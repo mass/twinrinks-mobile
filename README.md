@@ -7,8 +7,8 @@ Mobile applications for Twin Rinks Adult Hockey on the Android and iOS platforms
 
 **Formatting for ScheduleData.txt:**
 
-Date,DayOfWeek,Rink,StartTime,EndTime,League,HomeTeam,AwayTeam;
+`Date,DayOfWeek,Rink,StartTime,EndTime,League,HomeTeam,AwayTeam;`
   
 **Example:**
    
-02/25/13,MO,RED,10:20P,11:50P,Platinum,GREY,GOLD;
+`02/25/13,MO,RED,10:20P,11:50P,Platinum,GREY,GOLD;`
