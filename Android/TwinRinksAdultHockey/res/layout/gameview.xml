@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
+    android:background="@drawable/background_gameview"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center" >
+
+        <TextView
+            android:id="@+id/homeView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="PURPLE"
+            android:textSize="@dimen/text_Team" />
+
+        <TextView
+            android:id="@+id/awayView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="ORANGE"
+            android:textSize="@dimen/text_Team" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginTop="3dp"
+        android:background="@color/icsBlue" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:baselineAligned="false" >
+
+        <TextView
+            android:id="@+id/leagueView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Platinum"
+            android:textSize="@dimen/text_League" />
+
+        <TextView
+            android:id="@+id/rinkView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="BLUE Rink"
+            android:textSize="@dimen/text_Rink" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/View01"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginTop="3dp"
+        android:background="@color/icsBlue" />
+
+    <TextView
+        android:id="@+id/dateView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Saturday, 8/11/12 at 10:10P"
+        android:textSize="@dimen/text_Time" />
+
+</LinearLayout>

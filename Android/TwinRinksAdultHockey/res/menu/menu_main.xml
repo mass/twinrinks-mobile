@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/refresh"
+        android:enabled="true"
+        android:icon="@drawable/ic_refresh"
+        android:showAsAction="ifRoom"
+        android:title="Refresh"
+        android:visible="true">
+    </item>
+    <item
+        android:id="@+id/help"
+        android:enabled="true"
+        android:icon="@drawable/ic_help"
+        android:showAsAction="ifRoom"
+        android:title="Help"
+        android:visible="true">
+    </item>
+    <item
+        android:id="@+id/shareMenu"
+        android:enabled="true"
+        android:icon="@drawable/ic_share"
+        android:showAsAction="ifRoom"
+        android:title="Share"
+        android:visible="true">
+    </item>
+    <item
+        android:id="@+id/sendFeedback"
+        android:enabled="true"
+        android:icon="@drawable/ic_send"
+        android:showAsAction="ifRoom"
+        android:title="Send Feedback"
+        android:visible="true">
+    </item>
+    <item
+        android:id="@+id/rate"
+        android:enabled="true"
+        android:icon="@drawable/ic_rate"
+        android:showAsAction="ifRoom"
+        android:title="Rate App"
+        android:visible="true">
+    </item>
+    <item
+        android:id="@+id/settings"
+        android:enabled="true"
+        android:icon="@drawable/ic_settings"
+        android:showAsAction="ifRoom"
+        android:title="Settings"
+        android:visible="true">
+    </item>
+
+</menu>

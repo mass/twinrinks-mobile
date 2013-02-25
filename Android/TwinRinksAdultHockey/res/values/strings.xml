@@ -1,0 +1,6 @@
+<resources>
+
+    <string name="app_name">Twin Rinks Adult Hockey</string>
+    <string name="help">\n\t -There are three screens in the app: Upcoming, Schedules, and the Sub Sign-In page. Navigate between the three screens by touching using the tab bar. \n\n \t -The Upcoming screen shows you your next games in order, for all the teams you have entered in the settings page. \n\n \t -The Schedule page shows detailed information on games for specific teams or dates. \n\n \t -The Sub Sign-In page lets you access the Twin Rinks Adult Hockey online sub system so you can sign in and out of your upcoming games. \n\n \t -To add a team that you play for, open the settings page of the app. Next, hit the \"Add Team...\" button, and select your league and team to add that team to the list of teams you play for. That team\'s games should now show up in the upcoming games screen.</string>
+
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_Team">35sp</dimen>
+    <dimen name="text_League">20sp</dimen>
+    <dimen name="text_Rink">20sp</dimen>
+    <dimen name="text_Time">20sp</dimen>
+    <dimen name="text_Help">50sp</dimen>
+</resources>
