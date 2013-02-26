@@ -32,6 +32,8 @@ import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+
+//THIS IS A TEST TO TEST ECLIPSE AND GIT'S ABILITY TO PLAY NICELY TOGETHER
 public class MainActivity extends SherlockActivity implements TabListener {
 
     private ArrayList<Game> games = new ArrayList<Game>();
