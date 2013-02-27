@@ -2,6 +2,7 @@ package com.gigaStorm.twinRinks;
 
 import android.text.format.Time;
 
+// Wrapper class for an object representing a game
 public class Game {
     private String date;
     private String beginTime;
@@ -23,15 +24,14 @@ public class Game {
     }
 
     public Game(String d,String r,String bt,String et,String th,String ta,String l) {
+	// Clear whitespace
 	date = d.replaceAll("\\s", "");
 	beginTime = bt.replaceAll("\\s", "");
 	endTime = et.replaceAll("\\s", "");
 	rink = r.replaceAll("\\s", "");
 	league = l.replaceAll("\\s", "");
 
-	
-	
-	String temp = th.replaceAll("\\s","");
+	String temp = th.replaceAll("\\s", "");
 	if(temp.equalsIgnoreCase("PLAYOFFS") || temp.equalsIgnoreCase("SEMI") || temp.equalsIgnoreCase("FINALS")) {
 	    teamH = "PLAYOFF";
 	    teamA = "GAME";
@@ -75,8 +75,8 @@ public class Game {
 	String[] data2 = beginTime.substring(0, 5).split(":");
 	Time time = new Time();
 
-	// time.setToNow();
-	time.set(0, Integer.parseInt(data2[1]), Integer.parseInt(data2[0]) + 12, Integer.parseInt(data[1]), Integer.parseInt(data[0]) - 1, 2000 + Integer.parseInt(data[2]));
+	time.set(0, Integer.parseInt(data2[1]), Integer.parseInt(data2[0]) + 12, Integer.parseInt(data[1]),
+		Integer.parseInt(data[0]) - 1, 2000 + Integer.parseInt(data[2]));
 	time.normalize(false);
 	return time;
     }
@@ -86,7 +86,8 @@ public class Game {
     }
 
     public String toString() {
-	return "League: " + league + "\nDate: " + date + "\nRink: " + rink + "\nBegin: " + beginTime + "\nEnd: " + endTime + "\nHome: " + teamH + "\nAway: " + teamA;
+	return "League: " + league + "\nDate: " + date + "\nRink: " + rink + "\nBegin: " + beginTime + "\nEnd: "
+		+ endTime + "\nHome: " + teamH + "\nAway: " + teamA;
     }
 
     public String getDate() {

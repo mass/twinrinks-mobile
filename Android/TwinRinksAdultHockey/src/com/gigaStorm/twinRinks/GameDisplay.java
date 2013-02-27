@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+// Custom view class for game data
 public class GameDisplay extends RelativeLayout {
     private Context context;
     private TextView leagueView;

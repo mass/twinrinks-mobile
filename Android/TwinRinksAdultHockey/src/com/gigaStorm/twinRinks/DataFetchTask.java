@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 
+// Class which handles the downloading of data from the web server
 public class DataFetchTask extends AsyncTask<Void,Integer,String[]> {
     Dialog progress;
     MainActivity parent;
@@ -19,12 +20,14 @@ public class DataFetchTask extends AsyncTask<Void,Integer,String[]> {
 	parent = p;
     }
 
+    // Called first
     @Override
     protected void onPreExecute() {
 	super.onPreExecute();
 	progress = ProgressDialog.show(parent, "Fetching Game Data...", "Please Wait...", true);
     }
 
+    // Called second
     @Override
     protected String[] doInBackground(Void... params) {
 	String[] data;
@@ -47,6 +50,7 @@ public class DataFetchTask extends AsyncTask<Void,Integer,String[]> {
 	return data;
     }
 
+    // Called last
     @Override
     protected void onPostExecute(String[] result) {
 	super.onPostExecute(result);

@@ -1,8 +1,6 @@
 package com.gigaStorm.twinRinks;
 
 import java.util.ArrayList;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,7 +13,10 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.text.InputType;
 import android.widget.Toast;
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockPreferenceActivity;
 
+// Activity which allows the user to choose settings
 public class SettingsActivity extends SherlockPreferenceActivity {
 
     private PreferenceCategory addTeamCategory;
@@ -58,8 +59,10 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 	final EditTextPreference autoLogInUsername = (EditTextPreference) findPreference("autoLogInUsername");
 	final EditTextPreference autoLogInPassword = (EditTextPreference) findPreference("autoLogInPassword");
 
-	autoLogInUsername.getEditText().setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-	autoLogInPassword.getEditText().setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD);
+	autoLogInUsername.getEditText().setInputType(
+		InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+	autoLogInPassword.getEditText().setInputType(
+		InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
 	final CheckBoxPreference autoLogInCheckBox = (CheckBoxPreference) findPreference("autoLogInCheckbox");
 	autoLogInCheckBox.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -99,7 +102,8 @@ public class SettingsActivity extends SherlockPreferenceActivity {
     public void updatePreferencesFromTeams() {
 	addTeamCategory.removeAll();
 	for(int i = 0; i < yourTeams.size(); i++) {
-	    addTeamCategory.addPreference(getNewPreference(yourTeams.get(i).getLeague(), yourTeams.get(i).getTeamName()));
+	    addTeamCategory
+		    .addPreference(getNewPreference(yourTeams.get(i).getLeague(), yourTeams.get(i).getTeamName()));
 	}
 	addTeamCategory.addPreference(addNewTeamPref);
     }
@@ -186,7 +190,8 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 		builder2.setItems(teams, new DialogInterface.OnClickListener() {
 		    @Override
 		    public void onClick(DialogInterface dialog,int itemTeam) {
-			addNewTeam(getResources().getTextArray(R.array.leagues)[itemLeague].toString(), teams[itemTeam].toString());
+			addNewTeam(getResources().getTextArray(R.array.leagues)[itemLeague].toString(),
+				teams[itemTeam].toString());
 		    }
 		});
 		AlertDialog alert2 = builder2.create();

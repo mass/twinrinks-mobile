@@ -9,6 +9,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
+// Activity that shows help info to the user
 public class HelpActivity extends SherlockActivity {
 
     private ActionBar actionBar;
@@ -21,7 +22,6 @@ public class HelpActivity extends SherlockActivity {
 	actionBar = getSupportActionBar();
 	actionBar.setHomeButtonEnabled(true);
 	actionBar.setDisplayShowTitleEnabled(false);
-
     }
 
     @Override
@@ -54,7 +54,8 @@ public class HelpActivity extends SherlockActivity {
 	    case R.id.shareMenu:
 		Intent shareIntent = new Intent(Intent.ACTION_SEND);
 		shareIntent.setType("text/plain");
-		shareIntent.putExtra(Intent.EXTRA_TEXT, "Check out this Twin Rinks Adult Hockey Android app. http://goo.gl/ZeGxN");
+		shareIntent.putExtra(Intent.EXTRA_TEXT,
+			"Check out this Twin Rinks Adult Hockey Android app. http://goo.gl/ZeGxN");
 		startActivity(Intent.createChooser(shareIntent, "Choose Application:"));
 		return true;
 
@@ -64,7 +65,8 @@ public class HelpActivity extends SherlockActivity {
 		return true;
 
 	    case R.id.rate:
-		Intent rateIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.gigaStorm.twinRinks"));
+		Intent rateIntent = new Intent(Intent.ACTION_VIEW,
+			Uri.parse("market://details?id=com.gigaStorm.twinRinks"));
 		startActivity(Intent.createChooser(rateIntent, "Choose Application:"));
 		return true;
 
@@ -76,5 +78,4 @@ public class HelpActivity extends SherlockActivity {
 		return super.onOptionsItemSelected(item);
 	}
     }
-
 }

@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.widget.Toast;
 
-// Class which handles the importing and exporting of data to and from the internal memory
+// Class which handles the importing and exporting of data to and from the
+// internal memory
 public class MemoryManager {
 
     private Context context;
@@ -56,8 +57,8 @@ public class MemoryManager {
 	    if(temp != null) {
 		String[] teamsStrings = temp.split(":");
 
-		// Creates a new profile using the key taken from the String array, and adds it to
-		// profiles
+		// Creates a new profile using the key taken from the String
+		// array, and adds it to profiles
 		for(int i = 0; i < teamsStrings.length; i++) {
 		    teams.add(new Team(teamsStrings[i]));
 		}
@@ -69,7 +70,7 @@ public class MemoryManager {
 	    return teams;
 	}
     }
-    
+
     public void saveAllTeamsToMemory(ArrayList<Team> teams) {
 	try {
 	    DataOutputStream outTeam = new DataOutputStream(new FileOutputStream(allTeamStorage, false));
@@ -160,7 +161,7 @@ public class MemoryManager {
 
 	gameStorage = new File(dir, "GameStorage");
 	yourTeamStorage = new File(dir, "YourTeamStorage");
-	allTeamStorage = new File(dir,"AllTeamStorage");
+	allTeamStorage = new File(dir, "AllTeamStorage");
 
 	saveDefaultValues();
     }
@@ -170,7 +171,7 @@ public class MemoryManager {
 	    DataOutputStream outGame = new DataOutputStream(new FileOutputStream(gameStorage, false));
 	    DataOutputStream outYourTeam = new DataOutputStream(new FileOutputStream(yourTeamStorage, false));
 	    DataOutputStream outAllTeam = new DataOutputStream(new FileOutputStream(allTeamStorage, false));
-	    
+
 	    outYourTeam.close();
 	    outAllTeam.close();
 	    outGame.close();
