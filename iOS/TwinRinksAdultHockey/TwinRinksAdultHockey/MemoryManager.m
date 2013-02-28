@@ -11,6 +11,7 @@
 
 @implementation MemoryManager
 
+//TESTING GIT FUNCTION, PLEASE BE NICE
 -(NSArray *) getGameArray {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
