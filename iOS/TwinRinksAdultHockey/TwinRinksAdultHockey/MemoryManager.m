@@ -8,6 +8,7 @@
 
 #import "MemoryManager.h"
 #import "Game.h"
+#import "Team.h"
 
 @implementation MemoryManager
 
@@ -40,7 +41,7 @@
 
 -(NSArray *) getTeamArray {
     NSArray *games = [self getGameArray];
-    NSMutableSet *teams = [[NSMutableSet alloc] init];
+    NSMutableArray *teams = [[NSMutableArray alloc] init];
     
     for(Game *game in games) {
 
@@ -49,14 +50,12 @@
         NSString *homeTeam = game.homeTeam;
         
         if(![homeTeam isEqualToString:@"PLAYOFF"]) {
-            teams addObject:[[Team alloc] init:league,awayTeam];
-            teams addObject:[[Team alloc] init:league,homeTeam];
+            [teams addObject:[[Team alloc] initWithTeam:awayTeam andLeague:league]];
+            [teams addObject:[[Team alloc] initWithTeam:homeTeam andLeague:league]];
         }
     }
-    return [NSArray arrayWithObjects:teams count:teams.count];
+    return [NSArray arrayWithArray:teams];
 }
-#warning make team class you fool
-#warning make the set work you fool
 
 -(void) refreshData {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -68,7 +67,7 @@
     NSString *storedVal = textFile;
     NSString *key = @"gameData";
     [defaults setObject:storedVal forKey:key];
-    [defaults synchronize]; 
+    [defaults synchronize];
 }
 
 @end

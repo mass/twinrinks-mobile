@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49029A6016E00272002485AE /* Team.m in Sources */ = {isa = PBXBuildFile; fileRef = 49029A5F16E00272002485AE /* Team.m */; };
 		490D15BC169B9C42002B9622 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490D15BB169B9C42002B9622 /* SettingsViewController.m */; };
 		49486604169972E1009EAB60 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 49486601169972E1009EAB60 /* Game.m */; };
 		49486605169972E1009EAB60 /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49486603169972E1009EAB60 /* ScheduleViewController.m */; };
@@ -38,6 +39,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		49029A5E16E00272002485AE /* Team.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Team.h; sourceTree = "<group>"; };
+		49029A5F16E00272002485AE /* Team.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Team.m; sourceTree = "<group>"; };
 		490D15BA169B9C42002B9622 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		490D15BB169B9C42002B9622 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		49486600169972E1009EAB60 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
@@ -156,6 +159,8 @@
 				490D15BB169B9C42002B9622 /* SettingsViewController.m */,
 				49486600169972E1009EAB60 /* Game.h */,
 				49486601169972E1009EAB60 /* Game.m */,
+				49029A5E16E00272002485AE /* Team.h */,
+				49029A5F16E00272002485AE /* Team.m */,
 				49A744A2169D238000FC0BF9 /* MemoryManager.h */,
 				49A744A3169D238000FC0BF9 /* MemoryManager.m */,
 				49EC769C16990E25006D37FE /* Supporting Files */,
@@ -264,6 +269,7 @@
 				490D15BC169B9C42002B9622 /* SettingsViewController.m in Sources */,
 				49A744A0169D1B8C00FC0BF9 /* ScheduleTodayViewController.m in Sources */,
 				49A744A4169D238000FC0BF9 /* MemoryManager.m in Sources */,
+				49029A6016E00272002485AE /* Team.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
