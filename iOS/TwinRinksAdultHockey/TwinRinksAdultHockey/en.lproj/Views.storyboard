@@ -193,7 +193,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vbi-Eb-Ijh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="796" y="-507"/>
+            <point key="canvasLocation" x="988" y="-489"/>
         </scene>
         <!--Schedule View Controller - ScheduleViewController-->
         <scene sceneID="fca-zP-ntE">
@@ -366,7 +366,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DTH-kD-2rG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="796" y="167"/>
+            <point key="canvasLocation" x="988" y="186"/>
         </scene>
         <!--View Controller - HelpViewController-->
         <scene sceneID="pMc-ap-RAU">
@@ -535,7 +535,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0c-S2-xJK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="796" y="877"/>
+            <point key="canvasLocation" x="988" y="857"/>
         </scene>
         <!--View Controller - SettingsViewController-->
         <scene sceneID="T8N-hT-Zpo">
@@ -553,11 +553,33 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oS1-FT-8tP">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="293" id="c3P-oB-7js"/>
+                                </constraints>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIB-K1-phA">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Add Team...">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="amj-de-rWY" firstAttribute="leading" secondItem="gf2-6g-aDw" secondAttribute="leading" constant="59" id="iH6-dJ-J0a"/>
-                            <constraint firstItem="amj-de-rWY" firstAttribute="top" secondItem="gf2-6g-aDw" secondAttribute="top" constant="102" id="mtA-pf-MSG"/>
+                            <constraint firstItem="lIB-K1-phA" firstAttribute="top" secondItem="amj-de-rWY" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Fil-Kc-klu"/>
+                            <constraint firstItem="amj-de-rWY" firstAttribute="leading" secondItem="gf2-6g-aDw" secondAttribute="leading" constant="121" id="JpV-am-8C9"/>
+                            <constraint firstItem="amj-de-rWY" firstAttribute="top" secondItem="gf2-6g-aDw" secondAttribute="top" constant="20" symbolic="YES" type="default" id="Q7B-CG-J9N"/>
+                            <constraint firstItem="lIB-K1-phA" firstAttribute="leading" secondItem="gf2-6g-aDw" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Rry-Ab-bAd"/>
+                            <constraint firstAttribute="trailing" secondItem="lIB-K1-phA" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Yei-4H-MKL"/>
+                            <constraint firstAttribute="trailing" secondItem="oS1-FT-8tP" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="nYk-NI-CuT"/>
+                            <constraint firstItem="oS1-FT-8tP" firstAttribute="leading" secondItem="gf2-6g-aDw" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="qof-gC-WTQ"/>
+                            <constraint firstItem="oS1-FT-8tP" firstAttribute="top" secondItem="gf2-6g-aDw" secondAttribute="top" constant="132" id="zLl-jR-lJw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="f8K-B2-ZLM">

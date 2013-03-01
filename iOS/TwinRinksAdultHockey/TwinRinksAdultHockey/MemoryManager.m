@@ -17,25 +17,15 @@
     
     // Get the results out
     NSString *results = [defaults stringForKey:@"gameData"];
-    NSLog(results);
-    
     NSMutableArray *games = [[NSMutableArray alloc]init];
-    
     NSArray *lines = [results componentsSeparatedByString:@";"];
-    NSLog(@"count: %d",lines.count);
     
     for(int i=0;i<lines.count-1;i++) {
         NSString *firstSplit = [lines objectAtIndex:i];
-        NSLog(firstSplit);
-        
-        if(firstSplit != nil) {
-            Game *temp = [[Game alloc] initWithKey:firstSplit];
-            if(![temp isPassed])
-                [games addObject:temp];
-        }
+        Game *temp = [[Game alloc] initWithKey:firstSplit];
+        if(![temp isPassed])
+            [games addObject:temp];
     }
-    
-    NSLog(@"hereYOLO");
     
     NSArray *sortedGames = [games sortedArrayUsingComparator:^NSComparisonResult(Game *a, Game *b) {
         NSDate *first = [a getDateObject];
@@ -43,8 +33,8 @@
         return [first compare:second];
     }];
     
-    //return sortedGames;
-    return [[NSArray alloc] initWithArray:sortedGames];
+    return sortedGames;
+    //return [[NSArray alloc] initWithArray:sortedGames];
 }
 
 -(NSArray *) getTeamArray {
@@ -69,7 +59,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSError *error = nil;
-    NSURL *url = [NSURL URLWithString:@"http://www.avp42.com/zzz/bar.txt"];
+    NSURL *url = [NSURL URLWithString:@"https://raw.github.com/TheMasster12/TwinRinksAdultHockey_MobileApp/6d11139e7e28b7509139dc8b1a81845a68d31cc7/ScheduleData.txt"];
     NSString *textFile = [[NSString alloc] initWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
     
     NSString *storedVal = textFile;

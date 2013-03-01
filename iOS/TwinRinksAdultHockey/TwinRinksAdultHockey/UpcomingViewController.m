@@ -31,7 +31,7 @@
     MemoryManager *myManager = [[MemoryManager alloc] init];
     [myManager refreshData];
     gameArray = [myManager getGameArray];
-    //teamArray = [myManager getTeamArray];
+    teamArray = [myManager getTeamArray];
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,7 +78,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return gameArray.count;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
