@@ -17,8 +17,24 @@
     
     [self initButtons];
     
-    NSString *fullURL = @"http://www.twinrinks.com";
-    NSURL *url = [NSURL URLWithString:fullURL];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    BOOL isOn = [defaults boolForKey:@"IsAutoLoginOn"];
+    NSString *username = [defaults stringForKey:@"SavedUsername"];
+    NSString *password = [defaults stringForKey:@"SavedPassword"];
+    
+    NSString *urlString = @"http://www.twinrinks.com/adulthockey/subs/subs_entry.php?subs_data1=";
+    urlString = [urlString stringByAppendingString:username];
+    urlString = [urlString stringByAppendingString:@"&subs_data2="];
+    urlString = [urlString stringByAppendingString:password];
+    
+    NSString *offUrlString = @"http://www.twinrinks.com/adulthockey/subs/subs_entry.php";
+    
+    NSURL *url;
+    if(isOn)
+        url = [NSURL URLWithString:urlString];
+    else
+        url = [NSURL URLWithString:offUrlString];
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
     [_myWebView loadRequest:requestObj];
 }
