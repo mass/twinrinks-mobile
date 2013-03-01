@@ -12,23 +12,30 @@
 
 @implementation MemoryManager
 
-//TESTING GIT FUNCTION, PLEASE BE NICE
 -(NSArray *) getGameArray {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     // Get the results out
     NSString *results = [defaults stringForKey:@"gameData"];
+    NSLog(results);
     
     NSMutableArray *games = [[NSMutableArray alloc]init];
+    
     NSArray *lines = [results componentsSeparatedByString:@";"];
+    NSLog(@"count: %d",lines.count);
     
     for(int i=0;i<lines.count-1;i++) {
-        NSArray *data = [[lines objectAtIndex:i] componentsSeparatedByString:@","];
-        Game *temp = [[Game alloc] initWithArray:data];
+        NSString *firstSplit = [lines objectAtIndex:i];
+        NSLog(firstSplit);
         
-        if(![temp isPassed])
-            [games addObject:temp];
+        if(firstSplit != nil) {
+            Game *temp = [[Game alloc] initWithKey:firstSplit];
+            if(![temp isPassed])
+                [games addObject:temp];
+        }
     }
+    
+    NSLog(@"hereYOLO");
     
     NSArray *sortedGames = [games sortedArrayUsingComparator:^NSComparisonResult(Game *a, Game *b) {
         NSDate *first = [a getDateObject];
@@ -36,6 +43,7 @@
         return [first compare:second];
     }];
     
+    //return sortedGames;
     return [[NSArray alloc] initWithArray:sortedGames];
 }
 

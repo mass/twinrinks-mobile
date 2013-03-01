@@ -32,7 +32,7 @@
 		49EC76A816990E25006D37FE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 49EC76A716990E25006D37FE /* Default.png */; };
 		49EC76AA16990E25006D37FE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49EC76A916990E25006D37FE /* Default@2x.png */; };
 		49EC76AC16990E25006D37FE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49EC76AB16990E25006D37FE /* Default-568h@2x.png */; };
-		49EC76AF16990E25006D37FE /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49EC76AD16990E25006D37FE /* MainStoryboard.storyboard */; };
+		49EC76AF16990E25006D37FE /* Views.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49EC76AD16990E25006D37FE /* Views.storyboard */; };
 		49EC76B416990E25006D37FE /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 49EC76B316990E25006D37FE /* first.png */; };
 		49EC76BB16990E25006D37FE /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 49EC76BA16990E25006D37FE /* second.png */; };
 		49EC76C5169910C4006D37FE /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EC76C4169910C4006D37FE /* WebViewController.m */; };
@@ -75,7 +75,7 @@
 		49EC76A716990E25006D37FE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		49EC76A916990E25006D37FE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		49EC76AB16990E25006D37FE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		49EC76AE16990E25006D37FE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		49EC76AE16990E25006D37FE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Views.storyboard; sourceTree = "<group>"; };
 		49EC76B316990E25006D37FE /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		49EC76BA16990E25006D37FE /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		49EC76C3169910C4006D37FE /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
@@ -144,7 +144,7 @@
 		49EC769B16990E25006D37FE /* TwinRinksAdultHockey */ = {
 			isa = PBXGroup;
 			children = (
-				49EC76AD16990E25006D37FE /* MainStoryboard.storyboard */,
+				49EC76AD16990E25006D37FE /* Views.storyboard */,
 				49EC76A416990E25006D37FE /* AppDelegate.h */,
 				49EC76A516990E25006D37FE /* AppDelegate.m */,
 				4988912F16994FE200403EB5 /* UpcomingViewController.h */,
@@ -238,7 +238,7 @@
 				49EC76A816990E25006D37FE /* Default.png in Resources */,
 				49EC76AA16990E25006D37FE /* Default@2x.png in Resources */,
 				49EC76AC16990E25006D37FE /* Default-568h@2x.png in Resources */,
-				49EC76AF16990E25006D37FE /* MainStoryboard.storyboard in Resources */,
+				49EC76AF16990E25006D37FE /* Views.storyboard in Resources */,
 				49EC76B416990E25006D37FE /* first.png in Resources */,
 				49EC76BB16990E25006D37FE /* second.png in Resources */,
 				49619D5F169BC0E900D39E88 /* gear.png in Resources */,
@@ -284,12 +284,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		49EC76AD16990E25006D37FE /* MainStoryboard.storyboard */ = {
+		49EC76AD16990E25006D37FE /* Views.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				49EC76AE16990E25006D37FE /* en */,
 			);
-			name = MainStoryboard.storyboard;
+			name = Views.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

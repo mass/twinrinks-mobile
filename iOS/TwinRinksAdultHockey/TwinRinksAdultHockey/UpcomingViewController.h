@@ -11,6 +11,8 @@
 @interface UpcomingViewController : UITableViewController
 
 @property (nonatomic,strong) __block NSArray *gameArray;
+@property (nonatomic,strong) __block NSArray *teamArray;
+
 
 -(IBAction)doNothing:id;
 -(IBAction)settingsButtonPressed:id;

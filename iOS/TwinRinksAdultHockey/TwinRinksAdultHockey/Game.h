@@ -20,7 +20,7 @@
 @property (strong,nonatomic) NSString *league;
 
 -(BOOL)isPassed;
--(id)initWithArray:array;
+-(id)initWithKey:firstSplit;
 -(NSDate *) getDateObject;
 
 @end

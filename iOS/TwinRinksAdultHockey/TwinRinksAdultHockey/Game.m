@@ -12,11 +12,11 @@
 
 @synthesize homeTeam,awayTeam,date,day,rink,startTime,endTime,league;
 
--(id)initWithArray:array{
-    //10/14/12,SU,BLU,10:40P,12:10T,Platinum,PURPLE,BROWN;
+-(id)initWithKey:firstSplit{
+    // 10/14/12,SU,BLU,10:40P,12:10T,Platinum,PURPLE,BROWN
     
     self = [super init];
-    NSArray *data = array;
+    NSArray *data = [firstSplit componentsSeparatedByString:@","];
     
     self.date = [data objectAtIndex:0];
     self.day = [data objectAtIndex:1];

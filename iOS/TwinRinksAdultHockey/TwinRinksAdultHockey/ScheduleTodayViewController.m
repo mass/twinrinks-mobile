@@ -8,7 +8,7 @@
 
 #import "ScheduleTodayViewController.h"
 #import "Game.h"
-#import "GameParser.h"
+#import "MemoryManager.h"
 
 @interface ScheduleTodayViewController ()
 
@@ -31,18 +31,18 @@
 {
     [super viewDidLoad];
     
-    GameParser *parser = [[GameParser alloc] init];
-    NSMutableArray *tempArray = [NSMutableArray arrayWithArray:[parser getGameList]];
+    MemoryManager *myManager = [[MemoryManager alloc] init];
+    NSMutableArray *tempArray = [NSMutableArray arrayWithArray:[myManager getGameArray]];
     
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateFormat:@"MM/dd/yy"];
     NSString *todayString = [format stringFromDate:[NSDate date]];
-    NSLog(todayString);
+    //NSLog(todayString);
     
     
     for(int i=0;i<tempArray.count;i++) {
         if(![((NSString *)(((Game *)[tempArray objectAtIndex:i]).date)) isEqualToString:todayString]) {
-            NSLog((NSString *)(((Game *)[tempArray objectAtIndex:i]).date));
+            //NSLog((NSString *)(((Game *)[tempArray objectAtIndex:i]).date));
             [tempArray removeObjectAtIndex:i];
             i--;
         }

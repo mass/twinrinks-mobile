@@ -8,11 +8,11 @@
 
 #import "UpcomingViewController.h"
 #import "Game.h"
-#import "GameParser.h"
+#import "MemoryManager.h"
 
 @implementation UpcomingViewController
 
-@synthesize gameArray;
+@synthesize gameArray,teamArray;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -27,9 +27,11 @@
     [super viewDidLoad];
     
     [self initButtons];
-
-    GameParser *parser = [[GameParser alloc] init];
-    gameArray = [parser getGameList];
+    
+    MemoryManager *myManager = [[MemoryManager alloc] init];
+    [myManager refreshData];
+    gameArray = [myManager getGameArray];
+    //teamArray = [myManager getTeamArray];
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,14 +78,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return gameArray.count;
+    return 0;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if(section == 0) 
-        return @"Leisure-Gold";
-     else
-         return nil;
+    return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
