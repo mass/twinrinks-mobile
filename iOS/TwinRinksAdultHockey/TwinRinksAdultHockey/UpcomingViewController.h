@@ -15,7 +15,7 @@
 @property (nonatomic,strong) __block NSArray *yourTeamArray;
 
 
--(IBAction)doNothing:id;
+-(IBAction)refreshData:id;
 -(IBAction)settingsButtonPressed:id;
 -(IBAction)helpButtonPressed:id;
 -(void)initButtons;

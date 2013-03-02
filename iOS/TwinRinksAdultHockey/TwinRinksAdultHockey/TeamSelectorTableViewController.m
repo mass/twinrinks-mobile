@@ -33,6 +33,8 @@
 {
     [super viewDidLoad];
     
+    
+    
     MemoryManager *myManger = [[MemoryManager alloc]init];
     teamsArray = [myManger getTeamArray];
     leagueArray = [self generateLeagueArray];
@@ -74,6 +76,15 @@
     return count;
 }
 
+-(void)removeTeamFromArrayWithName:(NSString *)teamNameP andLeague:(NSString *)leagueP {
+    NSMutableArray *mutable = [NSMutableArray arrayWithArray:teamsArray];
+    for(int i=mutable.count -1;i>=0;i--) {
+        Team *temp = [mutable objectAtIndex:i];
+        if([temp.teamName isEqualToString:teamNameP] && [temp.league isEqualToString:leagueP])
+            [mutable removeObjectAtIndex:i];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -81,10 +92,9 @@
 }
 
 #pragma mark - Table view data source
-
+ 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return leagueArray.count;
 }
 
@@ -117,6 +127,8 @@
     label.text = [temp teamName];
     return cell;
 }
+
+
 
 #pragma mark - Table view delegate
 

@@ -27,7 +27,7 @@
 }
 
 -(NSString *) toString {
-    NSString *toReturn = [NSString stringWithFormat:@"%@ - %@",self.teamName,self.league];
+    NSString *toReturn = [NSString stringWithFormat:@"%@ - %@",self.league,self.teamName];
     return toReturn;
 }
 
