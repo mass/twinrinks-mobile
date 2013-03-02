@@ -105,6 +105,9 @@
 		49619D6F169BC64000D39E88 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				49EC76A716990E25006D37FE /* Default.png */,
+				49EC76A916990E25006D37FE /* Default@2x.png */,
+				49EC76AB16990E25006D37FE /* Default-568h@2x.png */,
 				49EC76B316990E25006D37FE /* first.png */,
 				49EC76BA16990E25006D37FE /* second.png */,
 				49619D5C169BC0E900D39E88 /* gear.png */,
@@ -186,9 +189,6 @@
 				49EC769E16990E25006D37FE /* InfoPlist.strings */,
 				49EC76A116990E25006D37FE /* main.m */,
 				49EC76A316990E25006D37FE /* TwinRinksAdultHockey-Prefix.pch */,
-				49EC76A716990E25006D37FE /* Default.png */,
-				49EC76A916990E25006D37FE /* Default@2x.png */,
-				49EC76AB16990E25006D37FE /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

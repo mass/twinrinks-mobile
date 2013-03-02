@@ -136,7 +136,7 @@
 {
     
     MemoryManager *myManger = [[MemoryManager alloc]init];
-    NSMutableArray *yourTeamsArray = [myManger getYourTeamArray];
+    NSMutableArray *yourTeamsArray = [NSMutableArray arrayWithArray:[myManger getYourTeamArray]];
     Team *toAdd = [[arrayOfTeamArrays objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     [yourTeamsArray addObject:toAdd];
     [myManger saveYourTeamsArray:yourTeamsArray];

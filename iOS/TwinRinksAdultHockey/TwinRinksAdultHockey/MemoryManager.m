@@ -89,7 +89,7 @@
     NSMutableString *toSave = [[NSMutableString alloc] init];
     
     for(int i=0;i<array.count;i++) {
-        toSave = [toSave stringByAppendingString:([((Team *) [array objectAtIndex:i]) getTeamKey])];
+        toSave = [NSMutableString stringWithString:[toSave stringByAppendingString:([((Team *) [array objectAtIndex:i]) getTeamKey])]];
     }
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -104,7 +104,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSError *error = nil;
-    NSURL *url = [NSURL URLWithString:@"https://raw.github.com/TheMasster12/TwinRinksAdultHockey_MobileApp/6d11139e7e28b7509139dc8b1a81845a68d31cc7/ScheduleData.txt"];
+    NSURL *url = [NSURL URLWithString:@"https://raw.github.com/TheMasster12/TwinRinksAdultHockey_MobileApp/master/ScheduleData.txt"];
     NSString *textFile = [[NSString alloc] initWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
     
     NSString *storedVal = textFile;
