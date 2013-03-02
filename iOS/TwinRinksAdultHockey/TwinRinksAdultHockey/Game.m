@@ -24,8 +24,8 @@
     self.startTime = [NSString stringWithFormat:@"%@M",[data objectAtIndex:3]];
     self.endTime = [NSString stringWithFormat:@"%@M",[data objectAtIndex:4]];
     self.league = [data objectAtIndex:5];
-    self.homeTeam = [data objectAtIndex:6];
-    self.awayTeam = [data objectAtIndex:7];
+    self.homeTeam = [[data objectAtIndex:6] uppercaseString];
+    self.awayTeam = [[data objectAtIndex:7] uppercaseString];
     
     return self;
 }

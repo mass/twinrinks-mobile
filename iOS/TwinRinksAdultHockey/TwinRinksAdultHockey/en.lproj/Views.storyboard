@@ -27,6 +27,38 @@
             </objects>
             <point key="canvasLocation" x="-153" y="869"/>
         </scene>
+        <!--Team Selector Table View Controller-->
+        <scene sceneID="Fhj-fc-kTi">
+            <objects>
+                <tableViewController id="cOl-cc-9gK" customClass="TeamSelectorTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="0dS-zK-yKS">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="teamSelectorCell" id="NE3-np-q7i">
+                                <rect key="frame" x="0.0" y="46" width="320" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="cOl-cc-9gK" id="iGV-4x-GgT"/>
+                            <outlet property="delegate" destination="cOl-cc-9gK" id="Oa2-tJ-0cb"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="AjP-gz-wfn" kind="modal" identifier="SelectorToSettings" id="wMY-zg-eln"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TlM-zm-BZD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1102" y="-1149"/>
+        </scene>
         <!--Settings Table View Controller-->
         <scene sceneID="Ked-im-Xv4">
             <objects>
@@ -61,7 +93,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UTZ-er-Xam" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-628" y="-404"/>
+            <point key="canvasLocation" x="-658" y="-255"/>
         </scene>
         <!--Navigation Controller - Upcoming-->
         <scene sceneID="kOV-Pw-6f5">
@@ -576,7 +608,7 @@
         <!--Settings View Controller - SettingsViewController-->
         <scene sceneID="T8N-hT-Zpo">
             <objects>
-                <viewController storyboardIdentifier="" title="SettingsViewController" id="1bn-yf-qbo" customClass="SettingsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsViewController" title="SettingsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1bn-yf-qbo" customClass="SettingsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gf2-6g-aDw">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -590,6 +622,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="cOl-cc-9gK" kind="modal" id="aeX-d9-OMW"/>
+                                </connections>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FAI-8z-n1I">
                                 <constraints>
@@ -726,6 +761,9 @@
                 <relationship kind="outlet" name="autoLoginLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="autoLoginSwitch" candidateClass="UISwitch"/>
             </relationships>
+        </class>
+        <class className="TeamSelectorTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamSelectorTableViewController.h"/>
         </class>
         <class className="UpcomingViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UpcomingViewController.h"/>

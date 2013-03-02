@@ -48,6 +48,7 @@
     alertPasswordTF.placeholder = @"Enter Login Password";
     
     [alert show];
+
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{

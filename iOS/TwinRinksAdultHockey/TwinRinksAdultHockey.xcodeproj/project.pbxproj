@@ -22,6 +22,7 @@
 		49619D6D169BC61900D39E88 /* reload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49619D6A169BC61900D39E88 /* reload@2x.png */; };
 		49619D6E169BC61900D39E88 /* reload@64.png in Resources */ = {isa = PBXBuildFile; fileRef = 49619D6B169BC61900D39E88 /* reload@64.png */; };
 		4988913116994FE200403EB5 /* UpcomingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4988913016994FE200403EB5 /* UpcomingViewController.m */; };
+		498E180516E2798600B7170A /* TeamSelectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E180416E2798600B7170A /* TeamSelectorTableViewController.m */; };
 		49A744A0169D1B8C00FC0BF9 /* ScheduleTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A7449F169D1B8C00FC0BF9 /* ScheduleTodayViewController.m */; };
 		49A744A4169D238000FC0BF9 /* MemoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A744A3169D238000FC0BF9 /* MemoryManager.m */; };
 		49EC769616990E25006D37FE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EC769516990E25006D37FE /* UIKit.framework */; };
@@ -61,6 +62,8 @@
 		49619D6B169BC61900D39E88 /* reload@64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reload@64.png"; sourceTree = "<group>"; };
 		4988912F16994FE200403EB5 /* UpcomingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpcomingViewController.h; sourceTree = "<group>"; };
 		4988913016994FE200403EB5 /* UpcomingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpcomingViewController.m; sourceTree = "<group>"; };
+		498E180316E2798600B7170A /* TeamSelectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamSelectorTableViewController.h; sourceTree = "<group>"; };
+		498E180416E2798600B7170A /* TeamSelectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamSelectorTableViewController.m; sourceTree = "<group>"; };
 		49A7449E169D1B8C00FC0BF9 /* ScheduleTodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleTodayViewController.h; sourceTree = "<group>"; };
 		49A7449F169D1B8C00FC0BF9 /* ScheduleTodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleTodayViewController.m; sourceTree = "<group>"; };
 		49A744A2169D238000FC0BF9 /* MemoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryManager.h; sourceTree = "<group>"; };
@@ -162,6 +165,8 @@
 				490D15BB169B9C42002B9622 /* SettingsViewController.m */,
 				4942CE5316E1DA9B00CDE926 /* SettingsTableViewController.h */,
 				4942CE5416E1DA9B00CDE926 /* SettingsTableViewController.m */,
+				498E180316E2798600B7170A /* TeamSelectorTableViewController.h */,
+				498E180416E2798600B7170A /* TeamSelectorTableViewController.m */,
 				49486600169972E1009EAB60 /* Game.h */,
 				49486601169972E1009EAB60 /* Game.m */,
 				49029A5E16E00272002485AE /* Team.h */,
@@ -276,6 +281,7 @@
 				49A744A4169D238000FC0BF9 /* MemoryManager.m in Sources */,
 				49029A6016E00272002485AE /* Team.m in Sources */,
 				4942CE5516E1DA9B00CDE926 /* SettingsTableViewController.m in Sources */,
+				498E180516E2798600B7170A /* TeamSelectorTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

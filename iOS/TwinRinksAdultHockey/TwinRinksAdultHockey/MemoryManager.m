@@ -50,21 +50,25 @@
         NSString *homeTeam = game.homeTeam;
         
         if(![homeTeam isEqualToString:@"PLAYOFF"]) {
-            [teams addObject:[[Team alloc] initWithTeam:awayTeam andLeague:league]];
-            [teams addObject:[[Team alloc] initWithTeam:homeTeam andLeague:league]];
+            if(![self alreadyHasTeam:teams withName:awayTeam withLeague:league])
+                [teams addObject:[[Team alloc] initWithTeam:awayTeam andLeague:league]];
+            if(![self alreadyHasTeam:teams withName:homeTeam withLeague:league])
+                [teams addObject:[[Team alloc] initWithTeam:homeTeam andLeague:league]];
         }
     }
     return [NSArray arrayWithArray:teams];
 }
 
+-(BOOL) alreadyHasTeam:(NSMutableArray *) array withName:(NSString *)nameP withLeague:(NSString *)leagueP {
+    for(int i=0;i<array.count;i++)
+        if([((Team *)[array objectAtIndex:i]).teamName isEqualToString:nameP] && [((Team *)[array objectAtIndex:i]).league isEqualToString:leagueP])
+            return YES;
+    return NO;
+}
+
 -(NSArray *) getYourTeamArray {
     NSMutableArray *yourTeams = [[NSMutableArray alloc] init];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    //REMOVE THIS EVENTUALLY:
-    NSString *tempData = @"Gold,BLUE;Bronze,TAN;";
-    [defaults setObject:tempData forKey:@"YourTeams"];
-    [defaults synchronize];
     
     NSString *teamData = [defaults objectForKey:@"YourTeams"];
     teamData = [teamData stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -79,6 +83,21 @@
         }
     }
     return yourTeams;
+}
+
+-(void) saveYourTeamsArray:(NSArray *)array {
+    NSMutableString *toSave = [[NSMutableString alloc] init];
+    
+    for(int i=0;i<array.count;i++) {
+        toSave = [toSave stringByAppendingString:([((Team *) [array objectAtIndex:i]) getTeamKey])];
+    }
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *data = [NSString stringWithString:toSave];
+    
+    [defaults setObject:data forKey:@"YourTeams"];
+    [defaults synchronize];
 }
 
 -(void) refreshData {
