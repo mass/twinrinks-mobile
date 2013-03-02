@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *autoLoginLabel;
 @property (strong, nonatomic) IBOutlet UIButton *autoLoginButton;
 
+
 - (IBAction)switch_autologin:(id)sender;
 - (IBAction)btn_autologin:(id)sender;
 

@@ -21,13 +21,18 @@
     [defaults setBool:isOn forKey:@"IsAutoLoginOn"];
     [defaults synchronize];
     
+    UIColor *lightGrey =[UIColor colorWithRed:.66f green:.66f blue:.66f alpha:1.0f];
+    UIColor *defBlue = [UIColor colorWithRed:.196f green:.309f blue:.521f alpha:1.00f];
+    
     if(!isOn) {
         self.autoLoginLabel.enabled = NO;
         self.autoLoginButton.enabled = NO;
+        self.autoLoginButton.titleLabel.textColor = lightGrey;
     }
     else {
         self.autoLoginButton.enabled = YES;
         self.autoLoginLabel.enabled = YES;
+        self.autoLoginButton.titleLabel.textColor = defBlue;
     }
 }
 
@@ -54,30 +59,35 @@
     [defaults synchronize];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+//- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+//{
+//    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+//    if (self) {
+//        // Custom initialization
+//    }
+//    return self;
+//}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL isAutoLoginOn = [defaults boolForKey:@"IsAutoLoginOn"];
     self.autoLoginSwitch.on = isAutoLoginOn;
     
+    UIColor *lightGrey =[UIColor colorWithRed:.66f green:.66f blue:.66f alpha:1.0f];
+    UIColor *defBlue = [UIColor colorWithRed:.196f green:.309f blue:.521f alpha:1.00f];
+    
     if(!isAutoLoginOn) {
         self.autoLoginLabel.enabled = NO;
         self.autoLoginButton.enabled = NO;
+        self.autoLoginButton.titleLabel.textColor = lightGrey;
     }
     else {
         self.autoLoginButton.enabled = YES;
         self.autoLoginLabel.enabled = YES;
+        self.autoLoginButton.titleLabel.textColor = defBlue;
     }
     
 }

@@ -27,6 +27,42 @@
             </objects>
             <point key="canvasLocation" x="-153" y="869"/>
         </scene>
+        <!--Settings Table View Controller-->
+        <scene sceneID="Ked-im-Xv4">
+            <objects>
+                <tableViewController id="kr3-jS-Rz8" customClass="SettingsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="j4d-of-3yC">
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="327"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="yourTeamsCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="yourTeamsCell" textLabel="1Sv-6J-N5o" style="IBUITableViewCellStyleDefault" id="d0X-oF-9Ot">
+                                <rect key="frame" x="0.0" y="22" width="280" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="280" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Sv-6J-N5o">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="kr3-jS-Rz8" id="zDx-ti-mxe"/>
+                            <outlet property="delegate" destination="kr3-jS-Rz8" id="Gsc-aT-FE4"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UTZ-er-Xam" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-628" y="-404"/>
+        </scene>
         <!--Navigation Controller - Upcoming-->
         <scene sceneID="kOV-Pw-6f5">
             <objects>
@@ -545,12 +581,6 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oS1-FT-8tP">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="0Ht-ok-zp3"/>
-                                </constraints>
-                            </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIB-K1-phA">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Add Team...">
@@ -561,26 +591,23 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CJy-wc-MEY">
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FAI-8z-n1I">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="77" id="b1j-13-dLQ"/>
+                                </constraints>
                                 <connections>
                                     <action selector="switch_autologin:" destination="1bn-yf-qbo" eventType="valueChanged" id="gOS-el-GZS"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Automatic Login" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNv-e0-UXf">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="129" id="YQM-gg-fHt"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2r-se-S2t">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Configure Automatic Login">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -590,26 +617,30 @@
                                     <action selector="btn_autologin:" destination="1bn-yf-qbo" eventType="touchUpInside" id="S00-fT-LOq"/>
                                 </connections>
                             </button>
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="clz-dF-Dxf">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="kr3-jS-Rz8" kind="embed" id="pDo-Ad-7gp"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="FAI-8z-n1I" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="1c9-tZ-95I"/>
-                            <constraint firstItem="N2r-se-S2t" firstAttribute="top" secondItem="SNv-e0-UXf" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="8KD-pJ-WTa"/>
-                            <constraint firstItem="lIB-K1-phA" firstAttribute="top" secondItem="oS1-FT-8tP" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="AzE-Z6-ix5"/>
-                            <constraint firstItem="oS1-FT-8tP" firstAttribute="top" secondItem="gf2-6g-aDw" secondAttribute="top" constant="20" symbolic="YES" type="default" id="BFV-9F-iTa"/>
+                            <constraint firstAttribute="trailing" secondItem="clz-dF-Dxf" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="CTa-7m-D1o"/>
                             <constraint firstAttribute="trailing" secondItem="N2r-se-S2t" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Fg3-1a-z89"/>
-                            <constraint firstItem="FAI-8z-n1I" firstAttribute="top" secondItem="CJy-wc-MEY" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Fgr-lt-oOt"/>
-                            <constraint firstItem="CJy-wc-MEY" firstAttribute="top" secondItem="lIB-K1-phA" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="NxE-4B-d7P"/>
-                            <constraint firstAttribute="trailing" secondItem="CJy-wc-MEY" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="R1o-Cw-PEa"/>
+                            <constraint firstItem="SNv-e0-UXf" firstAttribute="top" secondItem="lIB-K1-phA" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="PU8-zJ-PKG"/>
                             <constraint firstItem="N2r-se-S2t" firstAttribute="leading" secondItem="gf2-6g-aDw" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="RqU-kh-GFi"/>
-                            <constraint firstItem="lIB-K1-phA" firstAttribute="leading" secondItem="gf2-6g-aDw" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Rry-Ab-bAd"/>
-                            <constraint firstItem="SNv-e0-UXf" firstAttribute="leading" secondItem="gf2-6g-aDw" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="VNL-Hn-Y26"/>
-                            <constraint firstItem="SNv-e0-UXf" firstAttribute="centerY" secondItem="FAI-8z-n1I" secondAttribute="centerY" type="default" id="XAi-wQ-vWN"/>
-                            <constraint firstItem="CJy-wc-MEY" firstAttribute="leading" secondItem="gf2-6g-aDw" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Xbr-5u-inL"/>
-                            <constraint firstAttribute="trailing" secondItem="lIB-K1-phA" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Yei-4H-MKL"/>
-                            <constraint firstItem="FAI-8z-n1I" firstAttribute="top" secondItem="gf2-6g-aDw" secondAttribute="top" constant="242" id="deS-hp-mMu"/>
-                            <constraint firstAttribute="trailing" secondItem="oS1-FT-8tP" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="nYk-NI-CuT"/>
-                            <constraint firstItem="oS1-FT-8tP" firstAttribute="leading" secondItem="gf2-6g-aDw" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="qof-gC-WTQ"/>
+                            <constraint firstItem="FAI-8z-n1I" firstAttribute="leading" secondItem="SNv-e0-UXf" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="SGD-bw-tiq"/>
+                            <constraint firstItem="FAI-8z-n1I" firstAttribute="top" secondItem="lIB-K1-phA" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="VqA-hS-CKB"/>
+                            <constraint firstItem="lIB-K1-phA" firstAttribute="leading" secondItem="gf2-6g-aDw" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="WWJ-CG-Wwr"/>
+                            <constraint firstAttribute="bottom" secondItem="N2r-se-S2t" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="WaJ-84-Wvh"/>
+                            <constraint firstItem="clz-dF-Dxf" firstAttribute="leading" secondItem="gf2-6g-aDw" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Xc9-Lz-xP7"/>
+                            <constraint firstItem="clz-dF-Dxf" firstAttribute="top" secondItem="gf2-6g-aDw" secondAttribute="top" constant="20" symbolic="YES" type="default" id="ga0-l1-eAg"/>
+                            <constraint firstItem="SNv-e0-UXf" firstAttribute="leading" secondItem="gf2-6g-aDw" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="i4D-4f-IDx"/>
+                            <constraint firstAttribute="trailing" secondItem="lIB-K1-phA" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="lxK-Ux-EsB"/>
+                            <constraint firstItem="lIB-K1-phA" firstAttribute="top" secondItem="clz-dF-Dxf" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="sHm-y7-q8C"/>
+                            <constraint firstItem="N2r-se-S2t" firstAttribute="top" secondItem="SNv-e0-UXf" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="vmj-xr-ynK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="f8K-B2-ZLM">
@@ -682,6 +713,9 @@
                 <relationship kind="action" name="helpButtonPressed:"/>
                 <relationship kind="action" name="settingsButtonPressed:"/>
             </relationships>
+        </class>
+        <class className="SettingsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsTableViewController.h"/>
         </class>
         <class className="SettingsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>

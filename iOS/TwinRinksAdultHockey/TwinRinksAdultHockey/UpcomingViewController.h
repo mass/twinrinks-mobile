@@ -12,6 +12,7 @@
 
 @property (nonatomic,strong) __block NSArray *gameArray;
 @property (nonatomic,strong) __block NSArray *teamArray;
+@property (nonatomic,strong) __block NSArray *yourTeamArray;
 
 
 -(IBAction)doNothing:id;

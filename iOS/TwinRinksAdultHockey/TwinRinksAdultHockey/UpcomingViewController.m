@@ -8,11 +8,12 @@
 
 #import "UpcomingViewController.h"
 #import "Game.h"
+#import "Team.h"
 #import "MemoryManager.h"
 
 @implementation UpcomingViewController
 
-@synthesize gameArray,teamArray;
+@synthesize gameArray,teamArray,yourTeamArray;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -32,6 +33,28 @@
     [myManager refreshData];
     gameArray = [myManager getGameArray];
     teamArray = [myManager getTeamArray];
+    yourTeamArray = [myManager getYourTeamArray];
+    
+    gameArray = [self trimGameArray];
+}
+
+-(NSArray *)trimGameArray {
+    NSMutableArray *gameMutable = [[NSMutableArray alloc] initWithArray:gameArray];
+    for(int i = gameMutable.count-1;i>=0;i--)
+        if(![self isYourGame:[gameMutable objectAtIndex:i]])
+            [gameMutable removeObjectAtIndex:i];
+    return [NSArray arrayWithArray:gameMutable];
+}
+                 
+-(BOOL)isYourGame:(Game *)gameToTest {
+    for(int i=0;i<yourTeamArray.count;i++) {
+        Team *teamAtIndex = [yourTeamArray objectAtIndex:i];
+        if([gameToTest.homeTeam isEqualToString:teamAtIndex.teamName] && [gameToTest.league isEqualToString:teamAtIndex.league])
+            return YES;
+        if([gameToTest.awayTeam isEqualToString:teamAtIndex.teamName] && [gameToTest.league isEqualToString:teamAtIndex.league])
+            return YES;
+    }
+    return NO;
 }
 
 - (void)didReceiveMemoryWarning

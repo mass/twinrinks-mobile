@@ -12,6 +12,7 @@
 
 -(NSArray *) getGameArray;
 -(NSArray *) getTeamArray;
+-(NSArray *) getYourTeamArray;
 -(void) refreshData;
 
 @end

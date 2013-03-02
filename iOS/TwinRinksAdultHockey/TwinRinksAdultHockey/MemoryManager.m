@@ -22,6 +22,9 @@
     
     for(int i=0;i<lines.count-1;i++) {
         NSString *firstSplit = [lines objectAtIndex:i];
+        firstSplit = [firstSplit stringByReplacingOccurrencesOfString:@" " withString:@""];
+        firstSplit = [firstSplit stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        
         Game *temp = [[Game alloc] initWithKey:firstSplit];
         if(![temp isPassed])
             [games addObject:temp];
@@ -34,7 +37,6 @@
     }];
     
     return sortedGames;
-    //return [[NSArray alloc] initWithArray:sortedGames];
 }
 
 -(NSArray *) getTeamArray {
@@ -53,6 +55,30 @@
         }
     }
     return [NSArray arrayWithArray:teams];
+}
+
+-(NSArray *) getYourTeamArray {
+    NSMutableArray *yourTeams = [[NSMutableArray alloc] init];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    //REMOVE THIS EVENTUALLY:
+    NSString *tempData = @"Gold,BLUE;Bronze,TAN;";
+    [defaults setObject:tempData forKey:@"YourTeams"];
+    [defaults synchronize];
+    
+    NSString *teamData = [defaults objectForKey:@"YourTeams"];
+    teamData = [teamData stringByReplacingOccurrencesOfString:@" " withString:@""];
+    teamData = [teamData stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    
+    NSArray *lines = [teamData componentsSeparatedByString:@";"];
+    for(int i=0;i<lines.count;i++) {
+        NSArray *split = [[lines objectAtIndex:i] componentsSeparatedByString:@","];
+        if(split.count == 2) {
+            Team *temp = [[Team alloc] initWithTeam:[split objectAtIndex:1] andLeague:[split objectAtIndex:0]];
+            [yourTeams addObject:temp];
+        }
+    }
+    return yourTeams;
 }
 
 -(void) refreshData {
