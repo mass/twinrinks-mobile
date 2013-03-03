@@ -8,6 +8,8 @@
 
 #import "ScheduleViewController.h"
 #import "ScheduleGamesViewController.h"
+#import "TVC_ScheduleTeamSelector.h"
+#import "TVC_ScheduleYourTeamSelector.h"
 #import "MemoryManager.h"
 
 @interface ScheduleViewController ()
@@ -73,31 +75,27 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ScheduleGamesViewController *scheduleGamesViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ScheduleGamesViewController"];
-    
-    switch (indexPath.row) {
-        case 0:
-            scheduleGamesViewController.dataToDisplay = @"AllTeams";
-            break;
-        case 1:
-            scheduleGamesViewController.dataToDisplay = @"YourTeams";
-            break;
-        case 2:
-            scheduleGamesViewController.dataToDisplay = @"AllGames";
-            break;
-        case 3:
-            scheduleGamesViewController.dataToDisplay = @"Today";
-            break;
-        case 4:
-            scheduleGamesViewController.dataToDisplay = @"Playoffs";
-            break;
-            
-        default:
-            scheduleGamesViewController.dataToDisplay = @"AllGames";
-            break;
+    if(indexPath.row == 0) {
+        TVC_ScheduleTeamSelector *tvc_scheduleTeamSelector = [self.storyboard instantiateViewControllerWithIdentifier:@"TVC_ScheduleTeamSelector"];
+        [self.navigationController pushViewController:tvc_scheduleTeamSelector animated:YES];
+    }
+    if(indexPath.row == 1) {
+        TVC_ScheduleYourTeamSelector *tvc_scheduleYourTeamSelector = [self.storyboard instantiateViewControllerWithIdentifier:@"TVC_ScheduleYourTeamSelector"];
+        [self.navigationController pushViewController:tvc_scheduleYourTeamSelector animated:YES];
     }
     
-    [self.navigationController pushViewController:scheduleGamesViewController animated:YES];
+    if(indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4) {
+        ScheduleGamesViewController *scheduleGamesViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ScheduleGamesViewController"];
+        
+        if(indexPath.row == 2)
+            scheduleGamesViewController.dataToDisplay = @"AllGames";
+        if(indexPath.row == 3)
+            scheduleGamesViewController.dataToDisplay = @"Today";
+        if(indexPath.row == 4)
+            scheduleGamesViewController.dataToDisplay = @"Playoffs";
+        
+        [self.navigationController pushViewController:scheduleGamesViewController animated:YES];
+    }
 }
 
 @end

@@ -35,11 +35,27 @@
     
     if([self.dataToDisplay isEqualToString:@"AllGames"]){}
         //Do Nothing
-    if([self.dataToDisplay isEqualToString:@"Today"])
+    else if([self.dataToDisplay isEqualToString:@"Today"])
         [self trimGameArrayForToday];
-    if([self.dataToDisplay isEqualToString:@"Playoffs"])
+    else if([self.dataToDisplay isEqualToString:@"Playoffs"])
         [self trimGameArrayForPlayoffs];
+    else {
+        NSArray *data = [self.dataToDisplay componentsSeparatedByString:@","];
+        [self trimGameArrayForTeam:[((NSString *) [data objectAtIndex:1]) stringByReplacingOccurrencesOfString:@";" withString:@""] andLeague:[data objectAtIndex:0]];
+    }
     [self.tableView reloadData];
+}
+
+-(void)trimGameArrayForTeam:nameP andLeague:leagueP {
+    NSMutableArray *tempArray = [NSMutableArray arrayWithArray:gameArray];
+    for(int i=tempArray.count-1;i>=0;i--) {
+        Game *temp = [tempArray objectAtIndex:i];
+        if((![temp.league isEqualToString:leagueP]) || (!([temp.homeTeam isEqualToString:nameP] || [temp.awayTeam isEqualToString:nameP]))) {
+            [tempArray removeObjectAtIndex:i];
+        }
+    }
+    
+    gameArray = [NSArray arrayWithArray:tempArray];
 }
 
 -(void)trimGameArrayForToday {

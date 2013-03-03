@@ -57,7 +57,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TlM-zm-BZD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1102" y="-1149"/>
+            <point key="canvasLocation" x="-1102" y="-1063"/>
         </scene>
         <!--Settings Table View Controller-->
         <scene sceneID="Ked-im-Xv4">
@@ -203,6 +203,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TCD-gL-ZA3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="353" y="-489"/>
+        </scene>
+        <!--Schedule Team Selector-->
+        <scene sceneID="Fw0-hz-gZP">
+            <objects>
+                <tableViewController storyboardIdentifier="TVC_ScheduleTeamSelector" id="5T8-pe-Dhq" customClass="TVC_ScheduleTeamSelector" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="8bM-Sq-V4A">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="scheduleTeamSelectorCell" textLabel="xl4-1N-Nga" style="IBUITableViewCellStyleDefault" id="1bg-qx-Bbv">
+                                <rect key="frame" x="0.0" y="46" width="320" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xl4-1N-Nga">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="5T8-pe-Dhq" id="CW6-CJ-kG4"/>
+                            <outlet property="delegate" destination="5T8-pe-Dhq" id="ucw-2a-5kJ"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z9V-Wx-fUH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="848" y="-737"/>
         </scene>
         <!--Schedule View Controller - ScheduleViewController-->
         <scene sceneID="fca-zP-ntE">
@@ -400,7 +436,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DTH-kD-2rG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="848" y="186"/>
+            <point key="canvasLocation" x="848" y="624"/>
         </scene>
         <!--View Controller - HelpViewController-->
         <scene sceneID="pMc-ap-RAU">
@@ -640,55 +676,45 @@
             </objects>
             <point key="canvasLocation" x="-646" y="304"/>
         </scene>
+        <!--Schedule Your Team Selector-->
+        <scene sceneID="TDw-y6-KXv">
+            <objects>
+                <tableViewController storyboardIdentifier="TVC_ScheduleYourTeamSelector" id="W1x-SN-78u" customClass="TVC_ScheduleYourTeamSelector" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="ktP-v5-oxk">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="scheduleYourTeamSelectorCell" textLabel="GIz-Ok-UiX" style="IBUITableViewCellStyleDefault" id="zEx-HO-p56">
+                                <rect key="frame" x="0.0" y="46" width="320" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GIz-Ok-UiX">
+                                            <rect key="frame" x="10" y="0.0" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="W1x-SN-78u" id="wgD-sy-dSO"/>
+                            <outlet property="delegate" destination="W1x-SN-78u" id="tuK-3Q-Y1Z"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0uT-DG-5jR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="848" y="-63"/>
+        </scene>
     </scenes>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="ScheduleGamesViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ScheduleGamesViewController.h"/>
-        </class>
-        <class className="ScheduleViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ScheduleViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="doNothing:"/>
-                <relationship kind="action" name="helpButtonPressed:"/>
-                <relationship kind="action" name="settingsButtonPressed:"/>
-            </relationships>
-        </class>
-        <class className="SettingsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsTableViewController.h"/>
-        </class>
-        <class className="SettingsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btn_autologin:"/>
-                <relationship kind="action" name="switch_autologin:"/>
-                <relationship kind="outlet" name="autoLoginButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="autoLoginLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="autoLoginSwitch" candidateClass="UISwitch"/>
-            </relationships>
-        </class>
-        <class className="TeamSelectorTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamSelectorTableViewController.h"/>
-        </class>
-        <class className="UpcomingViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UpcomingViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="helpButtonPressed:"/>
-                <relationship kind="action" name="refreshData:"/>
-                <relationship kind="action" name="settingsButtonPressed:"/>
-            </relationships>
-        </class>
-        <class className="WebViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WebViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="doNothing:"/>
-                <relationship kind="action" name="helpButtonPressed:"/>
-                <relationship kind="action" name="settingsButtonPressed:"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
