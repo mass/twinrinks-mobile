@@ -1,11 +1,3 @@
-//
-//  Team.m
-//  TwinRinksAdultHockey
-//
-//  Created by Andrew on 2/28/13.
-//  Copyright (c) 2013 GigaStorm. All rights reserved.
-//
-
 #import "Team.h"
 
 @implementation Team
@@ -27,13 +19,11 @@
 }
 
 -(NSString *) toString {
-    NSString *toReturn = [NSString stringWithFormat:@"%@ - %@",self.league,self.teamName];
-    return toReturn;
+    return [NSString stringWithFormat:@"%@ - %@",self.league,self.teamName];
 }
 
 -(NSString *) getTeamKey {
-    NSString *toReturn = [NSString stringWithFormat:@"%@,%@;",self.league,self.teamName];
-    return toReturn;
+    return [NSString stringWithFormat:@"%@,%@;",self.league,self.teamName];
 }
 
 @end

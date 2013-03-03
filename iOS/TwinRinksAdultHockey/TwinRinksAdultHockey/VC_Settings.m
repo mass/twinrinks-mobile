@@ -1,20 +1,16 @@
-//
-//  SettingsViewController.m
-//  TwinRinksAdultHockey
-//
-//  Created by Andrew on 1/7/13.
-//  Copyright (c) 2013 GigaStorm. All rights reserved.
-//
+#import "VC_Settings.h"
 
-#import "SettingsViewController.h"
+@interface VC_Settings ()
 
-@interface SettingsViewController ()
+@property (strong, nonatomic) IBOutlet UISwitch *autoLoginSwitch;
+@property (strong, nonatomic) IBOutlet UILabel *autoLoginLabel;
+@property (strong, nonatomic) IBOutlet UIButton *autoLoginButton;
 
 @end
 
-@implementation SettingsViewController
+@implementation VC_Settings
 
-- (IBAction)switch_autologin:(id)sender {
+-(IBAction)switch_autologin:(id)sender {
     BOOL isOn = ((UISwitch*) sender).on;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -25,18 +21,18 @@
     UIColor *defBlue = [UIColor colorWithRed:.196f green:.309f blue:.521f alpha:1.00f];
     
     if(!isOn) {
-        self.autoLoginLabel.enabled = NO;
-        self.autoLoginButton.enabled = NO;
-        self.autoLoginButton.titleLabel.textColor = lightGrey;
+        _autoLoginLabel.enabled = NO;
+        _autoLoginButton.enabled = NO;
+        _autoLoginButton.titleLabel.textColor = lightGrey;
     }
     else {
-        self.autoLoginButton.enabled = YES;
-        self.autoLoginLabel.enabled = YES;
-        self.autoLoginButton.titleLabel.textColor = defBlue;
+        _autoLoginButton.enabled = YES;
+        _autoLoginLabel.enabled = YES;
+        _autoLoginButton.titleLabel.textColor = defBlue;
     }
 }
 
-- (IBAction)btn_autologin:(id)sender {
+-(IBAction)btn_autologin:(id)sender {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Configure Automatic Login" message:nil delegate:self cancelButtonTitle:@"Save" otherButtonTitles:nil, nil];
     alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
     
@@ -48,20 +44,16 @@
     alertPasswordTF.placeholder = @"Enter Login Password";
     
     [alert show];
-
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
     [defaults setObject:[[alertView textFieldAtIndex:0] text] forKey:@"SavedUsername"];
     [defaults setObject:[[alertView textFieldAtIndex:1] text] forKey:@"SavedPassword"];
     [defaults synchronize];
 }
 
-- (void)viewDidLoad
-{
+-(void)viewDidLoad {
     [super viewDidLoad];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -72,22 +64,15 @@
     UIColor *defBlue = [UIColor colorWithRed:.196f green:.309f blue:.521f alpha:1.00f];
     
     if(!isAutoLoginOn) {
-        self.autoLoginLabel.enabled = NO;
-        self.autoLoginButton.enabled = NO;
-        self.autoLoginButton.titleLabel.textColor = lightGrey;
+        _autoLoginLabel.enabled = NO;
+        _autoLoginButton.enabled = NO;
+        _autoLoginButton.titleLabel.textColor = lightGrey;
     }
     else {
-        self.autoLoginButton.enabled = YES;
-        self.autoLoginLabel.enabled = YES;
-        self.autoLoginButton.titleLabel.textColor = defBlue;
+        _autoLoginButton.enabled = YES;
+        _autoLoginLabel.enabled = YES;
+        _autoLoginButton.titleLabel.textColor = defBlue;
     }
-    
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

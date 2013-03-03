@@ -1,17 +1,16 @@
-#import "TVC_ScheduleTeamSelector.h"
 #import "MemoryManager.h"
 #import "Team.h"
-#import "VC_ScheduleGames.h"
 
-@interface TVC_ScheduleTeamSelector ()
+@interface TVC_TeamSelector : UITableViewController
 
 @property (strong, nonatomic) NSArray *teamsArray;
 @property (strong, nonatomic) NSArray *leagueArray;
 @property (strong, nonatomic) NSArray *arrayOfTeamArrays;
+@property (strong, nonatomic) MemoryManager *myManager;
 
 @end
 
-@implementation TVC_ScheduleTeamSelector
+@implementation TVC_TeamSelector
 
 -(id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
@@ -21,8 +20,9 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    MemoryManager *myManger = [[MemoryManager alloc]init];
-    _teamsArray = [myManger getTeamArray];
+    
+    _myManager = [[MemoryManager alloc]init];
+    _teamsArray = [_myManager getTeamArray];
     _leagueArray = [self generateLeagueArray];
     _arrayOfTeamArrays = [self generateDoubleArray];
 }
@@ -36,7 +36,16 @@
         for(int j=0;j<_leagueArray.count;j++)
             if([((Team *)[_teamsArray objectAtIndex:i]).league isEqualToString:((NSString *) [_leagueArray objectAtIndex:j])])
                 if(![[mutable objectAtIndex:j] containsObject:((Team *) [_teamsArray objectAtIndex:i])])
-                    [[mutable objectAtIndex:j] addObject:((Team *) [_teamsArray objectAtIndex:i])];
+                   [[mutable objectAtIndex:j] addObject:((Team *) [_teamsArray objectAtIndex:i])];
+    
+    return [[NSArray alloc] initWithArray:mutable];
+}
+
+-(NSArray *)generateLeagueArray {
+    NSMutableArray *mutable = [[NSMutableArray alloc]init];
+    for(int i=0;i<_teamsArray.count;i++) 
+        if(![mutable containsObject:((Team *)[_teamsArray objectAtIndex:i]).league])
+            [mutable addObject:((Team *)[_teamsArray objectAtIndex:i]).league];
     
     return [[NSArray alloc] initWithArray:mutable];
 }
@@ -50,38 +59,37 @@
     return count;
 }
 
--(NSArray *)generateLeagueArray {
-    NSMutableArray *mutable = [[NSMutableArray alloc]init];
-    for(int i=0;i<_teamsArray.count;i++) 
-        if(![mutable containsObject:((Team *)[_teamsArray objectAtIndex:i]).league])
-            [mutable addObject:((Team *)[_teamsArray objectAtIndex:i]).league];
-    
-    return [[NSArray alloc] initWithArray:mutable];
+-(void)removeTeamFromArrayWithName:(NSString *)teamNameP andLeague:(NSString *)leagueP {
+    NSMutableArray *mutable = [NSMutableArray arrayWithArray:_teamsArray];
+    for(int i=mutable.count-1;i>=0;i--)
+        if([((Team*)[mutable objectAtIndex:i]).teamName isEqualToString:teamNameP] && [((Team*)[mutable objectAtIndex:i]).league isEqualToString:leagueP])
+            [mutable removeObjectAtIndex:i];
 }
 
 #pragma mark - Table view data source
-
+ 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return _leagueArray.count;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self getNumberOfTeamsInLeague:((NSString *)[_leagueArray objectAtIndex:section])];
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return [_leagueArray objectAtIndex:section];
 }
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self getNumberOfTeamsInLeague:((NSString *)[_leagueArray objectAtIndex:section])];
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"id_cell_scheduleTeamSelector";
+    static NSString *cellIdentifier = @"id_cell_teamSelector";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
     if (cell == nil) 
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     
-    Team *temp = [[self.arrayOfTeamArrays objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    ((UILabel *)[cell viewWithTag:0]).text = [temp teamName];
+    UILabel *label = (UILabel *)[cell viewWithTag:0];
+    Team *temp = [[_arrayOfTeamArrays objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    label.text = [temp teamName];
     
     return cell;
 }
@@ -89,9 +97,13 @@
 #pragma mark - Table view delegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    VC_ScheduleGames *vc_ScheduleGames = [self.storyboard instantiateViewControllerWithIdentifier:@"id_vc_scheduleGames"];
-    vc_ScheduleGames.dataToDisplay = [((Team *) [[self.arrayOfTeamArrays objectAtIndex:indexPath.section] objectAtIndex:indexPath.row]) getTeamKey];
-    [self.navigationController pushViewController:vc_ScheduleGames animated:YES];
+    NSMutableArray *yourTeamsArray = [NSMutableArray arrayWithArray:[_myManager getYourTeamArray]];
+    [yourTeamsArray addObject:((Team *)[[_arrayOfTeamArrays objectAtIndex:indexPath.section] objectAtIndex:indexPath.row])];
+    [_myManager saveYourTeamsArray:yourTeamsArray];
+    
+    UIViewController *vc_Settings = [self.storyboard instantiateViewControllerWithIdentifier:@"id_vc_settings"];
+    [self.navigationController pushViewController:vc_Settings animated:YES];
+    [self performSegueWithIdentifier:@"id_segue_selectorToSettings" sender:self];
 }
 
 @end

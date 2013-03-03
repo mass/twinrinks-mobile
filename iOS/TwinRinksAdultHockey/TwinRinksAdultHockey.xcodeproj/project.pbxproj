@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		49029A6016E00272002485AE /* Team.m in Sources */ = {isa = PBXBuildFile; fileRef = 49029A5F16E00272002485AE /* Team.m */; };
-		490D15BC169B9C42002B9622 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490D15BB169B9C42002B9622 /* SettingsViewController.m */; };
-		4942CE5516E1DA9B00CDE926 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4942CE5416E1DA9B00CDE926 /* SettingsTableViewController.m */; };
+		490D15BC169B9C42002B9622 /* VC_Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 490D15BB169B9C42002B9622 /* VC_Settings.m */; };
+		4942CE5516E1DA9B00CDE926 /* TVC_Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4942CE5416E1DA9B00CDE926 /* TVC_Settings.m */; };
 		49486604169972E1009EAB60 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 49486601169972E1009EAB60 /* Game.m */; };
-		49486605169972E1009EAB60 /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49486603169972E1009EAB60 /* ScheduleViewController.m */; };
+		49486605169972E1009EAB60 /* VC_Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 49486603169972E1009EAB60 /* VC_Schedule.m */; };
 		49619D5F169BC0E900D39E88 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 49619D5C169BC0E900D39E88 /* gear.png */; };
 		49619D60169BC0E900D39E88 /* gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49619D5D169BC0E900D39E88 /* gear@2x.png */; };
 		49619D61169BC0E900D39E88 /* gear@64.png in Resources */ = {isa = PBXBuildFile; fileRef = 49619D5E169BC0E900D39E88 /* gear@64.png */; };
@@ -21,9 +21,9 @@
 		49619D6C169BC61900D39E88 /* reload.png in Resources */ = {isa = PBXBuildFile; fileRef = 49619D69169BC61900D39E88 /* reload.png */; };
 		49619D6D169BC61900D39E88 /* reload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49619D6A169BC61900D39E88 /* reload@2x.png */; };
 		49619D6E169BC61900D39E88 /* reload@64.png in Resources */ = {isa = PBXBuildFile; fileRef = 49619D6B169BC61900D39E88 /* reload@64.png */; };
-		4988913116994FE200403EB5 /* UpcomingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4988913016994FE200403EB5 /* UpcomingViewController.m */; };
-		498E180516E2798600B7170A /* TeamSelectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E180416E2798600B7170A /* TeamSelectorTableViewController.m */; };
-		49A744A0169D1B8C00FC0BF9 /* ScheduleGamesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A7449F169D1B8C00FC0BF9 /* ScheduleGamesViewController.m */; };
+		4988913116994FE200403EB5 /* VC_Upcoming.m in Sources */ = {isa = PBXBuildFile; fileRef = 4988913016994FE200403EB5 /* VC_Upcoming.m */; };
+		498E180516E2798600B7170A /* TVC_TeamSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E180416E2798600B7170A /* TVC_TeamSelector.m */; };
+		49A744A0169D1B8C00FC0BF9 /* VC_ScheduleGames.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A7449F169D1B8C00FC0BF9 /* VC_ScheduleGames.m */; };
 		49A744A4169D238000FC0BF9 /* MemoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A744A3169D238000FC0BF9 /* MemoryManager.m */; };
 		49EC769616990E25006D37FE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EC769516990E25006D37FE /* UIKit.framework */; };
 		49EC769816990E25006D37FE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EC769716990E25006D37FE /* Foundation.framework */; };
@@ -37,7 +37,7 @@
 		49EC76AF16990E25006D37FE /* Views.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49EC76AD16990E25006D37FE /* Views.storyboard */; };
 		49EC76B416990E25006D37FE /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 49EC76B316990E25006D37FE /* first.png */; };
 		49EC76BB16990E25006D37FE /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 49EC76BA16990E25006D37FE /* second.png */; };
-		49EC76C5169910C4006D37FE /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EC76C4169910C4006D37FE /* WebViewController.m */; };
+		49EC76C5169910C4006D37FE /* VC_WebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EC76C4169910C4006D37FE /* VC_WebView.m */; };
 		49EE7C6516E310CA000E63C7 /* TVC_ScheduleTeamSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE7C6416E310CA000E63C7 /* TVC_ScheduleTeamSelector.m */; };
 		49EE7C6816E31B76000E63C7 /* TVC_ScheduleYourTeamSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE7C6716E31B76000E63C7 /* TVC_ScheduleYourTeamSelector.m */; };
 /* End PBXBuildFile section */
@@ -45,14 +45,12 @@
 /* Begin PBXFileReference section */
 		49029A5E16E00272002485AE /* Team.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Team.h; sourceTree = "<group>"; };
 		49029A5F16E00272002485AE /* Team.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Team.m; sourceTree = "<group>"; };
-		490D15BA169B9C42002B9622 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		490D15BB169B9C42002B9622 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		4942CE5316E1DA9B00CDE926 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
-		4942CE5416E1DA9B00CDE926 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
+		490D15BA169B9C42002B9622 /* VC_Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VC_Settings.h; sourceTree = "<group>"; };
+		490D15BB169B9C42002B9622 /* VC_Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VC_Settings.m; sourceTree = "<group>"; };
+		4942CE5416E1DA9B00CDE926 /* TVC_Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVC_Settings.m; sourceTree = "<group>"; };
 		49486600169972E1009EAB60 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		49486601169972E1009EAB60 /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
-		49486602169972E1009EAB60 /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
-		49486603169972E1009EAB60 /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
+		49486603169972E1009EAB60 /* VC_Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VC_Schedule.m; sourceTree = "<group>"; };
 		49619D5C169BC0E900D39E88 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
 		49619D5D169BC0E900D39E88 /* gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gear@2x.png"; sourceTree = "<group>"; };
 		49619D5E169BC0E900D39E88 /* gear@64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gear@64.png"; sourceTree = "<group>"; };
@@ -62,12 +60,10 @@
 		49619D69169BC61900D39E88 /* reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reload.png; sourceTree = "<group>"; };
 		49619D6A169BC61900D39E88 /* reload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reload@2x.png"; sourceTree = "<group>"; };
 		49619D6B169BC61900D39E88 /* reload@64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reload@64.png"; sourceTree = "<group>"; };
-		4988912F16994FE200403EB5 /* UpcomingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpcomingViewController.h; sourceTree = "<group>"; };
-		4988913016994FE200403EB5 /* UpcomingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpcomingViewController.m; sourceTree = "<group>"; };
-		498E180316E2798600B7170A /* TeamSelectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamSelectorTableViewController.h; sourceTree = "<group>"; };
-		498E180416E2798600B7170A /* TeamSelectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamSelectorTableViewController.m; sourceTree = "<group>"; };
-		49A7449E169D1B8C00FC0BF9 /* ScheduleGamesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleGamesViewController.h; sourceTree = "<group>"; };
-		49A7449F169D1B8C00FC0BF9 /* ScheduleGamesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleGamesViewController.m; sourceTree = "<group>"; };
+		4988913016994FE200403EB5 /* VC_Upcoming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VC_Upcoming.m; sourceTree = "<group>"; };
+		498E180416E2798600B7170A /* TVC_TeamSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVC_TeamSelector.m; sourceTree = "<group>"; };
+		49A7449E169D1B8C00FC0BF9 /* VC_ScheduleGames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VC_ScheduleGames.h; sourceTree = "<group>"; };
+		49A7449F169D1B8C00FC0BF9 /* VC_ScheduleGames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VC_ScheduleGames.m; sourceTree = "<group>"; };
 		49A744A2169D238000FC0BF9 /* MemoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryManager.h; sourceTree = "<group>"; };
 		49A744A3169D238000FC0BF9 /* MemoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryManager.m; sourceTree = "<group>"; };
 		49EC769116990E25006D37FE /* TwinRinksAdultHockey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwinRinksAdultHockey.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,12 +82,11 @@
 		49EC76AE16990E25006D37FE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Views.storyboard; sourceTree = "<group>"; };
 		49EC76B316990E25006D37FE /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		49EC76BA16990E25006D37FE /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
-		49EC76C3169910C4006D37FE /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
-		49EC76C4169910C4006D37FE /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
-		49EE7C6316E310CA000E63C7 /* TVC_ScheduleTeamSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVC_ScheduleTeamSelector.h; sourceTree = "<group>"; };
+		49EC76C4169910C4006D37FE /* VC_WebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VC_WebView.m; sourceTree = "<group>"; };
 		49EE7C6416E310CA000E63C7 /* TVC_ScheduleTeamSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVC_ScheduleTeamSelector.m; sourceTree = "<group>"; };
-		49EE7C6616E31B76000E63C7 /* TVC_ScheduleYourTeamSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVC_ScheduleYourTeamSelector.h; sourceTree = "<group>"; };
 		49EE7C6716E31B76000E63C7 /* TVC_ScheduleYourTeamSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVC_ScheduleYourTeamSelector.m; sourceTree = "<group>"; };
+		49F6993616E3D78100857A53 /* TVC_ScheduleTeamSelector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVC_ScheduleTeamSelector.h; sourceTree = "<group>"; };
+		49F6993716E3D80D00857A53 /* TVC_ScheduleYourTeamSelector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVC_ScheduleYourTeamSelector.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,33 +154,7 @@
 		49EC769B16990E25006D37FE /* TwinRinksAdultHockey */ = {
 			isa = PBXGroup;
 			children = (
-				49EC76AD16990E25006D37FE /* Views.storyboard */,
-				49EC76A416990E25006D37FE /* AppDelegate.h */,
-				49EC76A516990E25006D37FE /* AppDelegate.m */,
-				4988912F16994FE200403EB5 /* UpcomingViewController.h */,
-				4988913016994FE200403EB5 /* UpcomingViewController.m */,
-				49486602169972E1009EAB60 /* ScheduleViewController.h */,
-				49486603169972E1009EAB60 /* ScheduleViewController.m */,
-				49A7449E169D1B8C00FC0BF9 /* ScheduleGamesViewController.h */,
-				49A7449F169D1B8C00FC0BF9 /* ScheduleGamesViewController.m */,
-				49EC76C3169910C4006D37FE /* WebViewController.h */,
-				49EC76C4169910C4006D37FE /* WebViewController.m */,
-				490D15BA169B9C42002B9622 /* SettingsViewController.h */,
-				490D15BB169B9C42002B9622 /* SettingsViewController.m */,
-				4942CE5316E1DA9B00CDE926 /* SettingsTableViewController.h */,
-				4942CE5416E1DA9B00CDE926 /* SettingsTableViewController.m */,
-				498E180316E2798600B7170A /* TeamSelectorTableViewController.h */,
-				498E180416E2798600B7170A /* TeamSelectorTableViewController.m */,
-				49EE7C6316E310CA000E63C7 /* TVC_ScheduleTeamSelector.h */,
-				49EE7C6416E310CA000E63C7 /* TVC_ScheduleTeamSelector.m */,
-				49EE7C6616E31B76000E63C7 /* TVC_ScheduleYourTeamSelector.h */,
-				49EE7C6716E31B76000E63C7 /* TVC_ScheduleYourTeamSelector.m */,
-				49486600169972E1009EAB60 /* Game.h */,
-				49486601169972E1009EAB60 /* Game.m */,
-				49029A5E16E00272002485AE /* Team.h */,
-				49029A5F16E00272002485AE /* Team.m */,
-				49A744A2169D238000FC0BF9 /* MemoryManager.h */,
-				49A744A3169D238000FC0BF9 /* MemoryManager.m */,
+				49F6993316E3BC7A00857A53 /* App */,
 				49EC769C16990E25006D37FE /* Supporting Files */,
 			);
 			path = TwinRinksAdultHockey;
@@ -195,12 +164,97 @@
 			isa = PBXGroup;
 			children = (
 				49619D6F169BC64000D39E88 /* Images */,
+				49EC76A416990E25006D37FE /* AppDelegate.h */,
+				49EC76A516990E25006D37FE /* AppDelegate.m */,
 				49EC769D16990E25006D37FE /* TwinRinksAdultHockey-Info.plist */,
 				49EC769E16990E25006D37FE /* InfoPlist.strings */,
 				49EC76A116990E25006D37FE /* main.m */,
 				49EC76A316990E25006D37FE /* TwinRinksAdultHockey-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		49F6992F16E3BC2B00857A53 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				49F6993516E3C64B00857A53 /* Implementation */,
+				49F6993416E3C64600857A53 /* Headers */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		49F6993116E3BC3400857A53 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				49F6993916E3D8D100857A53 /* Headers */,
+				49F6993816E3D8B800857A53 /* Implementation */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		49F6993216E3BC3A00857A53 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				49EC76AD16990E25006D37FE /* Views.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		49F6993316E3BC7A00857A53 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				49F6992F16E3BC2B00857A53 /* Controllers */,
+				49F6993116E3BC3400857A53 /* Models */,
+				49F6993216E3BC3A00857A53 /* Views */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
+		49F6993416E3C64600857A53 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				49A7449E169D1B8C00FC0BF9 /* VC_ScheduleGames.h */,
+				490D15BA169B9C42002B9622 /* VC_Settings.h */,
+				49F6993616E3D78100857A53 /* TVC_ScheduleTeamSelector.h */,
+				49F6993716E3D80D00857A53 /* TVC_ScheduleYourTeamSelector.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		49F6993516E3C64B00857A53 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				4988913016994FE200403EB5 /* VC_Upcoming.m */,
+				49486603169972E1009EAB60 /* VC_Schedule.m */,
+				49A7449F169D1B8C00FC0BF9 /* VC_ScheduleGames.m */,
+				49EC76C4169910C4006D37FE /* VC_WebView.m */,
+				490D15BB169B9C42002B9622 /* VC_Settings.m */,
+				4942CE5416E1DA9B00CDE926 /* TVC_Settings.m */,
+				498E180416E2798600B7170A /* TVC_TeamSelector.m */,
+				49EE7C6416E310CA000E63C7 /* TVC_ScheduleTeamSelector.m */,
+				49EE7C6716E31B76000E63C7 /* TVC_ScheduleYourTeamSelector.m */,
+			);
+			name = Implementation;
+			sourceTree = "<group>";
+		};
+		49F6993816E3D8B800857A53 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				49029A5F16E00272002485AE /* Team.m */,
+				49486601169972E1009EAB60 /* Game.m */,
+				49A744A3169D238000FC0BF9 /* MemoryManager.m */,
+			);
+			name = Implementation;
+			sourceTree = "<group>";
+		};
+		49F6993916E3D8D100857A53 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				49A744A2169D238000FC0BF9 /* MemoryManager.h */,
+				49486600169972E1009EAB60 /* Game.h */,
+				49029A5E16E00272002485AE /* Team.h */,
+			);
+			name = Headers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,16 +336,16 @@
 			files = (
 				49EC76A216990E25006D37FE /* main.m in Sources */,
 				49EC76A616990E25006D37FE /* AppDelegate.m in Sources */,
-				49EC76C5169910C4006D37FE /* WebViewController.m in Sources */,
-				4988913116994FE200403EB5 /* UpcomingViewController.m in Sources */,
+				49EC76C5169910C4006D37FE /* VC_WebView.m in Sources */,
+				4988913116994FE200403EB5 /* VC_Upcoming.m in Sources */,
 				49486604169972E1009EAB60 /* Game.m in Sources */,
-				49486605169972E1009EAB60 /* ScheduleViewController.m in Sources */,
-				490D15BC169B9C42002B9622 /* SettingsViewController.m in Sources */,
-				49A744A0169D1B8C00FC0BF9 /* ScheduleGamesViewController.m in Sources */,
+				49486605169972E1009EAB60 /* VC_Schedule.m in Sources */,
+				490D15BC169B9C42002B9622 /* VC_Settings.m in Sources */,
+				49A744A0169D1B8C00FC0BF9 /* VC_ScheduleGames.m in Sources */,
 				49A744A4169D238000FC0BF9 /* MemoryManager.m in Sources */,
 				49029A6016E00272002485AE /* Team.m in Sources */,
-				4942CE5516E1DA9B00CDE926 /* SettingsTableViewController.m in Sources */,
-				498E180516E2798600B7170A /* TeamSelectorTableViewController.m in Sources */,
+				4942CE5516E1DA9B00CDE926 /* TVC_Settings.m in Sources */,
+				498E180516E2798600B7170A /* TVC_TeamSelector.m in Sources */,
 				49EE7C6516E310CA000E63C7 /* TVC_ScheduleTeamSelector.m in Sources */,
 				49EE7C6816E31B76000E63C7 /* TVC_ScheduleYourTeamSelector.m in Sources */,
 			);

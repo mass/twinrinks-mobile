@@ -1,11 +1,3 @@
-//
-//  MemoryManager.m
-//  TwinRinksAdultHockey
-//
-//  Created by Andrew on 1/8/13.
-//  Copyright (c) 2013 GigaStorm. All rights reserved.
-//
-
 #import "MemoryManager.h"
 #import "Game.h"
 #import "Team.h"
@@ -14,12 +6,10 @@
 
 -(NSArray *) getGameArray {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    // Get the results out
     NSString *results = [defaults stringForKey:@"gameData"];
-    NSMutableArray *games = [[NSMutableArray alloc]init];
     NSArray *lines = [results componentsSeparatedByString:@";"];
     
+    NSMutableArray *games = [[NSMutableArray alloc]init];
     for(int i=0;i<lines.count-1;i++) {
         NSString *firstSplit = [lines objectAtIndex:i];
         firstSplit = [firstSplit stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -40,21 +30,18 @@
 }
 
 -(NSArray *) getTeamArray {
-    NSArray *games = [self getGameArray];
     NSMutableArray *teams = [[NSMutableArray alloc] init];
     
+    NSArray *games = [self getGameArray];
     for(Game *game in games) {
-
         NSString *league = game.league;
         NSString *awayTeam = game.awayTeam;
         NSString *homeTeam = game.homeTeam;
         
-        if(![homeTeam isEqualToString:@"PLAYOFF"]) {
-            if(![self alreadyHasTeam:teams withName:awayTeam withLeague:league])
-                [teams addObject:[[Team alloc] initWithTeam:awayTeam andLeague:league]];
-            if(![self alreadyHasTeam:teams withName:homeTeam withLeague:league])
-                [teams addObject:[[Team alloc] initWithTeam:homeTeam andLeague:league]];
-        }
+        if(![self alreadyHasTeam:teams withName:awayTeam withLeague:league])
+            [teams addObject:[[Team alloc] initWithTeam:awayTeam andLeague:league]];
+        if(![self alreadyHasTeam:teams withName:homeTeam withLeague:league])
+            [teams addObject:[[Team alloc] initWithTeam:homeTeam andLeague:league]];
     }
     return [NSArray arrayWithArray:teams];
 }
@@ -68,8 +55,8 @@
 
 -(NSArray *) getYourTeamArray {
     NSMutableArray *yourTeams = [[NSMutableArray alloc] init];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *teamData = [defaults objectForKey:@"YourTeams"];
     teamData = [teamData stringByReplacingOccurrencesOfString:@" " withString:@""];
     teamData = [teamData stringByReplacingOccurrencesOfString:@"\n" withString:@""];
@@ -88,14 +75,11 @@
 -(void) saveYourTeamsArray:(NSArray *)array {
     NSMutableString *toSave = [[NSMutableString alloc] init];
     
-    for(int i=0;i<array.count;i++) {
+    for(int i=0;i<array.count;i++) 
         toSave = [NSMutableString stringWithString:[toSave stringByAppendingString:([((Team *) [array objectAtIndex:i]) getTeamKey])]];
-    }
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
     NSString *data = [NSString stringWithString:toSave];
-    
     [defaults setObject:data forKey:@"YourTeams"];
     [defaults synchronize];
 }

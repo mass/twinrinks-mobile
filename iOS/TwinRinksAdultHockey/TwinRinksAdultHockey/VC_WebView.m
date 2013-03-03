@@ -1,25 +1,25 @@
-//
-//  WebViewController.m
-//  TwinRinksAdultHockey
-//
-//  Created by Andrew on 1/5/13.
-//  Copyright (c) 2013 GigaStorm. All rights reserved.
-//
-
-#import "WebViewController.h"
 #import "MemoryManager.h"
 
-@implementation WebViewController
+@interface VC_WebView : UIViewController
 
-- (void)viewDidLoad
-{
-    _myWebView.scrollView.bounces = NO;
+@property (strong,nonatomic) UIWebView *myWebView;
+
+-(IBAction)refreshData:id;
+-(IBAction)settingsButtonPressed:id;
+-(IBAction)helpButtonPressed:id;
+-(void)initButtons;
+
+@end
+
+@implementation VC_WebView
+
+-(void)viewDidLoad {
     [super viewDidLoad];
-    
     [self initButtons];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    _myWebView.scrollView.bounces = NO;
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL isOn = [defaults boolForKey:@"IsAutoLoginOn"];
     NSString *username = [defaults stringForKey:@"SavedUsername"];
     NSString *password = [defaults stringForKey:@"SavedPassword"];
@@ -37,32 +37,25 @@
     else
         url = [NSURL URLWithString:offUrlString];
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+    
     [_myWebView loadRequest:requestObj];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
--(IBAction)refreshData:(id)sender
-{
+-(IBAction)refreshData:(id)sender {
     MemoryManager *myManager = [[MemoryManager alloc]init];
     [myManager refreshData];
 }
 
-- (IBAction)settingsButtonPressed:(id)sender
-{
-    UIViewController *settingsViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SettingsNavController"];
-    settingsViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:settingsViewController animated:YES completion:nil];
+-(IBAction)settingsButtonPressed:(id)sender {
+    UIViewController *vc_Settings = [[self storyboard] instantiateViewControllerWithIdentifier:@"id_vc_settings"];
+    vc_Settings.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:vc_Settings animated:YES completion:nil];
 }
 
-- (IBAction)helpButtonPressed:(id)sender
-{
-    UIViewController *helpViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"HelpNavController"];
-    helpViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:helpViewController animated:YES completion:nil];
+-(IBAction)helpButtonPressed:(id)sender {
+    UIViewController *vc_Help = [[self storyboard] instantiateViewControllerWithIdentifier:@"id_vc_help"];
+    vc_Help.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:vc_Help animated:YES completion:nil];
 }
 
 -(void)initButtons {
