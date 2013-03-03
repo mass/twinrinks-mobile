@@ -1,3 +1,18 @@
+.container{
+  margin-bottom: 50px;
+}
+h2 {
+  text-align: center;
+}
+.status-buttons {
+  text-align: center;
+  margin: 20px;
+}
+.status-buttons a {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 200px;
+}
 .screenshots {
   margin: auto;
   text-align: center;
@@ -6,4 +21,7 @@
 .screenshots img {
   margin-left: 20px;
   margin-right: 20px;
+}
+.downloads {
+  text-align: center;
 }
