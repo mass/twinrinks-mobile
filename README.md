@@ -1,4 +1,4 @@
-TwinRinksAdultHockey_MobileApp
+twinrinks-mobile
 -----
 
 Mobile applications for Twin Rinks Adult Hockey on the Android and iOS platforms. The android app is currently released on the google play store, but the iOS app isn't near completion yet. I greatly appreciate any help in improving either application.
