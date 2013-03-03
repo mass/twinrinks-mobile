@@ -7,6 +7,7 @@
 //
 
 #import "WebViewController.h"
+#import "MemoryManager.h"
 
 @implementation WebViewController
 
@@ -44,9 +45,10 @@
     [super didReceiveMemoryWarning];
 }
 
--(IBAction)doNothing:(id)sender
+-(IBAction)refreshData:(id)sender
 {
-    return;
+    MemoryManager *myManager = [[MemoryManager alloc]init];
+    [myManager refreshData];
 }
 
 - (IBAction)settingsButtonPressed:(id)sender
@@ -66,7 +68,7 @@
 -(void)initButtons {
     UIBarButtonItem *help = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"help.png"] style:UIBarButtonItemStylePlain target:self action:@selector(helpButtonPressed:)];
     UIBarButtonItem *settings = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"] style:UIBarButtonItemStylePlain target:self action:@selector(settingsButtonPressed:)];
-    UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reload.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doNothing:)];
+    UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reload.png"] style:UIBarButtonItemStylePlain target:self action:@selector(refreshData:)];
     
     NSArray *buttons = [[NSMutableArray alloc] initWithObjects:settings,help,nil];
     self.navigationItem.rightBarButtonItems = buttons;

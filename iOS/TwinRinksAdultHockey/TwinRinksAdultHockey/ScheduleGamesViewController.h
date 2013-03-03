@@ -1,5 +1,5 @@
 //
-//  ScheduleTodayViewController.h
+//  ScheduleGamesViewController.h
 //  TwinRinksAdultHockey
 //
 //  Created by Andrew on 1/8/13.
@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ScheduleTodayViewController : UITableViewController
+@interface ScheduleGamesViewController : UITableViewController
 
 @property (nonatomic,strong) __block NSArray *gameArray;
+@property (nonatomic,strong) __block NSString *dataToDisplay;
 
 @end

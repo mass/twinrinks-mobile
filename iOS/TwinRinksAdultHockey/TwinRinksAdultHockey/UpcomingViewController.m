@@ -30,12 +30,17 @@
     [self initButtons];
     
     MemoryManager *myManager = [[MemoryManager alloc] init];
-    [myManager refreshData];
     gameArray = [myManager getGameArray];
+    
+    if(gameArray.count <= 0) {
+        [myManager refreshData];
+        gameArray = [myManager getGameArray];
+    }
+    
     teamArray = [myManager getTeamArray];
     yourTeamArray = [myManager getYourTeamArray];
-    
     gameArray = [self trimGameArray];
+    [self.tableView reloadData];
 }
 
 -(NSArray *)trimGameArray {

@@ -10,7 +10,7 @@
 
 @interface ScheduleViewController : UITableViewController
 
--(IBAction)doNothing:id;
+-(IBAction)refreshData:id;
 -(IBAction)settingsButtonPressed:id;
 -(IBAction)helpButtonPressed:id;
 -(void)initButtons;

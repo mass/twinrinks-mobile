@@ -104,7 +104,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSError *error = nil;
-    NSURL *url = [NSURL URLWithString:@"https://raw.github.com/TheMasster12/TwinRinksAdultHockey_MobileApp/master/ScheduleData.txt"];
+    NSURL *url = [NSURL URLWithString:@"https://raw.github.com/TheMasster12/twinrinks-mobile/master/ScheduleData.txt"];
     NSString *textFile = [[NSString alloc] initWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
     
     NSString *storedVal = textFile;

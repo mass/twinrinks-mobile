@@ -6,15 +6,15 @@
 //  Copyright (c) 2013 GigaStorm. All rights reserved.
 //
 
-#import "ScheduleTodayViewController.h"
+#import "ScheduleGamesViewController.h"
 #import "Game.h"
 #import "MemoryManager.h"
 
-@interface ScheduleTodayViewController ()
+@interface ScheduleGamesViewController ()
 
 @end
 
-@implementation ScheduleTodayViewController
+@implementation ScheduleGamesViewController
 
 @synthesize gameArray;
 
@@ -30,21 +30,41 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     MemoryManager *myManager = [[MemoryManager alloc] init];
-    NSMutableArray *tempArray = [NSMutableArray arrayWithArray:[myManager getGameArray]];
+    gameArray = [myManager getGameArray];
+    
+    if([self.dataToDisplay isEqualToString:@"AllGames"]){}
+        //Do Nothing
+    if([self.dataToDisplay isEqualToString:@"Today"])
+        [self trimGameArrayForToday];
+    if([self.dataToDisplay isEqualToString:@"Playoffs"])
+        [self trimGameArrayForPlayoffs];
+    [self.tableView reloadData];
+}
+
+-(void)trimGameArrayForToday {
+    NSMutableArray *tempArray = [NSMutableArray arrayWithArray:gameArray];
     
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateFormat:@"MM/dd/yy"];
     NSString *todayString = [format stringFromDate:[NSDate date]];
-    //NSLog(todayString);
-    
     
     for(int i=0;i<tempArray.count;i++) {
-        if(![((NSString *)(((Game *)[tempArray objectAtIndex:i]).date)) isEqualToString:todayString]) {
-            //NSLog((NSString *)(((Game *)[tempArray objectAtIndex:i]).date));
+        if(![((NSString *)(((Game *)[tempArray objectAtIndex:i]).date))isEqualToString:todayString]) {
             [tempArray removeObjectAtIndex:i];
             i--;
+        }
+    }
+    
+    gameArray = [NSArray arrayWithArray:tempArray];
+}
+
+-(void)trimGameArrayForPlayoffs {
+    NSMutableArray *tempArray = [NSMutableArray arrayWithArray:gameArray];
+    
+    for(int i=tempArray.count-1;i>=0;i--) {
+        if(![((Game *)[tempArray objectAtIndex:i]).homeTeam isEqualToString:@"PLAYOFFS"]) {
+            [tempArray removeObjectAtIndex:i];
         }
     }
     
@@ -71,7 +91,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"todayCell";
+    static NSString *cellIdentifier = @"scheduleCell";
     UITableViewCell *cell;
     cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
@@ -93,7 +113,6 @@
     rinkLabel.text = temp.rink;
     dayDateTimeLabel.text = [NSString stringWithFormat:@"%@ on %@, at %@",temp.day,temp.date,temp.startTime];
     return cell;
-
 }
 
 @end

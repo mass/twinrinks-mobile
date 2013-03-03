@@ -7,6 +7,8 @@
 //
 
 #import "ScheduleViewController.h"
+#import "ScheduleGamesViewController.h"
+#import "MemoryManager.h"
 
 @interface ScheduleViewController ()
 
@@ -29,11 +31,6 @@
     
     [self initButtons];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,9 +39,10 @@
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)doNothing:(id)sender
+-(IBAction)refreshData:(id)sender
 {
-    return;
+    MemoryManager *myManager = [[MemoryManager alloc]init];
+    [myManager refreshData];
 }
 
 - (IBAction)settingsButtonPressed:(id)sender
@@ -64,7 +62,7 @@
 -(void)initButtons {
     UIBarButtonItem *help = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"help.png"] style:UIBarButtonItemStylePlain target:self action:@selector(helpButtonPressed:)];
     UIBarButtonItem *settings = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"] style:UIBarButtonItemStylePlain target:self action:@selector(settingsButtonPressed:)];
-    UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reload.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doNothing:)];
+    UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reload.png"] style:UIBarButtonItemStylePlain target:self action:@selector(refreshData:)];
     
     NSArray *buttons = [[NSMutableArray alloc] initWithObjects:settings,help,nil];
     self.navigationItem.rightBarButtonItems = buttons;
@@ -75,13 +73,31 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    ScheduleGamesViewController *scheduleGamesViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ScheduleGamesViewController"];
+    
+    switch (indexPath.row) {
+        case 0:
+            scheduleGamesViewController.dataToDisplay = @"AllTeams";
+            break;
+        case 1:
+            scheduleGamesViewController.dataToDisplay = @"YourTeams";
+            break;
+        case 2:
+            scheduleGamesViewController.dataToDisplay = @"AllGames";
+            break;
+        case 3:
+            scheduleGamesViewController.dataToDisplay = @"Today";
+            break;
+        case 4:
+            scheduleGamesViewController.dataToDisplay = @"Playoffs";
+            break;
+            
+        default:
+            scheduleGamesViewController.dataToDisplay = @"AllGames";
+            break;
+    }
+    
+    [self.navigationController pushViewController:scheduleGamesViewController animated:YES];
 }
 
 @end
