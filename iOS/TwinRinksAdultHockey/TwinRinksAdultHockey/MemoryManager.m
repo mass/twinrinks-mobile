@@ -20,13 +20,7 @@
             [games addObject:temp];
     }
     
-    NSArray *sortedGames = [games sortedArrayUsingComparator:^NSComparisonResult(Game *a, Game *b) {
-        NSDate *first = [a getDateObject];
-        NSDate *second = [b getDateObject];
-        return [first compare:second];
-    }];
-    
-    return sortedGames;
+    return [NSArray arrayWithArray:games];
 }
 
 -(NSArray *) getTeamArray {

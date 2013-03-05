@@ -28,9 +28,10 @@
 
 -(NSDate *) getDateObject {
     NSString *timeStr = [NSString stringWithFormat:@"%@ %@",self.date,self.startTime];
+    timeStr = [timeStr stringByAppendingString:@"CST"];
     
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    [format setDateFormat:@"MM/dd/yy hh:mma"];
+    [format setDateFormat:@"MM/dd/yy hh:mmazzz"];
     NSDate *formattedDate = [format dateFromString:timeStr];
     
     return formattedDate;

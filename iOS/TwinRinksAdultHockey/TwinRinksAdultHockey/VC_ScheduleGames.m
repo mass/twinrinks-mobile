@@ -24,8 +24,10 @@
     MemoryManager *myManager = [[MemoryManager alloc] init];
     _gameArray = [myManager getGameArray];
     
-    if([dataToDisplay isEqualToString:@"AllGames"]){}
-        //Do Nothing
+    if([dataToDisplay isEqualToString:@"AllGames"])
+        _gameArray = [_gameArray sortedArrayUsingComparator:^NSComparisonResult(Game *a, Game *b) {
+            return [[a getDateObject] compare:[b getDateObject]];
+        }];
     else if([dataToDisplay isEqualToString:@"Today"])
         [self trimGameArrayForToday];
     else if([dataToDisplay isEqualToString:@"Playoffs"])
@@ -46,7 +48,10 @@
         if((![temp.league isEqualToString:leagueP]) || (!([temp.homeTeam isEqualToString:nameP] || [temp.awayTeam isEqualToString:nameP])))
             [tempArray removeObjectAtIndex:i];
     }
-    _gameArray = [NSArray arrayWithArray:tempArray];
+    
+    _gameArray = [tempArray sortedArrayUsingComparator:^NSComparisonResult(Game *a, Game *b) {
+        return [[a getDateObject] compare:[b getDateObject]];
+    }];
 }
 
 -(void)trimGameArrayForToday {
@@ -59,7 +64,9 @@
     for(int i=tempArray.count-1;i>=0;i--)
         if(![((NSString *)(((Game *)[tempArray objectAtIndex:i]).date))isEqualToString:todayString])
             [tempArray removeObjectAtIndex:i];
-    _gameArray = [NSArray arrayWithArray:tempArray];
+    _gameArray = [tempArray sortedArrayUsingComparator:^NSComparisonResult(Game *a, Game *b) {
+        return [[a getDateObject] compare:[b getDateObject]];
+    }];
 }
 
 -(void)trimGameArrayForPlayoffs {
@@ -68,7 +75,9 @@
     for(int i=tempArray.count-1;i>=0;i--)
         if(![((Game *)[tempArray objectAtIndex:i]).homeTeam isEqualToString:@"PLAYOFFS"])
             [tempArray removeObjectAtIndex:i];
-    _gameArray = [NSArray arrayWithArray:tempArray];
+    _gameArray = [tempArray sortedArrayUsingComparator:^NSComparisonResult(Game *a, Game *b) {
+        return [[a getDateObject] compare:[b getDateObject]];
+    }];
 }
 
 #pragma mark - Table view data source

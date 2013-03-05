@@ -46,7 +46,12 @@
     for(int i=gameMutable.count-1;i>=0;i--)
         if(![self isYourGame:[gameMutable objectAtIndex:i]])
             [gameMutable removeObjectAtIndex:i];
-    return [NSArray arrayWithArray:gameMutable];
+    
+        return [gameMutable sortedArrayUsingComparator:^NSComparisonResult(Game *a, Game *b) {
+           NSDate *first = [a getDateObject];
+           NSDate *second = [b getDateObject];
+           return [first compare:second];
+       }];
 }
                  
 -(BOOL)isYourGame:(Game *)gameToTest {
