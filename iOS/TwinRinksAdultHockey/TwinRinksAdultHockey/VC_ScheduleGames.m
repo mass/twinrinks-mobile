@@ -36,7 +36,6 @@
         NSArray *data = [dataToDisplay componentsSeparatedByString:@","];
         [self trimGameArrayForTeam:[((NSString *) [data objectAtIndex:1]) stringByReplacingOccurrencesOfString:@";" withString:@""] andLeague:[data objectAtIndex:0]];
     }
-    
     [self.tableView reloadData];
 }
 

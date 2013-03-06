@@ -10,6 +10,10 @@
     NSArray *lines = [results componentsSeparatedByString:@";"];
     
     NSMutableArray *games = [[NSMutableArray alloc]init];
+    
+    if(lines.count <= 0) 
+        return [[NSArray alloc]init];
+    
     for(int i=0;i<lines.count-1;i++) {
         NSString *firstSplit = [lines objectAtIndex:i];
         firstSplit = [firstSplit stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -19,7 +23,6 @@
         if(![temp isPassed])
             [games addObject:temp];
     }
-    
     return [NSArray arrayWithArray:games];
 }
 

@@ -30,6 +30,7 @@
     
     _myManager = [[MemoryManager alloc] init];
     _gameArray = [_myManager getGameArray];
+    
     if(_gameArray.count <= 0) {
         [_myManager refreshData];
         _gameArray = [_myManager getGameArray];
