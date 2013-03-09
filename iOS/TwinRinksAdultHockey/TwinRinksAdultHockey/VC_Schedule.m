@@ -7,7 +7,6 @@
 
 -(IBAction)refreshData:id;
 -(IBAction)settingsButtonPressed:id;
--(IBAction)helpButtonPressed:id;
 -(void)initButtons;
 
 @end
@@ -23,6 +22,9 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     [self initButtons];
+    
+    self.tableView.backgroundView = nil;
+    self.view.backgroundColor = [UIColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f];
 }
 
 -(IBAction)refreshData:(id)sender {
@@ -36,19 +38,10 @@
     [self presentViewController:vc_Settings animated:YES completion:nil];
 }
 
--(IBAction)helpButtonPressed:(id)sender {
-    UIViewController *vc_Help = [[self storyboard] instantiateViewControllerWithIdentifier:@"id_vc_help"];
-    vc_Help.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:vc_Help animated:YES completion:nil];
-}
-
 -(void)initButtons {
-    UIBarButtonItem *help = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"help.png"] style:UIBarButtonItemStylePlain target:self action:@selector(helpButtonPressed:)];
     UIBarButtonItem *settings = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"] style:UIBarButtonItemStylePlain target:self action:@selector(settingsButtonPressed:)];
     UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reload.png"] style:UIBarButtonItemStylePlain target:self action:@selector(refreshData:)];
-    
-    NSArray *buttons = [[NSMutableArray alloc] initWithObjects:settings,help,nil];
-    self.navigationItem.rightBarButtonItems = buttons;
+    self.navigationItem.rightBarButtonItem = settings;
     self.navigationItem.leftBarButtonItem = refresh;
 }
 

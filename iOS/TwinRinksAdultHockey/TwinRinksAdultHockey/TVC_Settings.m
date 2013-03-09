@@ -22,6 +22,11 @@
     
     _myManager = [[MemoryManager alloc] init];
     _yourTeamsArray = [_myManager getYourTeamArray];
+    
+    
+    self.tableView.backgroundView = nil;
+    self.view.backgroundColor = [UIColor whiteColor];
+    
 }
 
 #pragma mark - Table view data source

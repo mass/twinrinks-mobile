@@ -36,6 +36,9 @@
         NSArray *data = [dataToDisplay componentsSeparatedByString:@","];
         [self trimGameArrayForTeam:[((NSString *) [data objectAtIndex:1]) stringByReplacingOccurrencesOfString:@";" withString:@""] andLeague:[data objectAtIndex:0]];
     }
+    
+    self.tableView.backgroundView = nil;
+    self.view.backgroundColor = [UIColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f];
     [self.tableView reloadData];
 }
 

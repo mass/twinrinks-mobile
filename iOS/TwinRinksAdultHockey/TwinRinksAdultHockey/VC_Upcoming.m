@@ -11,7 +11,6 @@
 
 -(IBAction)refreshData:id;
 -(IBAction)settingsButtonPressed:id;
--(IBAction)helpButtonPressed:id;
 -(void)initButtons;
 
 @end
@@ -39,6 +38,9 @@
     _teamArray = [_myManager getTeamArray];
     _yourTeamArray = [_myManager getYourTeamArray];
     _gameArray = [self trimGameArray];
+    
+    self.tableView.backgroundView = nil;
+    self.view.backgroundColor = [UIColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f];
     [self.tableView reloadData];
 }
 
@@ -84,19 +86,10 @@
     [self presentViewController:vc_Settings animated:YES completion:nil];
 }
 
--(IBAction)helpButtonPressed:(id)sender {
-    UIViewController *vc_Help = [[self storyboard] instantiateViewControllerWithIdentifier:@"id_vc_help"];
-    vc_Help.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:vc_Help animated:YES completion:nil];
-}
-
 -(void)initButtons {
-    UIBarButtonItem *help = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"help.png"] style:UIBarButtonItemStylePlain target:self action:@selector(helpButtonPressed:)];
     UIBarButtonItem *settings = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"] style:UIBarButtonItemStylePlain target:self action:@selector(settingsButtonPressed:)];
     UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reload.png"] style:UIBarButtonItemStylePlain target:self action:@selector(refreshData:)];
-    
-    NSArray *buttons = [[NSMutableArray alloc] initWithObjects:settings,help,nil];
-    self.navigationItem.rightBarButtonItems = buttons;
+    self.navigationItem.rightBarButtonItem = settings;
     self.navigationItem.leftBarButtonItem = refresh;
 }
 
@@ -127,10 +120,12 @@
     
     homeLabel.text =  temp.homeTeam;
     awayLabel.text = temp.awayTeam;
-    leagueLabel.text = temp.league;
-    rinkLabel.text = temp.rink;
+    leagueLabel.text = [temp.league stringByAppendingString:@" League"];
+    rinkLabel.text = [temp.rink stringByAppendingString:@" Rink"];
     dayDateTimeLabel.text = [NSString stringWithFormat:@"%@ on %@, at %@",temp.day,temp.date,temp.startTime];
     
+//    cell.backgroundView.frame = CGRectOffset(cell.frame, 10,10);
+//    [cell addSubview:cell.backgroundView];
     return cell;
 }
 

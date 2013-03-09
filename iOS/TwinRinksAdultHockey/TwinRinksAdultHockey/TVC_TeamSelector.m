@@ -25,6 +25,9 @@
     _teamsArray = [_myManager getTeamArray];
     _leagueArray = [self generateLeagueArray];
     _arrayOfTeamArrays = [self generateDoubleArray];
+    
+    self.tableView.backgroundView = nil;
+    self.view.backgroundColor = [UIColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f];
 }
 
 -(NSArray *) generateDoubleArray {
@@ -72,8 +75,26 @@
     return _leagueArray.count;
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *tempView=[[UIView alloc]initWithFrame:CGRectMake(0,200,300,244)];
+    tempView.backgroundColor=[UIColor clearColor];
+    
+    UILabel *tempLabel=[[UILabel alloc]initWithFrame:CGRectMake(15,0,300,44)];
+    tempLabel.backgroundColor=[UIColor clearColor];
+    tempLabel.shadowColor = [UIColor blackColor];
+    tempLabel.shadowOffset = CGSizeMake(0,2);
+    tempLabel.textColor = [UIColor whiteColor];
+    tempLabel.font = [UIFont fontWithName:@"Helvetica" size:18.0f];
+    tempLabel.font = [UIFont boldSystemFontOfSize:18.0f];
+    tempLabel.text=[_leagueArray objectAtIndex:section];
+    [tempView addSubview:tempLabel];
+    
+    return tempView;
+}
+
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [_leagueArray objectAtIndex:section];
+   return [_leagueArray objectAtIndex:section];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
