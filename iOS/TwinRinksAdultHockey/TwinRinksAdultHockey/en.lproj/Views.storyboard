@@ -65,7 +65,7 @@
             <objects>
                 <tableViewController id="kr3-jS-Rz8" customClass="TVC_Settings" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="j4d-of-3yC">
-                        <rect key="frame" x="0.0" y="20" width="280" height="371"/>
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="286"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -126,7 +126,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="id_cell_upcomingGames" rowHeight="90" id="reD-Jz-3IZ">
-                                <rect key="frame" x="0.0" y="46" width="320" height="92"/>
+                                <rect key="frame" x="0.0" y="46" width="320" height="91"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="10" y="1" width="300" height="89"/>
@@ -181,19 +181,48 @@
                                 <rect key="contentStretch" x="0.0" y="0.25" width="1" height="1"/>
                                 <constraints>
                                     <constraint firstItem="iTM-c8-Ap1" firstAttribute="baseline" secondItem="srx-Z9-UOz" secondAttribute="baseline" type="default" id="70y-Wc-IiI"/>
-                                    <constraint firstAttribute="bottom" secondItem="hDd-ps-jEm" secondAttribute="bottom" constant="6" id="MJV-5P-tbM"/>
                                     <constraint firstAttribute="trailing" secondItem="C8a-ah-CiZ" secondAttribute="trailing" constant="20" type="default" id="Ojd-26-ptf"/>
                                     <constraint firstItem="dzs-sD-KYD" firstAttribute="top" secondItem="reD-Jz-3IZ" secondAttribute="top" constant="37" id="Qd8-9Y-a1G"/>
                                     <constraint firstAttribute="trailing" secondItem="iTM-c8-Ap1" secondAttribute="trailing" constant="20" type="default" id="R2x-xz-2Jc"/>
                                     <constraint firstItem="hDd-ps-jEm" firstAttribute="leading" secondItem="reD-Jz-3IZ" secondAttribute="leading" constant="20" type="default" id="UCU-KX-Slh"/>
                                     <constraint firstItem="srx-Z9-UOz" firstAttribute="top" secondItem="reD-Jz-3IZ" secondAttribute="top" constant="11" id="WW8-x2-FNJ"/>
                                     <constraint firstItem="C8a-ah-CiZ" firstAttribute="baseline" secondItem="hDd-ps-jEm" secondAttribute="baseline" type="default" id="aDJ-Md-nWq"/>
+                                    <constraint firstAttribute="bottom" secondItem="hDd-ps-jEm" secondAttribute="bottom" constant="5" id="bwu-uX-I8B"/>
                                     <constraint firstItem="dzs-sD-KYD" firstAttribute="leading" secondItem="reD-Jz-3IZ" secondAttribute="leading" constant="20" type="default" id="cVW-Z1-Fgg"/>
                                     <constraint firstItem="C8a-ah-CiZ" firstAttribute="leading" secondItem="iTM-c8-Ap1" secondAttribute="leading" type="default" id="cYG-XA-86F"/>
                                     <constraint firstAttribute="trailing" secondItem="dzs-sD-KYD" secondAttribute="trailing" constant="20" type="default" id="dq7-0L-acy"/>
                                     <constraint firstItem="C8a-ah-CiZ" firstAttribute="top" secondItem="hDd-ps-jEm" secondAttribute="top" type="default" id="ipg-mQ-7s6"/>
                                     <constraint firstItem="iTM-c8-Ap1" firstAttribute="top" secondItem="srx-Z9-UOz" secondAttribute="top" type="default" id="nbV-am-lZe"/>
                                     <constraint firstItem="srx-Z9-UOz" firstAttribute="leading" secondItem="reD-Jz-3IZ" secondAttribute="leading" constant="20" type="default" id="tER-z0-quY"/>
+                                </constraints>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="id_cell_upcomingGamesAddTeam" rowHeight="30" id="QA9-kf-yub">
+                                <rect key="frame" x="0.0" y="137" width="320" height="31"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="10" y="0.0" width="300" height="29"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Go To Settings to Add a Team..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F8H-FE-D6q">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="5dd-Zr-vYV"/>
+                                                <constraint firstAttribute="width" constant="260" id="Rdj-0g-8GO"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <accessibility key="accessibilityConfiguration" label="hi">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
+                                <rect key="contentStretch" x="0.0" y="0.25" width="1" height="1"/>
+                                <constraints>
+                                    <constraint firstItem="F8H-FE-D6q" firstAttribute="centerY" secondItem="QA9-kf-yub" secondAttribute="centerY" type="default" id="BD5-dC-LgA"/>
+                                    <constraint firstItem="F8H-FE-D6q" firstAttribute="centerX" secondItem="QA9-kf-yub" secondAttribute="centerX" type="default" id="bEq-VF-Yf8"/>
                                 </constraints>
                             </tableViewCell>
                         </prototypes>
@@ -519,7 +548,7 @@
             <objects>
                 <viewController storyboardIdentifier="" title="SettingsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1bn-yf-qbo" customClass="VC_Settings" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gf2-6g-aDw">
-                        <rect key="frame" x="0.0" y="20" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIB-K1-phA">
@@ -603,12 +632,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xUK-o3-sGv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1102" y="-216"/>
+            <point key="canvasLocation" x="-1086" y="-310"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Tqb-KA-GzP">
             <objects>
                 <navigationController storyboardIdentifier="id_vc_settings" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AjP-gz-wfn" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="TRM-wh-3yi"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="eiV-CH-Q6g">
@@ -621,7 +651,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KvZ-Ex-r4V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1512" y="-206"/>
+            <point key="canvasLocation" x="-1554" y="-319"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="15">

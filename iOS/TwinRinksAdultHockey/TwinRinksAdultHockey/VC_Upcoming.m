@@ -100,33 +100,35 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _gameArray.count;
+    if(_yourTeamArray.count > 0)
+        return _gameArray.count;
+    else
+        return 1;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"id_cell_upcomingGames";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    if(_yourTeamArray.count > 0) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"id_cell_upcomingGames" forIndexPath:indexPath];
     
-    if (cell == nil) 
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        if (cell == nil)
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"id_cell_upcomingGames"];
     
-    UILabel *homeLabel = (UILabel *)[cell viewWithTag:1];
-    UILabel *awayLabel = (UILabel *)[cell viewWithTag:2];
-    UILabel *dayDateTimeLabel = (UILabel *)[cell viewWithTag:3];
-    UILabel *leagueLabel = (UILabel *)[cell viewWithTag:4];
-    UILabel *rinkLabel = (UILabel *)[cell viewWithTag:5];
+        Game *temp = ((Game *)[_gameArray objectAtIndex:indexPath.row]);
+        
+        ((UILabel *)[cell viewWithTag:1]).text = temp.homeTeam;
+        ((UILabel *)[cell viewWithTag:2]).text = temp.awayTeam;
+        ((UILabel *)[cell viewWithTag:3]).text = [NSString stringWithFormat:@"%@ on %@, at %@",temp.day,temp.date,temp.startTime];
+        ((UILabel *)[cell viewWithTag:4]).text = [temp.league stringByAppendingString:@" League"];
+        ((UILabel *)[cell viewWithTag:5]).text = [temp.rink stringByAppendingString:@" Rink"];
 
-    Game *temp = ((Game *)[_gameArray objectAtIndex:indexPath.row]);
-    
-    homeLabel.text =  temp.homeTeam;
-    awayLabel.text = temp.awayTeam;
-    leagueLabel.text = [temp.league stringByAppendingString:@" League"];
-    rinkLabel.text = [temp.rink stringByAppendingString:@" Rink"];
-    dayDateTimeLabel.text = [NSString stringWithFormat:@"%@ on %@, at %@",temp.day,temp.date,temp.startTime];
-    
-//    cell.backgroundView.frame = CGRectOffset(cell.frame, 10,10);
-//    [cell addSubview:cell.backgroundView];
-    return cell;
+        return cell;
+    }
+    else {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"id_cell_upcomingGamesAddTeam" forIndexPath:indexPath];
+        if (cell == nil)
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"id_cell_upcomingGamesAddTeam"];
+        return cell;
+    }
 }
 
 @end
