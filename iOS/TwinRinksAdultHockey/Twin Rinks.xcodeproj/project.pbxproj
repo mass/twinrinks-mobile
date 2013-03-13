@@ -37,6 +37,7 @@
 		498E180516E2798600B7170A /* TVC_TeamSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E180416E2798600B7170A /* TVC_TeamSelector.m */; };
 		49A744A0169D1B8C00FC0BF9 /* VC_ScheduleGames.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A7449F169D1B8C00FC0BF9 /* VC_ScheduleGames.m */; };
 		49A744A4169D238000FC0BF9 /* MemoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A744A3169D238000FC0BF9 /* MemoryManager.m */; };
+		49DBEE4D16F019CD007DF4D0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49DBEE4C16F019CD007DF4D0 /* Default-568h@2x.png */; };
 		49EC769616990E25006D37FE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EC769516990E25006D37FE /* UIKit.framework */; };
 		49EC769816990E25006D37FE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EC769716990E25006D37FE /* Foundation.framework */; };
 		49EC769A16990E25006D37FE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EC769916990E25006D37FE /* CoreGraphics.framework */; };
@@ -85,6 +86,7 @@
 		49A7449F169D1B8C00FC0BF9 /* VC_ScheduleGames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VC_ScheduleGames.m; sourceTree = "<group>"; };
 		49A744A2169D238000FC0BF9 /* MemoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryManager.h; sourceTree = "<group>"; };
 		49A744A3169D238000FC0BF9 /* MemoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryManager.m; sourceTree = "<group>"; };
+		49DBEE4C16F019CD007DF4D0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		49EC769116990E25006D37FE /* Twin Rinks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Twin Rinks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49EC769516990E25006D37FE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		49EC769716990E25006D37FE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -131,6 +133,7 @@
 				4972043616F00E6C000577ED /* calendar@64.png */,
 				4972041F16F00BBC000577ED /* Default.png */,
 				4972042016F00BBC000577ED /* Default@2x.png */,
+				49DBEE4C16F019CD007DF4D0 /* Default-568h@2x.png */,
 				4972042116F00BBC000577ED /* Icon-72.png */,
 				4972042216F00BBC000577ED /* Icon-72@2x.png */,
 				4972042316F00BBC000577ED /* Icon.png */,
@@ -352,6 +355,7 @@
 				4972044316F01005000577ED /* arrow_up.png in Resources */,
 				4972044416F01005000577ED /* arrow_up@2x.png in Resources */,
 				4972044516F01005000577ED /* arrow_up@64.png in Resources */,
+				49DBEE4D16F019CD007DF4D0 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,7 +461,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TwinRinksAdultHockey/Twin Rinks-Prefix.pch";
 				INFOPLIST_FILE = "TwinRinksAdultHockey/Twin Rinks-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "Twin Rinks";
 				WRAPPER_EXTENSION = app;
 			};
@@ -469,7 +473,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TwinRinksAdultHockey/Twin Rinks-Prefix.pch";
 				INFOPLIST_FILE = "TwinRinksAdultHockey/Twin Rinks-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "Twin Rinks";
 				WRAPPER_EXTENSION = app;
 			};
