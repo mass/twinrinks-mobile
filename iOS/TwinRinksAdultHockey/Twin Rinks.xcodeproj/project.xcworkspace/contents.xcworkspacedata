@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:TwinRinksAdultHockey.xcodeproj">
+      location = "self:Twin Rinks.xcodeproj">
    </FileRef>
 </Workspace>

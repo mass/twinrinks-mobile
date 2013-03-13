@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "49EC769016990E25006D37FE"
                BuildableName = "TwinRinksAdultHockey.app"
-               BlueprintName = "TwinRinksAdultHockey"
-               ReferencedContainer = "container:TwinRinksAdultHockey.xcodeproj">
+               BlueprintName = "Twin Rinks"
+               ReferencedContainer = "container:Twin Rinks.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "49EC769016990E25006D37FE"
             BuildableName = "TwinRinksAdultHockey.app"
-            BlueprintName = "TwinRinksAdultHockey"
-            ReferencedContainer = "container:TwinRinksAdultHockey.xcodeproj">
+            BlueprintName = "Twin Rinks"
+            ReferencedContainer = "container:Twin Rinks.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -53,8 +53,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "49EC769016990E25006D37FE"
             BuildableName = "TwinRinksAdultHockey.app"
-            BlueprintName = "TwinRinksAdultHockey"
-            ReferencedContainer = "container:TwinRinksAdultHockey.xcodeproj">
+            BlueprintName = "Twin Rinks"
+            ReferencedContainer = "container:Twin Rinks.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -71,8 +71,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "49EC769016990E25006D37FE"
             BuildableName = "TwinRinksAdultHockey.app"
-            BlueprintName = "TwinRinksAdultHockey"
-            ReferencedContainer = "container:TwinRinksAdultHockey.xcodeproj">
+            BlueprintName = "Twin Rinks"
+            ReferencedContainer = "container:Twin Rinks.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

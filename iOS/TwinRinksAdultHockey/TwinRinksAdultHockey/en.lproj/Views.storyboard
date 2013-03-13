@@ -8,7 +8,7 @@
         <scene sceneID="LSO-nw-0Lc">
             <objects>
                 <navigationController title="WebViewNavController" definesPresentationContext="YES" id="dSo-Rj-QWH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Sub Sign-In" id="NUL-CE-LcS"/>
+                    <tabBarItem key="tabBarItem" title="Sub Sign-In" image="app_globe.png" id="NUL-CE-LcS"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="Tjc-Vc-XVS">
@@ -65,7 +65,7 @@
             <objects>
                 <tableViewController id="kr3-jS-Rz8" customClass="TVC_Settings" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="j4d-of-3yC">
-                        <rect key="frame" x="0.0" y="0.0" width="280" height="286"/>
+                        <rect key="frame" x="0.0" y="20" width="280" height="286"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -101,7 +101,7 @@
         <scene sceneID="kOV-Pw-6f5">
             <objects>
                 <navigationController definesPresentationContext="YES" id="RKK-If-Mox" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Upcoming" id="kSo-GQ-VgZ"/>
+                    <tabBarItem key="tabBarItem" title="Upcoming" image="arrow_up.png" id="kSo-GQ-VgZ"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="tie-YI-4ax">
@@ -491,7 +491,7 @@
         <scene sceneID="7BV-YH-Bad">
             <objects>
                 <navigationController title="ScheduleNavController" definesPresentationContext="YES" id="JRS-mA-x1v" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Schedule" id="XPA-VW-ME6"/>
+                    <tabBarItem key="tabBarItem" title="Schedule" image="calendar.png" id="XPA-VW-ME6"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="E3c-cc-fut">
@@ -548,7 +548,7 @@
             <objects>
                 <viewController storyboardIdentifier="" title="SettingsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1bn-yf-qbo" customClass="VC_Settings" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gf2-6g-aDw">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIB-K1-phA">
@@ -713,6 +713,11 @@
             <point key="canvasLocation" x="848" y="-63"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="app_globe.png" width="24" height="24"/>
+        <image name="arrow_up.png" width="24" height="24"/>
+        <image name="calendar.png" width="24" height="24"/>
+    </resources>
     <classes>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
