@@ -17,16 +17,6 @@
             android:key="defaultTab"
             android:title="Select Tab..." />
     </PreferenceCategory>
-	<PreferenceCategory
-        android:key="selectCalendarCategory"
-        android:summary="Select which calendar to use"
-        android:title="Calendars" >
-        <ListPreference
-            android:key="calendarID"
-            android:title="Select calendar"
-            android:entries="@array/Calendars"
-            android:entryValues="@array/NameCalendars" />
-    </PreferenceCategory>    
     <PreferenceCategory
         android:summary="Enter Login-Credentials"
         android:title="Automatic Login" >

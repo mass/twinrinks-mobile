@@ -81,10 +81,4 @@
         android:text="@string/dateTime"
         android:textSize="@dimen/text_Time" />
 
-    <Button
-        android:id="@+id/addCal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/add2cal" />
-
 </LinearLayout>

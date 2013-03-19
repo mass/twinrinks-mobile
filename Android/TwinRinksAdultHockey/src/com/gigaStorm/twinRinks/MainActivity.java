@@ -1,6 +1,7 @@
 package com.gigaStorm.twinRinks;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import android.app.AlertDialog;
@@ -12,6 +13,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
@@ -58,8 +60,7 @@ public class MainActivity extends SherlockActivity implements TabListener {
 	actionBar.setDisplayShowTitleEnabled(false);
 
 	createTabs();
-	actionBar.selectTab(actionBar.getTabAt(Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(
-		getApplicationContext()).getString("defaultTab", "0"))));
+	actionBar.selectTab(actionBar.getTabAt(Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("defaultTab", "0"))));
     }
 
     @Override
@@ -108,8 +109,7 @@ public class MainActivity extends SherlockActivity implements TabListener {
 	ArrayList<Game> gamesToAdd = new ArrayList<Game>();
 	for(Team e: yourTeams)
 	    for(Game e1: games)
-		if((e1.getTeamA().equalsIgnoreCase(e.getTeamName()) || e1.getTeamH().equalsIgnoreCase(e.getTeamName()))
-			&& e1.getLeague().equalsIgnoreCase(e.getLeague()))
+		if((e1.getTeamA().equalsIgnoreCase(e.getTeamName()) || e1.getTeamH().equalsIgnoreCase(e.getTeamName())) && e1.getLeague().equalsIgnoreCase(e.getLeague()))
 		    if(!e1.hasPassed())
 			gamesToAdd.add(e1);
 	gamesToAdd = getSortedGameArray(gamesToAdd);
@@ -203,19 +203,17 @@ public class MainActivity extends SherlockActivity implements TabListener {
 	Collections.sort(temp, new Comparator<Game>() {
 	    @Override
 	    public int compare(Game lhs,Game rhs) {
-		return Time.compare(lhs.getTimeObject(), rhs.getTimeObject());
+		java.util.Date date = lhs.getCalendarObject().getTime();
+		return date.compareTo(rhs.getCalendarObject().getTime());
 	    }
 	});
 	return temp;
     }
 
     public void showSigninPage() {
-	String autoLogInUsername = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(
-		"autoLogInUsername", "NullAndVoid");
-	String autoLogInPassword = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(
-		"autoLogInPassword", "NullAndVoid");
-	boolean autoLogInCheckbox = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(
-		"autoLogInCheckbox", false);
+	String autoLogInUsername = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("autoLogInUsername", "NullAndVoid");
+	String autoLogInPassword = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("autoLogInPassword", "NullAndVoid");
+	boolean autoLogInCheckbox = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("autoLogInCheckbox", false);
 
 	WebView webView = (WebView) this.findViewById(R.id.webView_subsigninmain_mainWebView);
 	WebViewClient webViewClient = new WebViewClient();
@@ -225,14 +223,12 @@ public class MainActivity extends SherlockActivity implements TabListener {
 
 	if(checkInternet()) {
 	    if(autoLogInCheckbox) {
-		webView.loadUrl("http://www.twinrinks.com/adulthockey/subs/subs_entry.php?subs_data1="
-			+ autoLogInUsername + "&subs_data2=" + autoLogInPassword);
+		webView.loadUrl("http://www.twinrinks.com/adulthockey/subs/subs_entry.php?subs_data1=" + autoLogInUsername + "&subs_data2=" + autoLogInPassword);
 	    } else {
 		webView.loadUrl("http://www.twinrinks.com/adulthockey/subs/subs_entry.html");
 	    }
 	} else {
-	    webView.loadData("This application requires a valid internet connection to properly function.",
-		    "text/html", "utf-8");
+	    webView.loadData("This application requires a valid internet connection to properly function.", "text/html", "utf-8");
 	    AlertDialog.Builder builder = new AlertDialog.Builder(this);
 	    builder.setCancelable(false);
 	    builder.setTitle("No Network Connection");
@@ -276,8 +272,7 @@ public class MainActivity extends SherlockActivity implements TabListener {
 	LinearLayout linearLayout_mainSchedule_games = (LinearLayout) findViewById(R.id.linearLayout_mainSchedule_games);
 	linearLayout_mainSchedule_games.removeAllViews();
 	for(Game e: games)
-	    if((e.getTeamA().equalsIgnoreCase(team) || e.getTeamH().equalsIgnoreCase(team))
-		    && e.getLeague().equalsIgnoreCase(league))
+	    if((e.getTeamA().equalsIgnoreCase(team) || e.getTeamH().equalsIgnoreCase(team)) && e.getLeague().equalsIgnoreCase(league))
 		if(!e.hasPassed()) {
 		    GameDisplay gd = new GameDisplay(this);
 		    gd.setGame(e);
@@ -313,8 +308,7 @@ public class MainActivity extends SherlockActivity implements TabListener {
 	LinearLayout linearLayout_mainSchedule_games = (LinearLayout) findViewById(R.id.linearLayout_mainSchedule_games);
 	linearLayout_mainSchedule_games.removeAllViews();
 	for(Game e: games) {
-	    if(e.getTimeObject().year == year && e.getTimeObject().month == month
-		    && e.getTimeObject().monthDay == monthday)
+	    if(e.getCalendarObject().get(Calendar.YEAR) == year && e.getCalendarObject().get(Calendar.MONTH) == month && e.getCalendarObject().get(Calendar.DAY_OF_MONTH) == monthday)
 		if(!e.hasPassed()) {
 		    GameDisplay gd = new GameDisplay(this);
 		    gd.setGame(e);
@@ -482,8 +476,7 @@ public class MainActivity extends SherlockActivity implements TabListener {
 	    case R.id.shareMenu:
 		Intent shareIntent = new Intent(Intent.ACTION_SEND);
 		shareIntent.setType("text/plain");
-		shareIntent.putExtra(Intent.EXTRA_TEXT,
-			"Check out this Twin Rinks Adult Hockey Android app. http://goo.gl/ZeGxN");
+		shareIntent.putExtra(Intent.EXTRA_TEXT, "Check out this Twin Rinks Adult Hockey Android app. http://goo.gl/ZeGxN");
 		startActivity(Intent.createChooser(shareIntent, "Choose Application:"));
 		return true;
 
@@ -493,9 +486,18 @@ public class MainActivity extends SherlockActivity implements TabListener {
 		return true;
 
 	    case R.id.rate:
-		Intent rateIntent = new Intent(Intent.ACTION_VIEW,
-			Uri.parse("market://details?id=com.gigaStorm.twinRinks"));
+		Intent rateIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.gigaStorm.twinRinks"));
 		startActivity(Intent.createChooser(rateIntent, "Choose Application:"));
+		return true;
+
+	    case R.id.addToCalendar:
+		if(Build.VERSION.SDK_INT >= 14) {
+		    CalendarManager man = new CalendarManager(this);
+		    man.saveGamesToCalendar();
+		} else {
+		    CalendarManagerCompat man = new CalendarManagerCompat(this);
+		    man.saveGamesToCalendar();
+		}
 		return true;
 
 	    case R.id.settings:

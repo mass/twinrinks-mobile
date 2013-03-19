@@ -37,6 +37,13 @@
         android:title="Rate App"
         android:visible="true"/>
     <item
+        android:id="@+id/addToCalendar"
+        android:enabled="true"
+        android:icon="@drawable/ic_rate"
+        android:showAsAction="ifRoom"
+        android:title="Add Games to Calendar"
+        android:visible="true"/>
+    <item
         android:id="@+id/settings"
         android:enabled="true"
         android:icon="@drawable/ic_settings"

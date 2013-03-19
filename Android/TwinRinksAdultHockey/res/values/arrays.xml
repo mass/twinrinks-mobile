@@ -18,8 +18,4 @@
         <item>1</item>
         <item>2</item>
     </string-array>
-    <string-array name="Calendars">
-    </string-array>
-    <string-array name="NameCalendars">
-    </string-array>
-</resources>
+</resources>
