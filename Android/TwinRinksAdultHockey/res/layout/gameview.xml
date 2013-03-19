@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="left"
-            android:text="PURPLE"
+            android:text="@string/homeTeam"
             android:textSize="@dimen/text_Team" />
 
         <TextView
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="right"
-            android:text="ORANGE"
+            android:text="@string/awayTeam"
             android:textSize="@dimen/text_Team" />
     </LinearLayout>
 
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="Platinum"
+            android:text="@string/league"
             android:textSize="@dimen/text_League" />
 
         <TextView
@@ -60,7 +60,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="right"
-            android:text="BLUE Rink"
+            android:text="@string/rink"
             android:textSize="@dimen/text_Rink" />
     </LinearLayout>
 
@@ -78,7 +78,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="Saturday, 8/11/12 at 10:10P"
+        android:text="@string/dateTime"
         android:textSize="@dimen/text_Time" />
+
+    <Button
+        android:id="@+id/addCal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add2cal" />
 
 </LinearLayout>

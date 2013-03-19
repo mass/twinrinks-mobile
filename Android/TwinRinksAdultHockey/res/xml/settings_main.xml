@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-
     <PreferenceCategory
         android:key="addTeamCategory"
         android:summary="Select what teams you play on"
@@ -18,6 +17,16 @@
             android:key="defaultTab"
             android:title="Select Tab..." />
     </PreferenceCategory>
+	<PreferenceCategory
+        android:key="selectCalendarCategory"
+        android:summary="Select which calendar to use"
+        android:title="Calendars" >
+        <ListPreference
+            android:key="calendarID"
+            android:title="Select calendar"
+            android:entries="@array/Calendars"
+            android:entryValues="@array/NameCalendars" />
+    </PreferenceCategory>    
     <PreferenceCategory
         android:summary="Enter Login-Credentials"
         android:title="Automatic Login" >
@@ -27,7 +36,6 @@
             android:summaryOff="Automatic Login Disabled"
             android:summaryOn="Automatic Login Enabled"
             android:title="Automatic Login" />
-
         <EditTextPreference
             android:key="autoLogInUsername"
             android:title="Enter your Email Address" />
