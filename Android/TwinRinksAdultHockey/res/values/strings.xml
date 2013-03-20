@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 
-    <string name="app_name">Twin Rinks Adult Hockey</string>
-    <string name="help">\n\t -There are three screens in the app: Upcoming,
-		Schedules, and the Sub Sign-In page. Navigate between the three
-		screens by touching using the tab bar. \n\n \t -The Upcoming screen
-		shows you your next games in order, for all the teams you have entered
-		in the settings page. \n\n \t -The Schedule page shows detailed
-		information on games for specific teams or dates. \n\n \t -The Sub
-		Sign-In page lets you access the Twin Rinks Adult Hockey online sub
-		system so you can sign in and out of your upcoming games. \n\n \t -To
-		add a team that you play for, open the settings page of the app. Next,
-		hit the \"Add Team...\" button, and select your league and team to add
-		that team to the list of teams you play for. That team\'s games should
-		now show up in the upcoming games screen.</string>
+    <string name="app_name">Twin Rinks</string>
+    <string name="string_about">"This app was conceived, designed, and developed by GigaStorm Developers. We hope you enjoy it. If you have any suggestions, feel free to send us an email using the button below. Or, you can give the app a rating on the Google Play Store.\n\nIf you are a developer and want to contribute to the project, search for twinrinks-mobile on github or send us an email to learn more."</string>
     <string name="homeTeam">Home Team</string>
     <string name="awayTeam">Away Team</string>
     <string name="rink">Rink</string>
     <string name="league">League</string>
     <string name="dateTime">Date &amp; Time</string>
-    <string name="add2cal">Add to Calendar</string>
 
 </resources>

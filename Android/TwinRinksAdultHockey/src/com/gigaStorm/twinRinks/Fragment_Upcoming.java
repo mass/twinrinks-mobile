@@ -35,17 +35,16 @@ public class Fragment_Upcoming extends SherlockFragment {
 	    btn_upcoming_goToAddTeams.setOnClickListener(new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-		    startActivity(new Intent(getActivity().getApplicationContext(), Activity_Settings.class));
+		    startActivity(new Intent(getActivity().getApplicationContext(), Activity_SettingsCompat.class));
 		}
 	    });
 
 	ArrayList<Model_Game> gamesToAdd = new ArrayList<Model_Game>();
-	for(Model_Team e: yourTeams)
-	    for(Model_Game e1: games)
+	for(Model_Game e1: games)
+	    for(Model_Team e: yourTeams)
 		if((e1.getTeamA().equalsIgnoreCase(e.getTeamName()) || e1.getTeamH().equalsIgnoreCase(e.getTeamName())) && e1.getLeague().equalsIgnoreCase(e.getLeague()))
 		    if(!e1.hasPassed())
 			gamesToAdd.add(e1);
-	memoryManager.sortGames(gamesToAdd);
 
 	for(Model_Game e2: gamesToAdd) {
 	    View_GameDisplay gd = new View_GameDisplay(getActivity());
@@ -57,5 +56,11 @@ public class Fragment_Upcoming extends SherlockFragment {
 	    ((LinearLayout) btn_upcoming_goToAddTeams.getParent()).removeViewAt(0);
 
 	return view;
+    }
+    
+    @Override
+    public void onResume() {
+        // TODO Auto-generated method stub
+        super.onResume();
     }
 }

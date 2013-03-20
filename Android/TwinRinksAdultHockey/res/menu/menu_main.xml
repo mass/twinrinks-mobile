@@ -2,49 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/refresh"
+        android:id="@+id/menu_refresh"
         android:enabled="true"
         android:icon="@drawable/ic_refresh"
         android:showAsAction="ifRoom"
         android:title="Refresh"
         android:visible="true"/>
     <item
-        android:id="@+id/help"
+        android:id="@+id/menu_about"
         android:enabled="true"
-        android:icon="@drawable/ic_help"
+        android:icon="@drawable/ic_about"
         android:showAsAction="ifRoom"
         android:title="Help"
         android:visible="true"/>
     <item
-        android:id="@+id/shareMenu"
+        android:id="@+id/menu_addToCalendar"
         android:enabled="true"
-        android:icon="@drawable/ic_share"
-        android:showAsAction="ifRoom"
-        android:title="Share"
-        android:visible="true"/>
-    <item
-        android:id="@+id/sendFeedback"
-        android:enabled="true"
-        android:icon="@drawable/ic_send"
-        android:showAsAction="ifRoom"
-        android:title="Send Feedback"
-        android:visible="true"/>
-    <item
-        android:id="@+id/rate"
-        android:enabled="true"
-        android:icon="@drawable/ic_rate"
-        android:showAsAction="ifRoom"
-        android:title="Rate App"
-        android:visible="true"/>
-    <item
-        android:id="@+id/addToCalendar"
-        android:enabled="true"
-        android:icon="@drawable/ic_rate"
+        android:icon="@drawable/ic_calendar"
         android:showAsAction="ifRoom"
         android:title="Add Games to Calendar"
         android:visible="true"/>
     <item
-        android:id="@+id/settings"
+        android:id="@+id/menu_settings"
         android:enabled="true"
         android:icon="@drawable/ic_settings"
         android:showAsAction="ifRoom"

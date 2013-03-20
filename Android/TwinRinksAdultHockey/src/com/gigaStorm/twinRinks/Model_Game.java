@@ -18,6 +18,7 @@ public class Model_Game {
     private Calendar cal;
 
     public Model_Game(String backing) {
+	//03/02/13,SA,BLU,08:40P,10:10P,Platinum,GOLD,LIME
 	String[] data = backing.split(";");
 	date = data[0];
 	beginTime = data[1];
@@ -36,16 +37,8 @@ public class Model_Game {
 	endTime = et.replaceAll("\\s", "");
 	rink = r.replaceAll("\\s", "");
 	league = l.replaceAll("\\s", "");
-
-	String temp = th.replaceAll("\\s", "");
-	if(temp.equalsIgnoreCase("PLAYOFFS") || temp.equalsIgnoreCase("SEMI") || temp.equalsIgnoreCase("FINALS")) {
-	    teamH = "PLAYOFF";
-	    teamA = "GAME";
-	} else {
-	    teamH = th.replaceAll("\\s", "");
-	    teamA = ta.replaceAll("\\s", "");
-	}
-
+	teamH = th.replaceAll("\\s", "");
+	teamA = ta.replaceAll("\\s", "");
 	cal = generateCalendarObject();
     }
 
@@ -106,14 +99,6 @@ public class Model_Game {
 
     public String getDate() {
 	return date;
-    }
-
-    public String getBeginTime() {
-	return beginTime;
-    }
-
-    public String getEndTime() {
-	return endTime;
     }
 
     public String getRink() {

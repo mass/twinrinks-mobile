@@ -5,6 +5,7 @@ import java.util.Calendar;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.format.Time;
@@ -44,7 +45,7 @@ public class Fragment_Schedule extends SherlockFragment {
 
 	btn_schedule_viewAnyTeam.setOnClickListener(new OnClickListener() {
 	    public void onClick(View v) {
-		// showSelectFromAllTeamsPopup();
+		showSelectFromAllTeamsPopup();
 	    }
 	});
 	btn_schedule_viewTeam.setOnClickListener(new OnClickListener() {
@@ -78,30 +79,24 @@ public class Fragment_Schedule extends SherlockFragment {
 	return view;
     }
 
-    // public void showSelectFromAllTeamsPopup() {
-    // final CharSequence[] leagues = getResources().getTextArray(R.array.leagues);
-    // final Context context = getActivity();
-    //
-    // AlertDialog.Builder builder = new AlertDialog.Builder(context);
-    // builder.setTitle("Select league:");
-    // builder.setItems(leagues, new DialogInterface.OnClickListener() {
-    // public void onClick(DialogInterface dialog,final int itemLeague) {
-    // final CharSequence[] teams = getTeamsFromLeague(leagues[itemLeague].toString());
-    // AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
-    // builder2.setTitle("Select your team:");
-    // builder2.setItems(teams, new DialogInterface.OnClickListener() {
-    // @Override
-    // public void onClick(DialogInterface dialog,int itemTeam) {
-    // showScheduleData(leagues[itemLeague].toString(), teams[itemTeam].toString());
-    // }
-    // });
-    // AlertDialog alert2 = builder2.create();
-    // alert2.show();
-    // }
-    // });
-    // AlertDialog alert = builder.create();
-    // alert.show();
-    // }
+    public void showSelectFromAllTeamsPopup() {
+	final Context context = getActivity();
+	final ArrayList<Model_Team> teams = memoryManager.getTeams();
+
+	final CharSequence[] teamStrings = new CharSequence[teams.size()];
+	for(int i = 0; i < teams.size(); i++)
+	    teamStrings[i] = teams.get(i).toString();
+
+	AlertDialog.Builder builder = new AlertDialog.Builder(context);
+	builder.setTitle("Select A Team:");
+	builder.setItems(teamStrings, new DialogInterface.OnClickListener() {
+	    public void onClick(DialogInterface dialog,final int item) {
+		showScheduleData(teams.get(item).getLeague(), teams.get(item).getTeamName());
+	    }
+	});
+	AlertDialog alert = builder.create();
+	alert.show();
+    }
 
     public void showSelectFromYourTeamsPopup() {
 	final ArrayList<Model_Team> yourTeams = memoryManager.getYourTeams();
@@ -110,7 +105,7 @@ public class Fragment_Schedule extends SherlockFragment {
 	    items[i] = yourTeams.get(i).toString();
 
 	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-	builder.setTitle("Select team:");
+	builder.setTitle("Select Your Team:");
 	builder.setItems(items, new DialogInterface.OnClickListener() {
 	    public void onClick(DialogInterface dialog,final int item) {
 		showScheduleData(yourTeams.get(item).getLeague(), yourTeams.get(item).getTeamName());

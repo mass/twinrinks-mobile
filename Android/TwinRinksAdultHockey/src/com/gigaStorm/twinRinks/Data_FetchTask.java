@@ -33,11 +33,12 @@ public class Data_FetchTask extends AsyncTask<Void,Integer,String[]> {
 	String[] data;
 
 	try {
-	    URL textURL = new URL("http://www.avp42.com/zzz/bar.txt");
+	    URL textURL = new URL("http://themasster12.github.com/twinrinks-mobile/ScheduleData.txt");
 
 	    BufferedReader bufferReader = new BufferedReader(new InputStreamReader(textURL.openStream()));
 	    String StringBuffer;
 	    String stringText = "";
+
 	    while((StringBuffer = bufferReader.readLine()) != null) {
 		stringText += StringBuffer;
 	    }
@@ -45,6 +46,7 @@ public class Data_FetchTask extends AsyncTask<Void,Integer,String[]> {
 
 	    data = stringText.split(";");
 	} catch(IOException e) {
+	    e.printStackTrace();
 	    return null;
 	}
 	return data;
@@ -54,7 +56,8 @@ public class Data_FetchTask extends AsyncTask<Void,Integer,String[]> {
     @Override
     protected void onPostExecute(String[] result) {
 	super.onPostExecute(result);
-	progress.dismiss();
 	parent.setScheduleTable(result);
+	progress.dismiss();
+	
     }
 }

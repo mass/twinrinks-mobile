@@ -11,6 +11,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.util.Log;
 import android.widget.Toast;
 
 // Class which handles the importing and exporting of data to and from the
@@ -33,16 +36,20 @@ public class Data_MemoryManager {
     }
 
     public void refreshData() {
-	Data_FetchTask fetchTask = new Data_FetchTask(this);
-	fetchTask.execute();
+	if(checkInternet()) {
+	    Data_FetchTask fetchTask = new Data_FetchTask(this);
+	    fetchTask.execute();
+	} else
+	    toast("No Internet Connection Found");
     }
 
     public void setScheduleTable(String[] data) {
 	if(data == null)
-	    toast("Data Retrieval Failed. Try again");
+	    toast("Data Retrieval Failed");
 
 	ArrayList<Model_Game> games = getGameList(data);
 	saveTeams(parseTeamsFromGames(games));
+	sortGames(games);
 	saveGames(games);
     }
 
@@ -54,28 +61,23 @@ public class Data_MemoryManager {
 	    if(attrs.length == 8)
 		list.add(new Model_Game(attrs[0], attrs[2], attrs[3], attrs[4], attrs[6], attrs[7], attrs[5]));
 	}
-	sortGames(list);
+	// sortGames(list);
 	return list;
     }
 
     public ArrayList<Model_Team> parseTeamsFromGames(ArrayList<Model_Game> games) {
 	ArrayList<Model_Team> allTeams = new ArrayList<Model_Team>();
 	for(Model_Game e: games) {
-	    String l = e.getLeague();
-	    String a = e.getTeamA();
-	    String h = e.getTeamH();
-	    if(!h.equalsIgnoreCase("PLAYOFF"))
-		if(!hasTeam(l, a)) {
-		    allTeams.add(new Model_Team(l, a));
-		    if(!hasTeam(l, h))
-			allTeams.add(new Model_Team(l, h));
-		} else if(!hasTeam(l, h))
-		    allTeams.add(new Model_Team(l, h));
+	    Log.e("iter","iter");
+	    if(!hasTeam(allTeams,e.getLeague(), e.getTeamA()))
+		allTeams.add(new Model_Team(e.getLeague(), e.getTeamA()));
+	    if(!hasTeam(allTeams,e.getLeague(), e.getTeamH()))
+		allTeams.add(new Model_Team(e.getLeague(), e.getTeamH()));
 	}
 	return allTeams;
     }
 
-    public void sortGames(ArrayList<Model_Game> list) {
+    private void sortGames(ArrayList<Model_Game> list) {
 	Collections.sort(list, new Comparator<Model_Game>() {
 	    @Override
 	    public int compare(Model_Game lhs,Model_Game rhs) {
@@ -84,23 +86,22 @@ public class Data_MemoryManager {
 	    }
 	});
     }
-
-//    public CharSequence[] getTeamsFromLeague(String league) {
-//	ArrayList<String> temp = new ArrayList<String>();
-//	for(Team e: allTeams)
-//	    if(e.getLeague().equalsIgnoreCase(league))
-//		temp.add(e.getTeamName());
-//
-//	CharSequence[] toReturn = new CharSequence[temp.size()];
-//	for(int i = 0; i < temp.size(); i++)
-//	    toReturn[i] = temp.get(i);
-//	return toReturn;
-//    }
-
-    public boolean hasTeam(String league,String team) {
-	for(Model_Team e: getTeams())
+    
+    public boolean hasTeam(ArrayList<Model_Team> teams, String league,String team) {
+	for(Model_Team e: teams)
 	    if(e.getLeague().equalsIgnoreCase(league) && e.getTeamName().equalsIgnoreCase(team))
 		return true;
+	return false;
+    }
+
+    public boolean checkInternet() {
+	ConnectivityManager connec = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+	NetworkInfo wifi = connec.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+	NetworkInfo mobile = connec.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+	if(wifi != null && wifi.isConnected() || mobile != null & mobile.isConnected())
+	    return true;
+
 	return false;
     }
 

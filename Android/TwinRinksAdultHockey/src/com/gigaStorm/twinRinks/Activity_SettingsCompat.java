@@ -17,12 +17,11 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.gigaStorm.twinRinks.R;
 
-// Activity which allows the user to choose settings
-public class Activity_Settings extends SherlockPreferenceActivity {
+@SuppressWarnings("deprecation")// Activity which allows the user to choose settings
+public class Activity_SettingsCompat extends SherlockPreferenceActivity {
 
     private PreferenceCategory addTeamCategory;
     private ArrayList<Model_Team> yourTeams;
-    private ArrayList<Model_Team> allTeams;
     private Data_MemoryManager memoryManager;
     private Preference addNewTeamPref;
     private ActionBar actionBar;
@@ -34,7 +33,7 @@ public class Activity_Settings extends SherlockPreferenceActivity {
 	addPreferencesFromResource(R.xml.settings_main);
 
 	actionBar = getSupportActionBar();
-	//actionBar.setHomeButtonEnabled(true);
+	// actionBar.setHomeButtonEnabled(true);
 	actionBar.setDisplayShowTitleEnabled(false);
 	actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -53,7 +52,6 @@ public class Activity_Settings extends SherlockPreferenceActivity {
 
 	memoryManager = new Data_MemoryManager(this);
 	yourTeams = memoryManager.getYourTeams();
-	allTeams = memoryManager.getTeams();
 	updatePreferencesFromTeams();
 
 	final EditTextPreference autoLogInUsername = (EditTextPreference) findPreference("autoLogInUsername");
@@ -92,53 +90,41 @@ public class Activity_Settings extends SherlockPreferenceActivity {
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onPause() {
 	memoryManager.saveYourTeams(yourTeams);
-	super.onDestroy();
+	super.onPause();
     }
 
     public void updatePreferencesFromTeams() {
 	addTeamCategory.removeAll();
-	for(int i = 0; i < yourTeams.size(); i++) {
-	    addTeamCategory.addPreference(getNewPreference(yourTeams.get(i).getLeague(), yourTeams.get(i).getTeamName()));
-	}
+	for(int i = 0; i < yourTeams.size(); i++)
+	    addTeamCategory.addPreference(getNewPreference(yourTeams.get(i)));
+
 	addTeamCategory.addPreference(addNewTeamPref);
     }
 
-    public void addNewTeam(String league,String team) {
-	if(!alreadyEntered(league, team)) {
-	    yourTeams.add(new Model_Team(league, team));
-	    addTeamCategory.addPreference(getNewPreference(league, team));
+    public void addNewTeam(Model_Team team) {
+	if(!alreadyEntered(team)) {
+	    yourTeams.add(team);
+	    addTeamCategory.addPreference(getNewPreference(team));
 	} else
 	    toast("Team already entered");
     }
 
-    public CharSequence[] getTeamsFromLeague(String league) {
-	ArrayList<String> temp = new ArrayList<String>();
-	for(Model_Team e: allTeams)
-	    if(e.getLeague().equalsIgnoreCase(league))
-		temp.add(e.getTeamName());
-
-	CharSequence[] toReturn = new CharSequence[temp.size()];
-	for(int i = 0; i < temp.size(); i++)
-	    toReturn[i] = temp.get(i);
-	return toReturn;
-    }
-
-    public boolean alreadyEntered(String league,String team) {
+    public boolean alreadyEntered(Model_Team team) {
 	for(int i = 0; i < yourTeams.size(); i++)
-	    if(yourTeams.get(i).getLeague().equals(league) && yourTeams.get(i).getTeamName().equals(team))
+	    if(yourTeams.get(i).getLeague().equals(team.getLeague()) && yourTeams.get(i).getTeamName().equals(team.getTeamName()))
 		return true;
 	return false;
     }
 
-    public Preference getNewPreference(String leagueP,String teamP) {
+    public Preference getNewPreference(Model_Team team) {
 	final Context context = this;
-	final String league = leagueP;
-	final String team = teamP;
+	final String league = team.getLeague();
+	final String teamName = team.getTeamName();
 
 	Preference newPref = new Preference(this);
-	newPref.setTitle(league + "-" + team);
+	newPref.setTitle(league + "-" + teamName);
 	newPref.setOrder(addTeamCategory.getPreferenceCount() - 1);
 
 	newPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -149,7 +135,7 @@ public class Activity_Settings extends SherlockPreferenceActivity {
 		builder.setCancelable(false);
 		builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 		    public void onClick(DialogInterface dialog,int id) {
-			yourTeams.remove(getIndexOfTeam(league, team));
+			yourTeams.remove(getIndexOfTeam(league, teamName));
 			addTeamCategory.removePreference(preference);
 		    }
 		});
@@ -174,24 +160,18 @@ public class Activity_Settings extends SherlockPreferenceActivity {
     }
 
     public void showAddTeamPopup() {
-	final CharSequence[] leagues = getResources().getTextArray(R.array.leagues);
 	final Context context = this;
+	final ArrayList<Model_Team> teams = memoryManager.getTeams();
+
+	final CharSequence[] teamStrings = new CharSequence[teams.size()];
+	for(int i = 0; i < teams.size(); i++)
+	    teamStrings[i] = teams.get(i).toString();
 
 	AlertDialog.Builder builder = new AlertDialog.Builder(context);
-	builder.setTitle("Select your league:");
-	builder.setItems(leagues, new DialogInterface.OnClickListener() {
-	    public void onClick(DialogInterface dialog,final int itemLeague) {
-		final CharSequence[] teams = getTeamsFromLeague(leagues[itemLeague].toString());
-		AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
-		builder2.setTitle("Select your team:");
-		builder2.setItems(teams, new DialogInterface.OnClickListener() {
-		    @Override
-		    public void onClick(DialogInterface dialog,int itemTeam) {
-			addNewTeam(getResources().getTextArray(R.array.leagues)[itemLeague].toString(), teams[itemTeam].toString());
-		    }
-		});
-		AlertDialog alert2 = builder2.create();
-		alert2.show();
+	builder.setTitle("Select A Team:");
+	builder.setItems(teamStrings, new DialogInterface.OnClickListener() {
+	    public void onClick(DialogInterface dialog,final int item) {
+		addNewTeam(teams.get(item));
 	    }
 	});
 	AlertDialog alert = builder.create();

@@ -1,7 +1,6 @@
 package com.gigaStorm.twinRinks;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -30,7 +29,12 @@ public class Activity_Main extends SherlockFragmentActivity implements TabListen
 	actionBar.setDisplayShowTitleEnabled(false);
 
 	createTabs();
+    }
+
+    @Override
+    protected void onResume() {
 	actionBar.selectTab(actionBar.getTabAt(0));
+	super.onResume();
     }
 
     public void createTabs() {
@@ -53,8 +57,7 @@ public class Activity_Main extends SherlockFragmentActivity implements TabListen
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-	// Intents to start activities of the app
-	Intent startSettings = new Intent(this, Activity_Settings.class);
+	Intent startSettings = new Intent(this, Activity_SettingsCompat.class);
 	Intent startHome = new Intent(this, Activity_Main.class);
 
 	switch(item.getItemId()) {
@@ -62,33 +65,16 @@ public class Activity_Main extends SherlockFragmentActivity implements TabListen
 		startActivity(startHome);
 		return true;
 
-	    case R.id.refresh:
+	    case R.id.menu_refresh:
 		memoryManager = new Data_MemoryManager(this);
 		memoryManager.refreshData();
 		return true;
 
-	    case R.id.help:
-		startActivity(new Intent(this, Activity_Help.class));
+	    case R.id.menu_about:
+		startActivity(new Intent(this, Activity_About.class));
 		return true;
 
-	    case R.id.shareMenu:
-		Intent shareIntent = new Intent(Intent.ACTION_SEND);
-		shareIntent.setType("text/plain");
-		shareIntent.putExtra(Intent.EXTRA_TEXT, "Check out this Twin Rinks Adult Hockey Android app. http://goo.gl/ZeGxN");
-		startActivity(Intent.createChooser(shareIntent, "Choose Application:"));
-		return true;
-
-	    case R.id.sendFeedback:
-		Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:support.m@gigastormdevelopers.com"));
-		startActivity(Intent.createChooser(intent, "Choose Application:"));
-		return true;
-
-	    case R.id.rate:
-		Intent rateIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.gigaStorm.twinRinks"));
-		startActivity(Intent.createChooser(rateIntent, "Choose Application:"));
-		return true;
-
-	    case R.id.addToCalendar:
+	    case R.id.menu_addToCalendar:
 		if(Build.VERSION.SDK_INT >= 14) {
 		    Data_CalendarManager man = new Data_CalendarManager(this);
 		    man.saveGamesToCalendar();
@@ -98,7 +84,7 @@ public class Activity_Main extends SherlockFragmentActivity implements TabListen
 		}
 		return true;
 
-	    case R.id.settings:
+	    case R.id.menu_settings:
 		startActivity(startSettings);
 		return true;
 

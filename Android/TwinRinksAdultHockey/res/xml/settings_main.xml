@@ -9,15 +9,6 @@
             android:title="Add Team..." />
     </PreferenceCategory>
     <PreferenceCategory
-        android:summary="Select default tab"
-        android:title="Default Tab" >
-        <ListPreference
-            android:entries="@array/tabs"
-            android:entryValues="@array/tabValues"
-            android:key="defaultTab"
-            android:title="Select Tab..." />
-    </PreferenceCategory>
-    <PreferenceCategory
         android:summary="Enter Login-Credentials"
         android:title="Automatic Login" >
         <CheckBoxPreference

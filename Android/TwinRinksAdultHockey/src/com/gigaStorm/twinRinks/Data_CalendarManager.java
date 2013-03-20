@@ -3,6 +3,7 @@ package com.gigaStorm.twinRinks;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -14,7 +15,7 @@ import android.provider.CalendarContract;
 import android.util.Log;
 import android.widget.Toast;
 
-public class Data_CalendarManager {
+@SuppressLint({"InlinedApi", "NewApi"}) public class Data_CalendarManager {
     private Context context;
     private Data_MemoryManager memoryManager;
 
