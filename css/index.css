@@ -6,12 +6,12 @@ h2 {
 }
 .status-buttons {
   text-align: center;
-  margin: 20px;
+  margin:0 20px 20px 20px;
 }
 .status-buttons a {
   margin-left: 10px;
   margin-right: 10px;
-  width: 200px;
+  width: 150px;
 }
 .screenshots {
   margin: auto;
@@ -24,4 +24,8 @@ h2 {
 }
 .downloads {
   text-align: center;
+}
+.downloads a {
+  width:150px;
+  margin-left: 20px;
 }
