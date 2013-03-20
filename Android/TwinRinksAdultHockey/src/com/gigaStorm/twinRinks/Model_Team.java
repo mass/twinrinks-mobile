@@ -1,17 +1,17 @@
 package com.gigaStorm.twinRinks;
 
 // Wrapper class for an object representing a team
-public class Team {
+public class Model_Team {
 
     private String league;
     private String teamName;
 
-    public Team(String l,String n) {
+    public Model_Team(String l,String n) {
 	league = l;
 	teamName = n;
     }
 
-    public Team(String backing) {
+    public Model_Team(String backing) {
 	String[] data = backing.split(";");
 	league = data[0];
 	teamName = data[1];

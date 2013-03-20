@@ -14,14 +14,14 @@ import android.provider.CalendarContract;
 import android.util.Log;
 import android.widget.Toast;
 
-public class CalendarManager {
+public class Data_CalendarManager {
     private Context context;
-    private MemoryManager memoryManager;
+    private Data_MemoryManager memoryManager;
 
     // Default constructor for a new instance of MemoryManager
-    public CalendarManager(Context context) {
+    public Data_CalendarManager(Context context) {
 	this.context = context;
-	memoryManager = new MemoryManager(context);
+	memoryManager = new Data_MemoryManager(context);
     }
 
     public void saveGamesToCalendar() {
@@ -29,7 +29,7 @@ public class CalendarManager {
     }
 
     private void loopThroughGames(int whichCalendar) {
-	ArrayList<Game> games = memoryManager.getGamesFromMemory();
+	ArrayList<Model_Game> games = memoryManager.getGames();
 
 	// for(Game e: games)
 	Log.d("Game", games.get(100).toString());
@@ -38,7 +38,7 @@ public class CalendarManager {
 	Log.d("ID", "" + whichCalendar);
     }
 
-    private void addGameToCalendar(Game game,int whichCalendar) {
+    private void addGameToCalendar(Model_Game game,int whichCalendar) {
 	ContentResolver cr = context.getContentResolver();
 	ContentValues values = new ContentValues();
 

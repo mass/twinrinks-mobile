@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Locale;
 
 // Wrapper class for an object representing a game
-public class Game {
+public class Model_Game {
     private String date;
     private String beginTime;
     private String endTime;
@@ -17,7 +17,7 @@ public class Game {
     private String league;
     private Calendar cal;
 
-    public Game(String backing) {
+    public Model_Game(String backing) {
 	String[] data = backing.split(";");
 	date = data[0];
 	beginTime = data[1];
@@ -29,7 +29,7 @@ public class Game {
 	cal = generateCalendarObject();
     }
 
-    public Game(String d,String r,String bt,String et,String th,String ta,String l) {
+    public Model_Game(String d,String r,String bt,String et,String th,String ta,String l) {
 	// Clear whitespace
 	date = d.replaceAll("\\s", "");
 	beginTime = bt.replaceAll("\\s", "");

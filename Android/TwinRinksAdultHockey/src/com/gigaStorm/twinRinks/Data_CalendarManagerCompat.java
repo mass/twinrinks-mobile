@@ -3,11 +3,11 @@ package com.gigaStorm.twinRinks;
 import android.content.Context;
 import android.widget.Toast;
 
-public class CalendarManagerCompat {
+public class Data_CalendarManagerCompat {
     private Context context;
 
     // Default constructor for a new instance of MemoryManager
-    public CalendarManagerCompat(Context context) {
+    public Data_CalendarManagerCompat(Context context) {
 	this.context = context;
     }
 

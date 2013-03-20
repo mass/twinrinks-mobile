@@ -1,5 +1,6 @@
 package com.gigaStorm.twinRinks;
 
+import com.gigaStorm.twinRinks.R;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -7,7 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 // Custom view class for game data
-public class GameDisplay extends RelativeLayout {
+public class View_GameDisplay extends RelativeLayout {
     private Context context;
     private TextView leagueView;
     private TextView awayView;
@@ -15,19 +16,19 @@ public class GameDisplay extends RelativeLayout {
     private TextView homeView;
     private TextView dateView;
 
-    public GameDisplay(Context context) {
+    public View_GameDisplay(Context context) {
 	super(context);
 	this.context = context;
 	init();
     }
 
-    public GameDisplay(Context context,AttributeSet attrs) {
+    public View_GameDisplay(Context context,AttributeSet attrs) {
 	super(context, attrs);
 	this.context = context;
 	init();
     }
 
-    public GameDisplay(Context context,AttributeSet attrs,int default_style) {
+    public View_GameDisplay(Context context,AttributeSet attrs,int default_style) {
 	super(context, attrs, default_style);
 	this.context = context;
 	init();
@@ -35,7 +36,7 @@ public class GameDisplay extends RelativeLayout {
 
     private void init() {
 	LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	layoutInflater.inflate(R.layout.gameview, this);
+	layoutInflater.inflate(R.layout.view_game, this);
 	leagueView = (TextView) this.findViewById(R.id.leagueView);
 	dateView = (TextView) this.findViewById(R.id.dateView);
 	awayView = (TextView) this.findViewById(R.id.awayView);
@@ -43,7 +44,7 @@ public class GameDisplay extends RelativeLayout {
 	homeView = (TextView) this.findViewById(R.id.homeView);
     }
 
-    public void setGame(Game g) {
+    public void setGame(Model_Game g) {
 	leagueView.setText(g.getLeague());
 	dateView.setText(g.getFullDateString());
 	awayView.setText(g.getTeamA());

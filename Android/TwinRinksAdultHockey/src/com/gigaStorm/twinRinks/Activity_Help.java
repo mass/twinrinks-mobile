@@ -1,5 +1,6 @@
 package com.gigaStorm.twinRinks;
 
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,16 +9,17 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.gigaStorm.twinRinks.R;
 
 // Activity that shows help info to the user
-public class HelpActivity extends SherlockActivity {
+public class Activity_Help extends SherlockActivity {
 
     private ActionBar actionBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_help);
+	setContentView(R.layout.layout_help);
 
 	actionBar = getSupportActionBar();
 	actionBar.setHomeButtonEnabled(true);
@@ -26,18 +28,16 @@ public class HelpActivity extends SherlockActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-	// Receives infalter object from actionbarsherlock
 	MenuInflater inflater = getSupportMenuInflater();
 	inflater.inflate(R.menu.menu_main, menu);
 	return true;
     }
 
-    // Handles touch events for menu items in actionbar or actionbar overflow
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 	// Intents to start activities of the app
-	Intent startSettings = new Intent(this, SettingsActivity.class);
-	Intent startHome = new Intent(this, MainActivity.class);
+	Intent startSettings = new Intent(this, Activity_Settings.class);
+	Intent startHome = new Intent(this, Activity_Main.class);
 
 	switch(item.getItemId()) {
 	    case android.R.id.home:
@@ -48,7 +48,7 @@ public class HelpActivity extends SherlockActivity {
 		return true;
 
 	    case R.id.help:
-		startActivity(new Intent(this, HelpActivity.class));
+		startActivity(new Intent(this, Activity_Help.class));
 		return true;
 
 	    case R.id.shareMenu:

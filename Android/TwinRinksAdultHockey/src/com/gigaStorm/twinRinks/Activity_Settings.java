@@ -13,25 +13,31 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.text.InputType;
 import android.widget.Toast;
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
+import com.gigaStorm.twinRinks.R;
 
 // Activity which allows the user to choose settings
-public class SettingsActivity extends SherlockPreferenceActivity {
+public class Activity_Settings extends SherlockPreferenceActivity {
 
     private PreferenceCategory addTeamCategory;
-    private ArrayList<Team> yourTeams;
-    private ArrayList<Team> allTeams;
-    private MemoryManager memoryManager;
+    private ArrayList<Model_Team> yourTeams;
+    private ArrayList<Model_Team> allTeams;
+    private Data_MemoryManager memoryManager;
     private Preference addNewTeamPref;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	// Adds the settings XML to the activity
 	addPreferencesFromResource(R.xml.settings_main);
-	/*
-	 * actionBar = getSupportActionBar(); actionBar.setHomeButtonEnabled(true); actionBar.setDisplayShowTitleEnabled(false);
-	 */
+
+	actionBar = getSupportActionBar();
+	//actionBar.setHomeButtonEnabled(true);
+	actionBar.setDisplayShowTitleEnabled(false);
+	actionBar.setDisplayHomeAsUpEnabled(true);
+
 	addTeamCategory = (PreferenceCategory) findPreference("addTeamCategory");
 	addTeamCategory.setOrderingAsAdded(false);
 
@@ -45,9 +51,9 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 	    }
 	});
 
-	memoryManager = new MemoryManager(this);
-	yourTeams = memoryManager.getYourTeamsFromMemory();
-	allTeams = memoryManager.getAllTeamsFromMemory();
+	memoryManager = new Data_MemoryManager(this);
+	yourTeams = memoryManager.getYourTeams();
+	allTeams = memoryManager.getTeams();
 	updatePreferencesFromTeams();
 
 	final EditTextPreference autoLogInUsername = (EditTextPreference) findPreference("autoLogInUsername");
@@ -81,13 +87,13 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 
     @Override
     public void onBackPressed() {
-	memoryManager.saveYourTeamsToMemory(yourTeams);
+	memoryManager.saveYourTeams(yourTeams);
 	super.onBackPressed();
     }
 
     @Override
     protected void onDestroy() {
-	memoryManager.saveYourTeamsToMemory(yourTeams);
+	memoryManager.saveYourTeams(yourTeams);
 	super.onDestroy();
     }
 
@@ -101,7 +107,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 
     public void addNewTeam(String league,String team) {
 	if(!alreadyEntered(league, team)) {
-	    yourTeams.add(new Team(league, team));
+	    yourTeams.add(new Model_Team(league, team));
 	    addTeamCategory.addPreference(getNewPreference(league, team));
 	} else
 	    toast("Team already entered");
@@ -109,7 +115,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 
     public CharSequence[] getTeamsFromLeague(String league) {
 	ArrayList<String> temp = new ArrayList<String>();
-	for(Team e: allTeams)
+	for(Model_Team e: allTeams)
 	    if(e.getLeague().equalsIgnoreCase(league))
 		temp.add(e.getTeamName());
 
