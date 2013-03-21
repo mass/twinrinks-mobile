@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Twin Rinks Mobile"
+            android:text="@string/app_name"
             android:textSize="30sp" />
 
         <ImageView
@@ -24,7 +24,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:contentDescription="Main Icon"
+            android:contentDescription="@string/mainIcon"
             android:src="@drawable/image_launcher" />
 
         <TextView
@@ -45,7 +45,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Share" />
+                android:text="@string/share" />
 
             <Button
                 android:id="@+id/btn_about_rate"
@@ -53,7 +53,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Rate App" />
+                android:text="@string/rate" />
 
             <Button
                 android:id="@+id/btn_about_send"
@@ -61,7 +61,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Send Feedback" />
+                android:text="@string/sendFeedback" />
         </LinearLayout>
     </LinearLayout>
 

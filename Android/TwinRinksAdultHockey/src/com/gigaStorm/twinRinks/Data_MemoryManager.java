@@ -16,8 +16,6 @@ import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.Toast;
 
-// Class which handles the importing and exporting of data to and from the
-// internal memory
 public class Data_MemoryManager {
 
     private Context context;
@@ -26,7 +24,6 @@ public class Data_MemoryManager {
     private File yourTeamStorage;
     private File allTeamStorage;
 
-    // Default constructor for a new instance of MemoryManager
     public Data_MemoryManager(Context context) {
 	this.context = context;
 	dir = context.getDir("TwinRinksAdultHockey", Context.MODE_PRIVATE);
@@ -61,17 +58,16 @@ public class Data_MemoryManager {
 	    if(attrs.length == 8)
 		list.add(new Model_Game(attrs[0], attrs[2], attrs[3], attrs[4], attrs[6], attrs[7], attrs[5]));
 	}
-	// sortGames(list);
 	return list;
     }
 
     public ArrayList<Model_Team> parseTeamsFromGames(ArrayList<Model_Game> games) {
 	ArrayList<Model_Team> allTeams = new ArrayList<Model_Team>();
 	for(Model_Game e: games) {
-	    Log.e("iter","iter");
-	    if(!hasTeam(allTeams,e.getLeague(), e.getTeamA()))
+	    Log.e("iter", "iter");
+	    if(!hasTeam(allTeams, e.getLeague(), e.getTeamA()))
 		allTeams.add(new Model_Team(e.getLeague(), e.getTeamA()));
-	    if(!hasTeam(allTeams,e.getLeague(), e.getTeamH()))
+	    if(!hasTeam(allTeams, e.getLeague(), e.getTeamH()))
 		allTeams.add(new Model_Team(e.getLeague(), e.getTeamH()));
 	}
 	return allTeams;
@@ -86,8 +82,8 @@ public class Data_MemoryManager {
 	    }
 	});
     }
-    
-    public boolean hasTeam(ArrayList<Model_Team> teams, String league,String team) {
+
+    public boolean hasTeam(ArrayList<Model_Team> teams,String league,String team) {
 	for(Model_Team e: teams)
 	    if(e.getLeague().equalsIgnoreCase(league) && e.getTeamName().equalsIgnoreCase(team))
 		return true;
@@ -133,8 +129,6 @@ public class Data_MemoryManager {
 	    if(temp != null) {
 		String[] teamsStrings = temp.split(":");
 
-		// Creates a new profile using the key taken from the String
-		// array, and adds it to profiles
 		for(int i = 0; i < teamsStrings.length; i++) {
 		    teams.add(new Model_Team(teamsStrings[i]));
 		}

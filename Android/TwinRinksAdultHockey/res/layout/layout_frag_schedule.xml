@@ -18,7 +18,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/background_button"
-                android:text="Your Teams" />
+                android:text="@string/yourTeams" />
 
             <Button
                 android:id="@+id/btn_schedule_viewAll"
@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/background_button"
-                android:text="Any Team" />
+                android:text="@string/anyTeam" />
         </LinearLayout>
 
         <LinearLayout
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/background_button"
-                android:text="All Games" />
+                android:text="@string/allGames" />
 
             <Button
                 android:id="@+id/btn_schedule_playoffs"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/background_button"
-                android:text="Playoffs" />
+                android:text="@string/playoffs" />
         </LinearLayout>
 
         <LinearLayout
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/background_button"
-                android:text="Today" />
+                android:text="@string/today" />
 
             <Button
                 android:id="@+id/btn_schedule_viewDate"
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/background_button"
-                android:text="Choose Date" />
+                android:text="@string/chooseDate" />
         </LinearLayout>
 
         <LinearLayout

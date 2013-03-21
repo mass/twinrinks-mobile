@@ -13,7 +13,7 @@
             android:id="@+id/btn_upcoming_goToAddTeams"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add New Teams..." />
+            android:text="@string/addNewTeams" />
 
         <LinearLayout
             android:id="@+id/linearLayout_upcoming_games"

@@ -18,6 +18,7 @@ public class Fragment_Upcoming extends SherlockFragment {
     private ArrayList<Model_Team> yourTeams;
     private ArrayList<Model_Game> games;
     private Data_MemoryManager memoryManager;
+    private LinearLayout linearLayout_upcomingMain_games;
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
@@ -25,19 +26,26 @@ public class Fragment_Upcoming extends SherlockFragment {
 
 	memoryManager = new Data_MemoryManager(getActivity());
 	yourTeams = memoryManager.getYourTeams();
-	games = memoryManager.getGames();
 
-	LinearLayout linearLayout_upcomingMain_games = (LinearLayout) view.findViewById(R.id.linearLayout_upcoming_games);
+	linearLayout_upcomingMain_games = (LinearLayout) view.findViewById(R.id.linearLayout_upcoming_games);
 	linearLayout_upcomingMain_games.removeAllViews();
 
 	btn_upcoming_goToAddTeams = (Button) view.findViewById(R.id.btn_upcoming_goToAddTeams);
-	if(btn_upcoming_goToAddTeams != null)
-	    btn_upcoming_goToAddTeams.setOnClickListener(new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-		    startActivity(new Intent(getActivity().getApplicationContext(), Activity_SettingsCompat.class));
-		}
-	    });
+	btn_upcoming_goToAddTeams.setOnClickListener(new OnClickListener() {
+	    @Override
+	    public void onClick(View v) {
+		startActivity(new Intent(getActivity().getApplicationContext(), Activity_SettingsCompat.class));
+	    }
+	});
+
+	if(yourTeams.size() > 0)
+	    prepareGames();
+
+	return view;
+    }
+
+    private void prepareGames() {
+	games = memoryManager.getGames();
 
 	ArrayList<Model_Game> gamesToAdd = new ArrayList<Model_Game>();
 	for(Model_Game e1: games)
@@ -54,13 +62,5 @@ public class Fragment_Upcoming extends SherlockFragment {
 
 	if(!yourTeams.isEmpty() && btn_upcoming_goToAddTeams != null)
 	    ((LinearLayout) btn_upcoming_goToAddTeams.getParent()).removeViewAt(0);
-
-	return view;
-    }
-    
-    @Override
-    public void onResume() {
-        // TODO Auto-generated method stub
-        super.onResume();
     }
 }
