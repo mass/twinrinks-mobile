@@ -1,8 +1,10 @@
 package com.gigaStorm.twinRinks;
 
-// Wrapper class for an object representing a team
-public class Model_Team {
+import java.io.Serializable;
 
+public class Model_Team implements Serializable {
+
+    private static final long serialVersionUID = 1337L;
     private String league;
     private String teamName;
 

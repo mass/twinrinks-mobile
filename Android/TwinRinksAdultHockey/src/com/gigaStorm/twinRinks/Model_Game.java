@@ -1,5 +1,6 @@
 package com.gigaStorm.twinRinks;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -7,7 +8,9 @@ import java.util.Date;
 import java.util.Locale;
 
 // Wrapper class for an object representing a game
-public class Model_Game {
+public class Model_Game implements Serializable {
+
+    private static final long serialVersionUID = 1338L;
     private String date;
     private String beginTime;
     private String endTime;
@@ -18,7 +21,7 @@ public class Model_Game {
     private Calendar cal;
 
     public Model_Game(String backing) {
-	//03/02/13,SA,BLU,08:40P,10:10P,Platinum,GOLD,LIME
+	// 03/02/13,SA,BLU,08:40P,10:10P,Platinum,GOLD,LIME
 	String[] data = backing.split(";");
 	date = data[0];
 	beginTime = data[1];

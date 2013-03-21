@@ -1,11 +1,12 @@
 package com.gigaStorm.twinRinks;
 
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,7 +14,6 @@ import java.util.Date;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 import android.widget.Toast;
 
 public class Data_MemoryManager {
@@ -64,7 +64,6 @@ public class Data_MemoryManager {
     public ArrayList<Model_Team> parseTeamsFromGames(ArrayList<Model_Game> games) {
 	ArrayList<Model_Team> allTeams = new ArrayList<Model_Team>();
 	for(Model_Game e: games) {
-	    Log.e("iter", "iter");
 	    if(!hasTeam(allTeams, e.getLeague(), e.getTeamA()))
 		allTeams.add(new Model_Team(e.getLeague(), e.getTeamA()));
 	    if(!hasTeam(allTeams, e.getLeague(), e.getTeamH()))
@@ -103,121 +102,79 @@ public class Data_MemoryManager {
 
     public void saveYourTeams(ArrayList<Model_Team> teams) {
 	try {
-	    DataOutputStream outTeam = new DataOutputStream(new FileOutputStream(yourTeamStorage, false));
-
-	    for(int i = 0; i < teams.size(); i++) {
-		String temp = teams.get(i).getTeamKey() + ":";
-		outTeam.write(temp.getBytes());
-	    }
-	    outTeam.close();
+	    ObjectOutputStream outFile = new ObjectOutputStream(new FileOutputStream(yourTeamStorage, false));
+	    outFile.writeObject(teams);
+	    outFile.close();
 	} catch(IOException e) {
 	    e.printStackTrace();
 	    resetFiles();
 	}
     }
 
-    @SuppressWarnings("deprecation")
-    public ArrayList<Model_Team> getYourTeams() {
-	ArrayList<Model_Team> teams = new ArrayList<Model_Team>();
-
+    @SuppressWarnings("unchecked") public ArrayList<Model_Team> getYourTeams() {
+	ArrayList<Model_Team> tasks = new ArrayList<Model_Team>();
 	try {
-	    DataInputStream inTeam = new DataInputStream(new FileInputStream(yourTeamStorage));
-
-	    String temp = inTeam.readLine();
-	    inTeam.close();
-
-	    if(temp != null) {
-		String[] teamsStrings = temp.split(":");
-
-		for(int i = 0; i < teamsStrings.length; i++) {
-		    teams.add(new Model_Team(teamsStrings[i]));
-		}
-	    }
-	    return teams;
-	} catch(IOException e) {
+	    ObjectInputStream inFile = new ObjectInputStream(new FileInputStream(yourTeamStorage));
+	    Object obj = inFile.readObject();
+	    tasks = (ArrayList<Model_Team>) obj;
+	    inFile.close();
+	    return tasks;
+	} catch(Exception e) {
 	    e.printStackTrace();
 	    resetFiles();
-	    return teams;
+	    return tasks;
 	}
     }
 
     public void saveTeams(ArrayList<Model_Team> teams) {
 	try {
-	    DataOutputStream outTeam = new DataOutputStream(new FileOutputStream(allTeamStorage, false));
-
-	    for(int i = 0; i < teams.size(); i++) {
-		String temp = teams.get(i).getTeamKey() + ":";
-		outTeam.write(temp.getBytes());
-	    }
-	    outTeam.close();
+	    ObjectOutputStream outFile = new ObjectOutputStream(new FileOutputStream(allTeamStorage, false));
+	    outFile.writeObject(teams);
+	    outFile.close();
 	} catch(IOException e) {
 	    e.printStackTrace();
 	    resetFiles();
 	}
     }
 
-    @SuppressWarnings("deprecation")
-    public ArrayList<Model_Team> getTeams() {
-	ArrayList<Model_Team> teams = new ArrayList<Model_Team>();
-
+    @SuppressWarnings("unchecked") public ArrayList<Model_Team> getTeams() {
+	ArrayList<Model_Team> tasks = new ArrayList<Model_Team>();
 	try {
-	    DataInputStream inTeam = new DataInputStream(new FileInputStream(allTeamStorage));
-
-	    String temp = inTeam.readLine();
-	    inTeam.close();
-
-	    if(temp != null) {
-		String[] teamsStrings = temp.split(":");
-
-		for(int i = 0; i < teamsStrings.length; i++) {
-		    teams.add(new Model_Team(teamsStrings[i]));
-		}
-	    }
-	    return teams;
-	} catch(IOException e) {
+	    ObjectInputStream inFile = new ObjectInputStream(new FileInputStream(allTeamStorage));
+	    Object obj = inFile.readObject();
+	    tasks = (ArrayList<Model_Team>) obj;
+	    inFile.close();
+	    return tasks;
+	} catch(Exception e) {
 	    e.printStackTrace();
 	    resetFiles();
-	    return teams;
+	    return tasks;
 	}
     }
 
     public void saveGames(ArrayList<Model_Game> games) {
 	try {
-	    DataOutputStream outGame = new DataOutputStream(new FileOutputStream(gameStorage, false));
-
-	    for(int i = 0; i < games.size(); i++) {
-		String temp = games.get(i).getGameKey() + "::";
-		outGame.write(temp.getBytes());
-	    }
-	    outGame.close();
+	    ObjectOutputStream outFile = new ObjectOutputStream(new FileOutputStream(gameStorage, false));
+	    outFile.writeObject(games);
+	    outFile.close();
 	} catch(IOException e) {
 	    e.printStackTrace();
 	    resetFiles();
 	}
     }
 
-    @SuppressWarnings("deprecation")
-    public ArrayList<Model_Game> getGames() {
-	ArrayList<Model_Game> games = new ArrayList<Model_Game>();
-
+    @SuppressWarnings("unchecked") public ArrayList<Model_Game> getGames() {
+	ArrayList<Model_Game> tasks = new ArrayList<Model_Game>();
 	try {
-	    DataInputStream inGame = new DataInputStream(new FileInputStream(gameStorage));
-
-	    String temp = inGame.readLine();
-	    inGame.close();
-
-	    if(temp != null) {
-		String[] gamesStrings = temp.split("::");
-
-		for(int i = 0; i < gamesStrings.length; i++) {
-		    games.add(new Model_Game(gamesStrings[i]));
-		}
-	    }
-	    return games;
-	} catch(IOException e) {
+	    ObjectInputStream inFile = new ObjectInputStream(new FileInputStream(gameStorage));
+	    Object obj = inFile.readObject();
+	    tasks = (ArrayList<Model_Game>) obj;
+	    inFile.close();
+	    return tasks;
+	} catch(Exception e) {
 	    e.printStackTrace();
 	    resetFiles();
-	    return games;
+	    return tasks;
 	}
     }
 
