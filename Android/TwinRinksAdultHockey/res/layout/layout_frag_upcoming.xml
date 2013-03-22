@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@android:color/darker_gray"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <Button
+        android:id="@+id/btn_upcoming_goToAddTeams"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:text="@string/addNewTeams" />
 
-        <Button
-            android:id="@+id/btn_upcoming_goToAddTeams"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/addNewTeams" />
+    <ListView
+        android:id="@+id/listView_upcoming_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp" >
 
-        <LinearLayout
-            android:id="@+id/linearLayout_upcoming_games"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </LinearLayout>
+    </ListView>
 
-</ScrollView>
+</LinearLayout>

@@ -3,7 +3,13 @@ package com.gigaStorm.twinRinks;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
@@ -18,6 +24,8 @@ public class Activity_Main extends SherlockFragmentActivity implements TabListen
 
     private ActionBar actionBar;
     private Data_MemoryManager memoryManager;
+    private ViewPager viewPager;
+    private PagerAdapter pagerAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,8 +35,24 @@ public class Activity_Main extends SherlockFragmentActivity implements TabListen
 	actionBar = getSupportActionBar();
 	actionBar.setHomeButtonEnabled(false);
 	actionBar.setDisplayShowTitleEnabled(false);
+	
+	viewPager = (ViewPager) findViewById(R.id.viewPager_main_main);
+	pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+	viewPager.setAdapter(pagerAdapter);
 
 	createTabs();
+    }
+    
+    @Override
+    public void onBackPressed() {
+        if (viewPager.getCurrentItem() == 0) {
+            // If the user is currently looking at the first step, allow the system to handle the
+            // Back button. This calls finish() on this activity and pops the back stack.
+            super.onBackPressed();
+        } else {
+            // Otherwise, select the previous step.
+            viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+        }
     }
 
     @Override
@@ -95,30 +119,8 @@ public class Activity_Main extends SherlockFragmentActivity implements TabListen
 
     @Override
     public void onTabSelected(Tab tab,FragmentTransaction trans) {
-	FragmentTransaction ft;
-	if(actionBar.getSelectedTab().getPosition() == 0) {
-	    ft = getSupportFragmentManager().beginTransaction();
-	    Fragment_Upcoming newFrag = new Fragment_Upcoming();
-	    ft.replace(R.id.main_framelayout_main, newFrag);
-	    ft.commit();
-	    return;
-	}
-
-	if(actionBar.getSelectedTab().getPosition() == 1) {
-	    ft = getSupportFragmentManager().beginTransaction();
-	    Fragment_Schedule newFrag = new Fragment_Schedule();
-	    ft.replace(R.id.main_framelayout_main, newFrag);
-	    ft.commit();
-	    return;
-	}
-
-	if(actionBar.getSelectedTab().getPosition() == 2) {
-	    ft = getSupportFragmentManager().beginTransaction();
-	    Fragment_SignIn newFrag = new Fragment_SignIn();
-	    ft.replace(R.id.main_framelayout_main, newFrag);
-	    ft.commit();
-	    return;
-	}
+	viewPager.setCurrentItem(tab.getPosition(), true);
+	Log.e("hi","here");
     }
 
     @Override
@@ -126,4 +128,26 @@ public class Activity_Main extends SherlockFragmentActivity implements TabListen
 
     @Override
     public void onTabReselected(Tab tab,FragmentTransaction ft) {}
+    
+    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+        public ScreenSlidePagerAdapter(FragmentManager fm) {
+            super(fm);
+        }        
+
+        @Override
+        public Fragment getItem(int position) {
+            if(position == 0)
+        	return new Fragment_Upcoming();
+            if(position == 1)
+        	return new Fragment_Schedule();
+            if(position == 2)
+        	return new Fragment_SignIn();
+            return new Fragment_Upcoming();
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
+    }
 }

@@ -2,5 +2,7 @@
 <resources>
 
     <color name="icsBlue">#33B5E5</color>
+    <color name="topTextColor">#666666</color>
+    <color name="bottomTextColor">#BBBBBB</color>
 
 </resources>

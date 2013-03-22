@@ -7,6 +7,8 @@ import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.format.Time;
 import android.view.LayoutInflater;
@@ -15,7 +17,7 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.LinearLayout;
+import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.gigaStorm.twinRinks.R;
 
@@ -29,12 +31,18 @@ public class Fragment_Schedule extends SherlockFragment {
     private Button btn_schedule_viewDate;
     private Data_MemoryManager memoryManager;
     private View view;
+    private ListView listView_schedule_main;
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 	view = inflater.inflate(R.layout.layout_frag_schedule, container, false);
 
 	memoryManager = new Data_MemoryManager(getActivity());
+
+	listView_schedule_main = (ListView) view.findViewById(R.id.listView_schedule_main);
+	listView_schedule_main.setSelector(new ColorDrawable(Color.TRANSPARENT));
+	listView_schedule_main.setDivider(null);
+	listView_schedule_main.setDividerHeight(10);
 
 	btn_schedule_viewAnyTeam = (Button) view.findViewById(R.id.btn_schedule_viewAll);
 	btn_schedule_viewTeam = (Button) view.findViewById(R.id.btn_schedule_viewTeam);
@@ -128,54 +136,64 @@ public class Fragment_Schedule extends SherlockFragment {
 
     public void showScheduleData(String league,String team) {
 	ArrayList<Model_Game> games = memoryManager.getGames();
-	LinearLayout linearLayout_mainSchedule_games = (LinearLayout) view.findViewById(R.id.linearLayout_mainSchedule_games);
-	linearLayout_mainSchedule_games.removeAllViews();
+	ArrayList<Model_Game> gamesToAdd = new ArrayList<Model_Game>();
 	for(Model_Game e: games)
 	    if((e.getTeamA().equalsIgnoreCase(team) || e.getTeamH().equalsIgnoreCase(team)) && e.getLeague().equalsIgnoreCase(league))
-		if(!e.hasPassed()) {
-		    View_GameDisplay gd = new View_GameDisplay(getActivity());
-		    gd.setGame(e);
-		    linearLayout_mainSchedule_games.addView(gd);
-		}
+		if(!e.hasPassed())
+		    gamesToAdd.add(e);
+
+	String[] values = new String[gamesToAdd.size()];
+	for(int i = 0; i < values.length; i++)
+	    values[i] = gamesToAdd.get(i).toString();
+
+	Data_ArrayAdapter adapter = new Data_ArrayAdapter(getActivity(), gamesToAdd, values);
+	listView_schedule_main.setAdapter(adapter);
     }
 
     public void showScheduleDataAllGames() {
 	ArrayList<Model_Game> games = memoryManager.getGames();
-	LinearLayout linearLayout_mainSchedule_games = (LinearLayout) view.findViewById(R.id.linearLayout_mainSchedule_games);
-	linearLayout_mainSchedule_games.removeAllViews();
-	for(Model_Game e: games) {
-	    if(!e.hasPassed()) {
-		View_GameDisplay gd = new View_GameDisplay(getActivity());
-		gd.setGame(e);
-		linearLayout_mainSchedule_games.addView(gd);
-	    }
-	}
+	ArrayList<Model_Game> gamesToAdd = new ArrayList<Model_Game>();
+	for(Model_Game e: games)
+	    if(!e.hasPassed())
+		gamesToAdd.add(e);
+
+	String[] values = new String[gamesToAdd.size()];
+	for(int i = 0; i < values.length; i++)
+	    values[i] = gamesToAdd.get(i).toString();
+
+	Data_ArrayAdapter adapter = new Data_ArrayAdapter(getActivity(), gamesToAdd, values);
+	listView_schedule_main.setAdapter(adapter);
     }
 
     public void showScheduleDataPlayoffs() {
 	ArrayList<Model_Game> games = memoryManager.getGames();
-	LinearLayout linearLayout_mainSchedule_games = (LinearLayout) view.findViewById(R.id.linearLayout_mainSchedule_games);
-	linearLayout_mainSchedule_games.removeAllViews();
+	ArrayList<Model_Game> gamesToAdd = new ArrayList<Model_Game>();
 	for(Model_Game e: games)
-	    if((e.getTeamA().equalsIgnoreCase("PLAYOFF") || e.getTeamH().equalsIgnoreCase("PLAYOFF")))
-		if(!e.hasPassed()) {
-		    View_GameDisplay gd = new View_GameDisplay(getActivity());
-		    gd.setGame(e);
-		    linearLayout_mainSchedule_games.addView(gd);
-		}
+	    if((e.getTeamA().equalsIgnoreCase("PLAYOFFS") || e.getTeamH().equalsIgnoreCase("PLAYOFFS")))
+		if(!e.hasPassed())
+		    gamesToAdd.add(e);
+
+	String[] values = new String[gamesToAdd.size()];
+	for(int i = 0; i < values.length; i++)
+	    values[i] = gamesToAdd.get(i).toString();
+
+	Data_ArrayAdapter adapter = new Data_ArrayAdapter(getActivity(), gamesToAdd, values);
+	listView_schedule_main.setAdapter(adapter);
     }
 
     public void showScheduleDataDate(int year,int month,int monthday) {
 	ArrayList<Model_Game> games = memoryManager.getGames();
-	LinearLayout linearLayout_mainSchedule_games = (LinearLayout) view.findViewById(R.id.linearLayout_mainSchedule_games);
-	linearLayout_mainSchedule_games.removeAllViews();
-	for(Model_Game e: games) {
+	ArrayList<Model_Game> gamesToAdd = new ArrayList<Model_Game>();
+	for(Model_Game e: games)
 	    if(e.getCalendarObject().get(Calendar.YEAR) == year && e.getCalendarObject().get(Calendar.MONTH) == month && e.getCalendarObject().get(Calendar.DAY_OF_MONTH) == monthday)
-		if(!e.hasPassed()) {
-		    View_GameDisplay gd = new View_GameDisplay(getActivity());
-		    gd.setGame(e);
-		    linearLayout_mainSchedule_games.addView(gd);
-		}
-	}
+		if(!e.hasPassed())
+		    gamesToAdd.add(e);
+
+	String[] values = new String[gamesToAdd.size()];
+	for(int i = 0; i < values.length; i++)
+	    values[i] = gamesToAdd.get(i).toString();
+
+	Data_ArrayAdapter adapter = new Data_ArrayAdapter(getActivity(), gamesToAdd, values);
+	listView_schedule_main.setAdapter(adapter);
     }
 }
