@@ -18,6 +18,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.gigaStorm.twinRinks.R;
+import com.viewpagerindicator.TitlePageIndicator;
 
 // Main class that shows the main views and game data
 public class Activity_Main extends SherlockFragmentActivity implements TabListener {
@@ -35,41 +36,22 @@ public class Activity_Main extends SherlockFragmentActivity implements TabListen
 	actionBar = getSupportActionBar();
 	actionBar.setHomeButtonEnabled(false);
 	actionBar.setDisplayShowTitleEnabled(false);
-	
+
 	viewPager = (ViewPager) findViewById(R.id.viewPager_main_main);
 	pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
 	viewPager.setAdapter(pagerAdapter);
 
-	createTabs();
+	TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.viewPagerIndicator);
+	titleIndicator.setViewPager(viewPager);
+	titleIndicator.setBackgroundColor(getResources().getColor(R.color.vpi__background_holo_dark));
     }
-    
+
     @Override
     public void onBackPressed() {
-        if (viewPager.getCurrentItem() == 0) {
-            // If the user is currently looking at the first step, allow the system to handle the
-            // Back button. This calls finish() on this activity and pops the back stack.
-            super.onBackPressed();
-        } else {
-            // Otherwise, select the previous step.
-            viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
-        }
-    }
-
-    @Override
-    protected void onResume() {
-	actionBar.selectTab(actionBar.getTabAt(0));
-	super.onResume();
-    }
-
-    public void createTabs() {
-	actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-	String[] tabNames = {"Upcoming", "Schedule", "Sub Sign-in"};
-	for(int i = 0; i < 3; i++) {
-	    ActionBar.Tab tab = getSupportActionBar().newTab();
-	    tab.setText(tabNames[i]);
-	    tab.setTabListener(this);
-	    getSupportActionBar().addTab(tab);
-	}
+	if(viewPager.getCurrentItem() == 0)
+	    super.onBackPressed();
+	else
+	    viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
     }
 
     @Override
@@ -120,7 +102,7 @@ public class Activity_Main extends SherlockFragmentActivity implements TabListen
     @Override
     public void onTabSelected(Tab tab,FragmentTransaction trans) {
 	viewPager.setCurrentItem(tab.getPosition(), true);
-	Log.e("hi","here");
+	Log.e("hi", "here");
     }
 
     @Override
@@ -128,26 +110,37 @@ public class Activity_Main extends SherlockFragmentActivity implements TabListen
 
     @Override
     public void onTabReselected(Tab tab,FragmentTransaction ft) {}
-    
+
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
-        public ScreenSlidePagerAdapter(FragmentManager fm) {
-            super(fm);
-        }        
+	public ScreenSlidePagerAdapter(FragmentManager fm) {
+	    super(fm);
+	}
 
-        @Override
-        public Fragment getItem(int position) {
-            if(position == 0)
-        	return new Fragment_Upcoming();
-            if(position == 1)
-        	return new Fragment_Schedule();
-            if(position == 2)
-        	return new Fragment_SignIn();
-            return new Fragment_Upcoming();
-        }
+	@Override
+	public Fragment getItem(int position) {
+	    if(position == 0)
+		return new Fragment_Upcoming();
+	    if(position == 1)
+		return new Fragment_Schedule();
+	    if(position == 2)
+		return new Fragment_SignIn();
+	    return new Fragment_Upcoming();
+	}
 
-        @Override
-        public int getCount() {
-            return 3;
-        }
+	@Override
+	public CharSequence getPageTitle(int position) {
+	    if(position == 0)
+		return "Upcoming";
+	    if(position == 1)
+		return "Schedule";
+	    if(position == 2)
+		return "Sub Sign-In";
+	    return "Error";
+	}
+
+	@Override
+	public int getCount() {
+	    return 3;
+	}
     }
 }
