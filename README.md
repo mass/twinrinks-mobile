@@ -1,4 +1,4 @@
-twinrinks-mobile
+Twin Rinks Mobile App
 -----
 
 Mobile applications for Twin Rinks Adult Hockey on the Android and iOS platforms. 
@@ -22,6 +22,6 @@ This file is located in the gh-pages branch of this repository.
 Credits
 -------
 
-Majority of the development - GigaStorm Developers (Andrew Mass, Aakash Patel, Matt Voska)
+Majority of the development - [GigaStorm](www.gigastormdevelopers.com) (Andrew Mass, Aakash Patel, Matt Voska)
 
-Android calendar integration feature - Boris Dubinsky 
+Android calendar integration feature - [Boris Dubinsky](www.github.com/dubi13)
