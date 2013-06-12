@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:key="addTeamCategory"
+        android:summary="Select what teams you play on"
+        android:title="Your Teams" >
+        <Preference
+            android:key="addNewTeamPref"
+            android:title="Add Team..." />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:summary="Enter Login-Credentials"
+        android:title="Automatic Login" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="autoLogInCheckbox"
+            android:summaryOff="Automatic Login Disabled"
+            android:summaryOn="Automatic Login Enabled"
+            android:title="Automatic Login" />
+
+        <EditTextPreference
+            android:key="autoLogInUsername"
+            android:title="Enter your Email Address" />
+        <EditTextPreference
+            android:key="autoLogInPassword"
+            android:title="Enter your password" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="spinner_scheduleDataSelector_entries">
+        <item>Any Team</item>
+        <item>Your Teams</item>
+        <item>All Games</item>
+        <item>Playoffs</item>
+        <item>Any Date</item>
+        <item>Today</item>
+    </string-array>
+
+</resources>

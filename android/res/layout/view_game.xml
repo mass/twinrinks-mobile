@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_gameview"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/textView_gameview_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:text="@string/gameview_top"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/gameview_top" />
+
+    <TextView
+        android:id="@+id/textView_gameview_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gameview_dateTime"
+        android:textColor="@color/otherTextColor"
+        android:textSize="@dimen/gameview_bot" />
+
+    <TextView
+        android:id="@+id/textView_gameview_middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gameview_middle"
+        android:textColor="@color/otherTextColor"
+        android:textSize="@dimen/gameview_mid" />
+
+</LinearLayout>
