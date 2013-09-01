@@ -22,6 +22,6 @@ This file is located in the gh-pages branch of this repository.
 Credits
 -------
 
-Majority of the development - [GigaStorm](www.gigastormdevelopers.com) (Andrew Mass, Aakash Patel, Matt Voska)
+Majority of the development - [GigaStorm](http://www.gigastormdevelopers.com) (Andrew Mass, Aakash Patel, Matt Voska)
 
-Android calendar integration feature - [Boris Dubinsky](www.github.com/dubi13)
+Android calendar integration feature - [Boris Dubinsky](http://www.github.com/dubi13)
