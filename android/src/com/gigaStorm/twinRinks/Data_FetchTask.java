@@ -50,7 +50,7 @@ public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
 
         try {
             URL textURL = new URL(
-                    "http://themasster12.github.com/twinrinks-mobile/ScheduleData.txt");
+                    "http://mass.github.com/twinrinks-mobile/ScheduleData.txt");
             BufferedReader bufferReader = new BufferedReader(new InputStreamReader(
                     textURL.openStream()));
             String StringBuffer;
