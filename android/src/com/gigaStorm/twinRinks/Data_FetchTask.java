@@ -1,4 +1,3 @@
-
 package com.gigaStorm.twinRinks;
 
 import java.io.BufferedReader;
@@ -50,7 +49,7 @@ public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
 
         try {
             URL textURL = new URL(
-                    "http://mass.github.com/twinrinks-mobile/ScheduleData.txt");
+                    "raw.github.com/mass/twinrinks-mobile/master/ScheduleData.txt");
             BufferedReader bufferReader = new BufferedReader(new InputStreamReader(
                     textURL.openStream()));
             String StringBuffer;
