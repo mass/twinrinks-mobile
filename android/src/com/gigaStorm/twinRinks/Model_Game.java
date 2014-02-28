@@ -13,9 +13,15 @@ import java.util.Locale;
  * @author mass
  * @see Serializable
  */
+<<<<<<< HEAD
 public class Model_Game {
 
   private Integer Id; // Used by database
+=======
+public class Model_Game implements Serializable {
+  private static final long serialVersionUID = 8443055282851237298L;
+
+>>>>>>> 188a691... Fix data fetch bug.
   private String date;
   private String weekDay;
   private String beginTime;
@@ -26,11 +32,16 @@ public class Model_Game {
   private String league;
   private Calendar cal;
 
+<<<<<<< HEAD
   public Model_Game() {
 
   }
 
   public Model_Game(String d, String r, String bt, String et, String th, String ta, String l) {
+=======
+  public Model_Game(String d, String r, String bt, String et, String th,
+      String ta, String l) {
+>>>>>>> 188a691... Fix data fetch bug.
     date = d.replaceAll("\\s", "");
     beginTime = bt.replaceAll("\\s", "") + "M";
     endTime = et.replaceAll("\\s", "");
@@ -41,6 +52,11 @@ public class Model_Game {
     cal = generateCalendarObject();
   }
 
+  /**
+   * Provides a more user-friendly string representing the date.
+   * 
+   * @return the formatted date string.
+   */
   public String getFullDateString() {
     switch(this.cal.get(Calendar.DAY_OF_WEEK)) {
       case 1:
@@ -61,26 +77,52 @@ public class Model_Game {
     return "Failed";
   }
 
+  /**
+   * Checks to see if the game is in the past.
+   * <p>
+   * Adds a two-hour grace-period so we can see games that have happened in the
+   * past two hours.
+   * </p>
+   * 
+   * @return boolean representing whether this game is in the past.
+   */
   public boolean hasPassed() {
     Calendar now = Calendar.getInstance();
-
-    if(this.cal.getTimeInMillis() + 7200000 <= now.getTimeInMillis())
-      return true;
-    return false;
+    now.add(Calendar.HOUR, -2);
+    return this.cal.before(now);
   }
 
+<<<<<<< HEAD
   public Calendar generateCalendarObject() {
     Calendar cal = Calendar.getInstance();
 
     // 05/31/13;08:55PM
     SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy;hh:mmaa", Locale.US);
+=======
+  /**
+   * Outputs a <code>Calendar</code> object based on the game's date string
+   * which gives the game's start time.
+   * 
+   * @return a <code>Calendar</code> object representing this game's start time.
+   */
+  private Calendar generateCalendarObject() {
+    Calendar cal = Calendar.getInstance();
+
+    SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy;hh:mma", Locale.US);
+>>>>>>> 188a691... Fix data fetch bug.
     Date date = new Date();
+
     try {
       date = format.parse(this.date + ";" + this.beginTime + "M");
     }
     catch(ParseException e) {
+<<<<<<< HEAD
       Logger.i("Model_Game", "generateCalendarObject(): " + e.getMessage());
+=======
+      System.err.println("Failed to parse date string");
+>>>>>>> 188a691... Fix data fetch bug.
     }
+
     cal.setTime(date);
     return cal;
   }
@@ -89,9 +131,11 @@ public class Model_Game {
     return this.cal;
   }
 
+  @Override
   public String toString() {
-    return "League: " + league + "\nDate: " + date + "\nRink: " + rink + "\nBegin: " + beginTime
-        + "\nEnd: " + endTime + "\nHome: " + teamH + "\nAway: " + teamA;
+    return "League: " + league + "\nDate: " + date + "\nRink: " + rink
+        + "\nBegin: " + beginTime + "\nEnd: " + endTime + "\nHome: " + teamH
+        + "\nAway: " + teamA;
   }
 
   public String getDate() {

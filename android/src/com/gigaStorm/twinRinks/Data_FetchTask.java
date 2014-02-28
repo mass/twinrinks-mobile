@@ -2,12 +2,12 @@ package com.gigaStorm.twinRinks;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.AsyncTask;
@@ -19,23 +19,26 @@ import android.os.AsyncTask;
  * @see AsyncTask
  */
 public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
-  ProgressDialog progress;
 
   Data_MemoryManager parent;
   private DbHelper db;
+  private ProgressDialog progress;
 
-  Map<String, String> urlMap;
+  private Context parentContext;
 
-  public Data_FetchTask(Data_MemoryManager p) {
+  private String[] fetchData;
+
+  public Data_FetchTask(Data_MemoryManager p, Context context) {
     super();
     parent = p;
     db = new DbHelper(p.getContext());
+    parentContext = context;
   }
 
   @Override
   protected void onPreExecute() {
     super.onPreExecute();
-    progress = new ProgressDialog(parent.getContext());
+    progress = new ProgressDialog(parentContext);
     progress.setTitle("Fetching Game Data...");
     progress.setMessage("Please Wait...");
     progress.setIndeterminate(true);
@@ -160,6 +163,7 @@ public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
 
   @Override
   protected void onPostExecute(Void result) {
+    parent.setScheduleTable(fetchData);
     progress.dismiss();
     super.onPostExecute(result);
   }

@@ -5,9 +5,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.widget.Toast;
 
 /**
  * <code>Data_MemoryManager</code> loads, saves, and manages application data.
@@ -15,25 +12,31 @@ import android.widget.Toast;
  * @author Andrew Mass
  */
 public class Data_MemoryManager {
+
   private Context context;
+
+  private Util util;
 
   public Data_MemoryManager(Context context) {
     // database needs the context, so save it for db use
     this.context = context;
+    this.util = new Util(context);
   }
 
   public void refreshData() {
-    if(checkInternet()) {
-      Data_FetchTask fetchTask = new Data_FetchTask(this);
+    if(util.checkInternet()) {
+      Data_FetchTask fetchTask = new Data_FetchTask(this, context);
       fetchTask.execute();
     }
-    else
-      toast("No Internet Connection Found");
+    else {
+      util.toast("No Internet Connection Found");
+    }
   }
 
   public void setScheduleTable(String[] data) {
-    if(data == null)
-      toast("Data Retrieval Failed");
+    if(data == null) {
+      util.err("Data Retrieval Failed");
+    }
     else {
       ArrayList<Model_Game> games = getGameList(data);
       // Not sure if need to sort the stuff anymore since db does it
@@ -79,54 +82,79 @@ public class Data_MemoryManager {
       public int compare(Model_Team lhs, Model_Team rhs) {
         int leagueCompLeft;
         String tempLeagueLeft = lhs.getLeague();
-        if(tempLeagueLeft.equals("Platinum"))
+        if(tempLeagueLeft.equals("Platinum")) {
           leagueCompLeft = 0;
-        else
-          if(tempLeagueLeft.equals("Gold"))
+        }
+        else {
+          if(tempLeagueLeft.equals("Gold")) {
             leagueCompLeft = 1;
-          else
-            if(tempLeagueLeft.equals("Silver"))
+          }
+          else {
+            if(tempLeagueLeft.equals("Silver")) {
               leagueCompLeft = 2;
-            else
-              if(tempLeagueLeft.equals("Bronze"))
+            }
+            else {
+              if(tempLeagueLeft.equals("Bronze")) {
                 leagueCompLeft = 3;
-              else
-                if(tempLeagueLeft.equals("Leisure"))
+              }
+              else {
+                if(tempLeagueLeft.equals("Leisure")) {
                   leagueCompLeft = 4;
-                else
+                }
+                else {
                   leagueCompLeft = 10;
+                }
+              }
+            }
+          }
+        }
 
         int leagueCompRight;
         String tempLeagueRight = rhs.getLeague();
-        if(tempLeagueRight.equals("Platinum"))
+        if(tempLeagueRight.equals("Platinum")) {
           leagueCompRight = 0;
-        else
-          if(tempLeagueRight.equals("Gold"))
+        }
+        else {
+          if(tempLeagueRight.equals("Gold")) {
             leagueCompRight = 1;
-          else
-            if(tempLeagueRight.equals("Silver"))
-              leagueCompRight = 2;
-            else
-              if(tempLeagueRight.equals("Bronze"))
-                leagueCompRight = 3;
-              else
-                if(tempLeagueRight.equals("Leisure"))
-                  leagueCompRight = 4;
-                else
-                  leagueCompRight = 10;
-
-        if(leagueCompLeft > leagueCompRight)
-          return 1;
-        else
-          if(leagueCompLeft < leagueCompRight)
-            return -1;
+          }
           else {
-            if(lhs.getTeamName().equals("PLAYOFFS"))
+            if(tempLeagueRight.equals("Silver")) {
+              leagueCompRight = 2;
+            }
+            else {
+              if(tempLeagueRight.equals("Bronze")) {
+                leagueCompRight = 3;
+              }
+              else {
+                if(tempLeagueRight.equals("Leisure")) {
+                  leagueCompRight = 4;
+                }
+                else {
+                  leagueCompRight = 10;
+                }
+              }
+            }
+          }
+        }
+
+        if(leagueCompLeft > leagueCompRight) {
+          return 1;
+        }
+        else {
+          if(leagueCompLeft < leagueCompRight) {
+            return -1;
+          }
+          else {
+            if(lhs.getTeamName().equals("PLAYOFFS")) {
               return 1;
-            if(rhs.getTeamName().equals("PLAYOFFS"))
+            }
+            if(rhs.getTeamName().equals("PLAYOFFS")) {
               return 1;
+            }
             return lhs.getTeamName().compareTo(rhs.getTeamName());
           }
+        }
       }
     });
     return teams;
@@ -143,21 +171,11 @@ public class Data_MemoryManager {
   }
 
   public boolean hasTeam(ArrayList<Model_Team> teams, String league, String team) {
-    for(Model_Team e: teams)
-      if(e.getLeague().equalsIgnoreCase(league) && e.getTeamName().equalsIgnoreCase(team))
+    for(Model_Team e: teams) {
+      if(e.getLeague().equalsIgnoreCase(league) && e.getTeamName().equalsIgnoreCase(team)) {
         return true;
-    return false;
-  }
-
-  public boolean checkInternet() {
-    ConnectivityManager connec = (ConnectivityManager) context
-        .getSystemService(Context.CONNECTIVITY_SERVICE);
-    NetworkInfo wifi = connec.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-    NetworkInfo mobile = connec.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-
-    if(wifi != null && wifi.isConnected() || mobile != null & mobile.isConnected())
-      return true;
-
+      }
+    }
     return false;
   }
 
@@ -174,8 +192,10 @@ public class Data_MemoryManager {
     // get teams from db
     DbHelper db = new DbHelper(context);
     yourTeams = (ArrayList<Model_Team>) db.getAllMyTeams();
-    if(yourTeams == null)
+    if(yourTeams == null) {
       yourTeams = new ArrayList<Model_Team>();
+    }
+
     return yourTeams;
   }
 
@@ -183,8 +203,9 @@ public class Data_MemoryManager {
     ArrayList<Model_Team> teams = null;
     DbHelper db = new DbHelper(context);
     teams = (ArrayList<Model_Team>) db.getAllTeams();
-    if(teams == null)
+    if(teams == null) {
       teams = new ArrayList<Model_Team>();
+    }
     return teams;
   }
 
@@ -192,23 +213,17 @@ public class Data_MemoryManager {
     ArrayList<Model_Game> games = null;
     DbHelper db = new DbHelper(context);
     games = (ArrayList<Model_Game>) db.getAllGames();
-    if(games == null)
+    if(games == null) {
       games = new ArrayList<Model_Game>();
+    }
     return games;
   }
 
   public void resetFiles() {
-    saveDefaultValues();
+    // saveDefaultValues();
   }
-
-  public void saveDefaultValues() {}
 
   public Context getContext() {
     return this.context;
-  }
-
-  public void toast(String desc) {
-    Toast toast = Toast.makeText(context, desc, Toast.LENGTH_LONG);
-    toast.show();
   }
 }

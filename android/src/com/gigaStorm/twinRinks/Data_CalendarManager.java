@@ -15,7 +15,8 @@ import android.provider.BaseColumns;
 import android.provider.CalendarContract;
 
 /**
- * <code>Data_CalendarManager</code> handles the addition of events to a user's calendar.
+ * <<<<<<< HEAD <code>Data_CalendarManager</code> handles the addition of events to a user's
+ * calendar.
  * 
  * @author Boris Dubinsky
  * @author Andrew Mass

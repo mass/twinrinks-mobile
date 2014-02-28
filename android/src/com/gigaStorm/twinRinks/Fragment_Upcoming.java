@@ -90,7 +90,6 @@ public class Fragment_Upcoming extends SherlockFragment {
 
     if(!yourTeams.isEmpty() && btn_upcoming_goToAddTeams != null) {
       ((LinearLayout) btn_upcoming_goToAddTeams.getParent()).getChildAt(0).setVisibility(View.GONE);
-
     }
   }
 }
