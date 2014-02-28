@@ -14,8 +14,15 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockFragment;
 
-// Fragment which shows the user's upcoming games in date-sorted order
+/**
+ * <code>Fragment_Upcoming</code> shows the user's upcoming games in date-sorted
+ * order.
+ * 
+ * @author Andrew Mass
+ * @see Fragment
+ */
 public class Fragment_Upcoming extends SherlockFragment {
+
   private Button btn_upcoming_goToAddTeams;
 
   private ArrayList<Model_Team> yourTeams;
@@ -29,7 +36,8 @@ public class Fragment_Upcoming extends SherlockFragment {
   private View view;
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+      Bundle savedInstanceState) {
     view = inflater.inflate(R.layout.layout_frag_upcoming, container, false);
 
     memoryManager = new Data_MemoryManager(getActivity());
@@ -39,11 +47,13 @@ public class Fragment_Upcoming extends SherlockFragment {
       games = memoryManager.getGames();
     }
 
-    btn_upcoming_goToAddTeams = (Button) view.findViewById(R.id.btn_upcoming_goToAddTeams);
+    btn_upcoming_goToAddTeams = (Button) view
+        .findViewById(R.id.btn_upcoming_goToAddTeams);
     btn_upcoming_goToAddTeams.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
-        startActivity(new Intent(getActivity().getApplicationContext(), Activity_Settings.class));
+        startActivity(new Intent(getActivity().getApplicationContext(),
+            Activity_Settings.class));
       }
     });
     return view;
@@ -52,31 +62,41 @@ public class Fragment_Upcoming extends SherlockFragment {
   @Override
   public void onResume() {
     yourTeams = memoryManager.getYourTeams();
-    if(yourTeams.size() > 0)
+    if(yourTeams.size() > 0) {
       prepareGames();
+    }
     super.onResume();
   }
 
   private void prepareGames() {
     ArrayList<Model_Game> gamesToAdd = new ArrayList<Model_Game>();
-    for(Model_Game e1: games)
-      for(Model_Team e: yourTeams)
-        if((e1.getTeamA().equalsIgnoreCase(e.getTeamName()) || e1.getTeamH().equalsIgnoreCase(
-            e.getTeamName()))
-            && e1.getLeague().equalsIgnoreCase(e.getLeague()))
-          if(!e1.hasPassed())
+    for(Model_Game e1: games) {
+      for(Model_Team e: yourTeams) {
+        if((e1.getTeamA().equalsIgnoreCase(e.getTeamName()) || e1.getTeamH()
+            .equalsIgnoreCase(e.getTeamName()))
+            && e1.getLeague().equalsIgnoreCase(e.getLeague())) {
+          if(!e1.hasPassed()) {
             gamesToAdd.add(e1);
+          }
+        }
+      }
+    }
 
     String[] values = new String[gamesToAdd.size()];
-    for(int i = 0; i < values.length; i++)
+    for(int i = 0; i < values.length; i++) {
       values[i] = gamesToAdd.get(i).toString();
+    }
 
-    Data_ArrayAdapter adapter = new Data_ArrayAdapter(getActivity(), gamesToAdd, values);
-    listView_upcoming_main = (ListView) view.findViewById(R.id.listView_upcoming_main);
+    Data_ArrayAdapter adapter = new Data_ArrayAdapter(getActivity(),
+        gamesToAdd, values);
+    listView_upcoming_main = (ListView) view
+        .findViewById(R.id.listView_upcoming_main);
     listView_upcoming_main.setAdapter(adapter);
     listView_upcoming_main.setSelector(new ColorDrawable(Color.TRANSPARENT));
 
-    if(!yourTeams.isEmpty() && btn_upcoming_goToAddTeams != null)
-      ((LinearLayout) btn_upcoming_goToAddTeams.getParent()).getChildAt(0).setVisibility(View.GONE);
+    if(!yourTeams.isEmpty() && btn_upcoming_goToAddTeams != null) {
+      ((LinearLayout) btn_upcoming_goToAddTeams.getParent()).getChildAt(0)
+          .setVisibility(View.GONE);
+    }
   }
 }

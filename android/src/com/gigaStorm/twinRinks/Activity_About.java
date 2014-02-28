@@ -10,7 +10,12 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
 
-// Activity that shows extra information to the user
+/**
+ * <code>Activity_About</code> shows extra information about the appliation to
+ * the user.
+ * 
+ * @author Andrew Mass
+ */
 public class Activity_About extends SherlockActivity {
 
   private ActionBar actionBar;
@@ -24,6 +29,7 @@ public class Activity_About extends SherlockActivity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
     setContentView(R.layout.layout_about);
     getWindow().setBackgroundDrawableResource(android.R.color.black);
 
@@ -47,8 +53,9 @@ public class Activity_About extends SherlockActivity {
       public void onClick(View v) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT,
-            "Check out this Twin Rinks Adult Hockey Android app. http://goo.gl/ZeGxN");
+        shareIntent
+            .putExtra(Intent.EXTRA_TEXT,
+                "Check out this Twin Rinks Adult Hockey Android app. http://goo.gl/ZeGxN");
         startActivity(Intent.createChooser(shareIntent, "Choose Application:"));
       }
     });

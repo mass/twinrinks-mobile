@@ -4,29 +4,39 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.Map;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.AsyncTask;
 
-// Class which handles the downloading of data from the web server
+/**
+ * <code>Data_FetchTask</code> handles the downloading of game data from the web
+ * server.
+ * 
+ * @author Andrew Mass
+ * @see AsyncTask
+ */
 public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
-  ProgressDialog progress;
 
-  Data_MemoryManager parent;
+  private ProgressDialog progress;
 
-  Map<String, String> urlMap;
+  private Data_MemoryManager parent;
 
-  public Data_FetchTask(Data_MemoryManager p) {
+  private Context parentContext;
+
+  private String[] fetchData;
+
+  public Data_FetchTask(Data_MemoryManager p, Context context) {
     super();
     parent = p;
+    parentContext = context;
   }
 
   @Override
   protected void onPreExecute() {
     super.onPreExecute();
-    progress = new ProgressDialog(parent.getContext());
+    progress = new ProgressDialog(parentContext);
     progress.setTitle("Fetching Game Data...");
     progress.setMessage("Please Wait...");
     progress.setIndeterminate(true);
@@ -44,11 +54,12 @@ public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
 
   @Override
   protected Void doInBackground(Void... params) {
-    String[] data;
 
     try {
-      URL textURL = new URL("raw.github.com/mass/twinrinks-mobile/master/ScheduleData.txt");
-      BufferedReader bufferReader = new BufferedReader(new InputStreamReader(textURL.openStream()));
+      URL textURL = new URL(parentContext.getResources().getString(
+          R.string.data_url));
+      BufferedReader bufferReader = new BufferedReader(new InputStreamReader(
+          textURL.openStream()));
       String StringBuffer;
       String stringText = "";
 
@@ -56,19 +67,18 @@ public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
         stringText += StringBuffer;
 
       bufferReader.close();
-      data = stringText.split(";");
+      fetchData = stringText.split(";");
     }
     catch(IOException e) {
-      e.printStackTrace();
-      data = null;
+      fetchData = null;
     }
 
-    parent.setScheduleTable(data);
     return null;
   }
 
   @Override
   protected void onPostExecute(Void result) {
+    parent.setScheduleTable(fetchData);
     progress.dismiss();
     super.onPostExecute(result);
   }

@@ -7,7 +7,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-// Wrapper class for an object representing a game
+/**
+ * <code>Model_Game</code> represents a game.
+ * 
+ * @author mass
+ * @see Serializable
+ */
 public class Model_Game implements Serializable {
   private static final long serialVersionUID = 8443055282851237298L;
 
@@ -27,7 +32,8 @@ public class Model_Game implements Serializable {
 
   private Calendar cal;
 
-  public Model_Game(String d, String r, String bt, String et, String th, String ta, String l) {
+  public Model_Game(String d, String r, String bt, String et, String th,
+      String ta, String l) {
     date = d.replaceAll("\\s", "");
     beginTime = bt.replaceAll("\\s", "") + "M";
     endTime = et.replaceAll("\\s", "");
@@ -38,6 +44,11 @@ public class Model_Game implements Serializable {
     cal = generateCalendarObject();
   }
 
+  /**
+   * Provides a more user-friendly string representing the date.
+   * 
+   * @return the formatted date string.
+   */
   public String getFullDateString() {
     switch(this.cal.get(Calendar.DAY_OF_WEEK)) {
       case 1:
@@ -58,26 +69,40 @@ public class Model_Game implements Serializable {
     return "Failed";
   }
 
+  /**
+   * Checks to see if the game is in the past.
+   * <p>
+   * Adds a two-hour grace-period so we can see games that have happened in the
+   * past two hours.
+   * </p>
+   * 
+   * @return boolean representing whether this game is in the past.
+   */
   public boolean hasPassed() {
     Calendar now = Calendar.getInstance();
-
-    if(this.cal.getTimeInMillis() + 7200000 <= now.getTimeInMillis())
-      return true;
-    return false;
+    now.add(Calendar.HOUR, -2);
+    return this.cal.before(now);
   }
 
+  /**
+   * Outputs a <code>Calendar</code> object based on the game's date string
+   * which gives the game's start time.
+   * 
+   * @return a <code>Calendar</code> object representing this game's start time.
+   */
   private Calendar generateCalendarObject() {
     Calendar cal = Calendar.getInstance();
 
-    // 05/31/13;08:55PM
     SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy;hh:mma", Locale.US);
     Date date = new Date();
+
     try {
       date = format.parse(this.date + ";" + this.beginTime);
     }
     catch(ParseException e) {
-      e.printStackTrace();
+      System.err.println("Failed to parse date string");
     }
+
     cal.setTime(date);
     return cal;
   }
@@ -86,9 +111,11 @@ public class Model_Game implements Serializable {
     return this.cal;
   }
 
+  @Override
   public String toString() {
-    return "League: " + league + "\nDate: " + date + "\nRink: " + rink + "\nBegin: " + beginTime
-        + "\nEnd: " + endTime + "\nHome: " + teamH + "\nAway: " + teamA;
+    return "League: " + league + "\nDate: " + date + "\nRink: " + rink
+        + "\nBegin: " + beginTime + "\nEnd: " + endTime + "\nHome: " + teamH
+        + "\nAway: " + teamA;
   }
 
   public String getDate() {

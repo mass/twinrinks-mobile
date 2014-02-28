@@ -2,7 +2,12 @@ package com.gigaStorm.twinRinks;
 
 import java.io.Serializable;
 
-// Wrapper class for an object representing a team
+/**
+ * <code>Model_Team</code> represents a team.
+ * 
+ * @author Andrew Mass
+ * @see Serializable
+ */
 public class Model_Team implements Serializable {
   private static final long serialVersionUID = 8308588163969826346L;
 
@@ -15,8 +20,8 @@ public class Model_Team implements Serializable {
     teamName = n;
   }
 
-  public Model_Team(String backing) {
-    String[] data = backing.split(";");
+  public Model_Team(String key) {
+    String[] data = key.split(";");
     league = data[0];
     teamName = data[1];
   }
@@ -33,6 +38,7 @@ public class Model_Team implements Serializable {
     return teamName;
   }
 
+  @Override
   public String toString() {
     return league + "-" + teamName;
   }

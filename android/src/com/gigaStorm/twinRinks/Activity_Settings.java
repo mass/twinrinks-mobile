@@ -11,15 +11,20 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.text.InputType;
-import android.widget.Toast;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
 
-@SuppressWarnings("deprecation")
-// Activity which allows the user to choose settings
+/**
+ * <code>Activity_Settings</code> allows the user to change application settings
+ * and choose preferences.
+ * 
+ * @author Andrew Mass
+ * @see PreferenceActivity
+ */
 public class Activity_Settings extends SherlockPreferenceActivity {
 
   private PreferenceCategory addTeamCategory;
@@ -32,9 +37,12 @@ public class Activity_Settings extends SherlockPreferenceActivity {
 
   private ActionBar actionBar;
 
+  private Util util;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
     // Adds the settings XML to the activity
     addPreferencesFromResource(R.xml.settings_main);
 
@@ -50,13 +58,16 @@ public class Activity_Settings extends SherlockPreferenceActivity {
 
     addNewTeamPref = findPreference("addNewTeamPref");
     addNewTeamPref.setOrder(999);
-    addNewTeamPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-      @Override
-      public boolean onPreferenceClick(Preference preference) {
-        showAddTeamPopup();
-        return true;
-      }
-    });
+    addNewTeamPref
+        .setOnPreferenceClickListener(new OnPreferenceClickListener() {
+          @Override
+          public boolean onPreferenceClick(Preference preference) {
+            showAddTeamPopup();
+            return true;
+          }
+        });
+
+    util = new Util(this);
 
     memoryManager = new Data_MemoryManager(this);
     yourTeams = memoryManager.getYourTeams();
@@ -65,25 +76,30 @@ public class Activity_Settings extends SherlockPreferenceActivity {
     final EditTextPreference autoLogInUsername = (EditTextPreference) findPreference("autoLogInUsername");
     final EditTextPreference autoLogInPassword = (EditTextPreference) findPreference("autoLogInPassword");
 
-    autoLogInUsername.getEditText().setInputType(
-        InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+    autoLogInUsername.getEditText()
+        .setInputType(
+            InputType.TYPE_CLASS_TEXT
+                | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
     autoLogInPassword.getEditText().setInputType(
         InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
     final CheckBoxPreference autoLogInCheckBox = (CheckBoxPreference) findPreference("autoLogInCheckbox");
-    autoLogInCheckBox.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-      public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if(autoLogInCheckBox.isChecked()) {
-          autoLogInPassword.setEnabled(false);
-          autoLogInUsername.setEnabled(false);
-        }
-        else {
-          autoLogInPassword.setEnabled(true);
-          autoLogInUsername.setEnabled(true);
-        }
-        return true;
-      }
-    });
+    autoLogInCheckBox
+        .setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+          @Override
+          public boolean onPreferenceChange(Preference preference,
+              Object newValue) {
+            if(autoLogInCheckBox.isChecked()) {
+              autoLogInPassword.setEnabled(false);
+              autoLogInUsername.setEnabled(false);
+            }
+            else {
+              autoLogInPassword.setEnabled(true);
+              autoLogInUsername.setEnabled(true);
+            }
+            return true;
+          }
+        });
 
     if(autoLogInCheckBox.isChecked() == false) {
       autoLogInPassword.setEnabled(false);
@@ -103,8 +119,9 @@ public class Activity_Settings extends SherlockPreferenceActivity {
 
   public void updatePreferencesFromTeams() {
     addTeamCategory.removeAll();
-    for(int i = 0; i < yourTeams.size(); i++)
+    for(int i = 0; i < yourTeams.size(); i++) {
       addTeamCategory.addPreference(getNewPreference(yourTeams.get(i)));
+    }
 
     addTeamCategory.addPreference(addNewTeamPref);
   }
@@ -114,15 +131,18 @@ public class Activity_Settings extends SherlockPreferenceActivity {
       yourTeams.add(team);
       addTeamCategory.addPreference(getNewPreference(team));
     }
-    else
-      toast("Team already entered");
+    else {
+      util.toast("Team already entered");
+    }
   }
 
   public boolean alreadyEntered(Model_Team team) {
-    for(int i = 0; i < yourTeams.size(); i++)
+    for(int i = 0; i < yourTeams.size(); i++) {
       if(yourTeams.get(i).getLeague().equals(team.getLeague())
-          && yourTeams.get(i).getTeamName().equals(team.getTeamName()))
+          && yourTeams.get(i).getTeamName().equals(team.getTeamName())) {
         return true;
+      }
+    }
     return false;
   }
 
@@ -142,12 +162,14 @@ public class Activity_Settings extends SherlockPreferenceActivity {
         builder.setMessage("Remove this team?");
         builder.setCancelable(false);
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+          @Override
           public void onClick(DialogInterface dialog, int id) {
             yourTeams.remove(getIndexOfTeam(league, teamName));
             addTeamCategory.removePreference(preference);
           }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+          @Override
           public void onClick(DialogInterface dialog, int id) {
             dialog.cancel();
           }
@@ -161,9 +183,12 @@ public class Activity_Settings extends SherlockPreferenceActivity {
   }
 
   public int getIndexOfTeam(String league, String name) {
-    for(int i = 0; i < yourTeams.size(); i++)
-      if(yourTeams.get(i).getLeague().equals(league) && yourTeams.get(i).getTeamName().equals(name))
+    for(int i = 0; i < yourTeams.size(); i++) {
+      if(yourTeams.get(i).getLeague().equals(league)
+          && yourTeams.get(i).getTeamName().equals(name)) {
         return i;
+      }
+    }
     return -1;
   }
 
@@ -178,17 +203,13 @@ public class Activity_Settings extends SherlockPreferenceActivity {
     AlertDialog.Builder builder = new AlertDialog.Builder(context);
     builder.setTitle("Select A Team:");
     builder.setItems(teamStrings, new DialogInterface.OnClickListener() {
+      @Override
       public void onClick(DialogInterface dialog, final int item) {
         addNewTeam(teams.get(item));
       }
     });
     AlertDialog alert = builder.create();
     alert.show();
-  }
-
-  public void toast(String desc) {
-    Toast toast = Toast.makeText(getApplicationContext(), desc, Toast.LENGTH_LONG);
-    toast.show();
   }
 
   @Override

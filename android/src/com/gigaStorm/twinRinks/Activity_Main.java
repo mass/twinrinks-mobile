@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
@@ -15,7 +16,13 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.viewpagerindicator.TitlePageIndicator;
 
-// Main activity that loads the three fragments into a frame layout
+/**
+ * <code>Activity_Main</code> loads the three main fragments into a frame
+ * layout.
+ * 
+ * @author Andrew Mass
+ * @see FragmentActivity
+ */
 public class Activity_Main extends SherlockFragmentActivity {
 
   private ActionBar actionBar;
@@ -45,18 +52,23 @@ public class Activity_Main extends SherlockFragmentActivity {
 
     TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.viewPagerIndicator);
     titleIndicator.setViewPager(viewPager);
-    titleIndicator.setBackgroundColor(getResources().getColor(R.color.vpi__background_holo_dark));
-    titleIndicator.setFooterIndicatorStyle(TitlePageIndicator.IndicatorStyle.None);
+    titleIndicator.setBackgroundColor(getResources().getColor(
+        R.color.vpi__background_holo_dark));
+    titleIndicator
+        .setFooterIndicatorStyle(TitlePageIndicator.IndicatorStyle.None);
     titleIndicator.setCurrentItem(viewPager.getCurrentItem());
+
     super.onResume();
   }
 
   @Override
   public void onBackPressed() {
-    if(viewPager.getCurrentItem() == 0)
+    if(viewPager.getCurrentItem() == 0) {
       super.onBackPressed();
-    else
+    }
+    else {
       viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+    }
   }
 
   @Override
@@ -109,23 +121,29 @@ public class Activity_Main extends SherlockFragmentActivity {
 
     @Override
     public Fragment getItem(int position) {
-      if(position == 0)
+      if(position == 0) {
         return new Fragment_Upcoming();
-      if(position == 1)
+      }
+      if(position == 1) {
         return new Fragment_Schedule();
-      if(position == 2)
+      }
+      if(position == 2) {
         return new Fragment_SignIn();
+      }
       return new Fragment_Upcoming();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-      if(position == 0)
+      if(position == 0) {
         return "Upcoming";
-      if(position == 1)
+      }
+      if(position == 1) {
         return "Schedule";
-      if(position == 2)
+      }
+      if(position == 2) {
         return "Sub Sign-In";
+      }
       return "Error";
     }
 

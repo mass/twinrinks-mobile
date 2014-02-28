@@ -13,18 +13,27 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.provider.CalendarContract;
-import android.widget.Toast;
 
-// Class which handles the addition of events to a user's calendar
-@SuppressLint({"InlinedApi", "NewApi"})
+/**
+ * <code>Data_CalendarManager</code> handles the addition of events to a user's
+ * calendar.
+ * 
+ * @author Boris Dubinsky
+ * @author Andrew Mass
+ */
+@SuppressLint("NewApi")
 public class Data_CalendarManager {
+
   private Context context;
 
   private Data_MemoryManager memoryManager;
 
+  private Util util;
+
   public Data_CalendarManager(Context context) {
     this.context = context;
     memoryManager = new Data_MemoryManager(context);
+    util = new Util(context);
   }
 
   public void saveGamesToCalendar() {
@@ -37,7 +46,8 @@ public class Data_CalendarManager {
     final Uri uri;
     List<String> listCals = new ArrayList<String>();
     final String[] projection = new String[] {BaseColumns._ID,
-        CalendarContract.Calendars.ACCOUNT_NAME, CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,
+        CalendarContract.Calendars.ACCOUNT_NAME,
+        CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,
         CalendarContract.Calendars.NAME,};
 
     uri = CalendarContract.Calendars.CONTENT_URI;
@@ -46,11 +56,13 @@ public class Data_CalendarManager {
     result = cr.query(uri, projection, null, null, null);
     if(result.getCount() > 0 && result.moveToFirst()) {
       do {
-        listCals.add(result.getString(result.getColumnIndex(CalendarContract.Calendars.NAME)));
+        listCals.add(result.getString(result
+            .getColumnIndex(CalendarContract.Calendars.NAME)));
       }
       while(result.moveToNext());
     }
-    CharSequence[] calendars = listCals.toArray(new CharSequence[listCals.size()]);
+    CharSequence[] calendars = listCals.toArray(new CharSequence[listCals
+        .size()]);
 
     AlertDialog.Builder builder = new AlertDialog.Builder(context);
     builder.setTitle("Calendar to use:");
@@ -67,13 +79,17 @@ public class Data_CalendarManager {
   private void loopThroughGames(int whichCalendar) {
     ArrayList<Model_Game> games = memoryManager.getGames();
 
-    for(Model_Game e1: games)
-      for(Model_Team e: memoryManager.getYourTeams())
-        if((e1.getTeamA().equalsIgnoreCase(e.getTeamName()) || e1.getTeamH().equalsIgnoreCase(
-            e.getTeamName()))
-            && e1.getLeague().equalsIgnoreCase(e.getLeague()))
-          if(!e1.hasPassed())
+    for(Model_Game e1: games) {
+      for(Model_Team e: memoryManager.getYourTeams()) {
+        if((e1.getTeamA().equalsIgnoreCase(e.getTeamName()) || e1.getTeamH()
+            .equalsIgnoreCase(e.getTeamName()))
+            && e1.getLeague().equalsIgnoreCase(e.getLeague())) {
+          if(!e1.hasPassed()) {
             addGameToCalendar(e1, whichCalendar + 1);
+          }
+        }
+      }
+    }
   }
 
   private void addGameToCalendar(Model_Game game, int whichCalendar) {
@@ -81,24 +97,20 @@ public class Data_CalendarManager {
     ContentValues values = new ContentValues();
     try {
       values.put(CalendarContract.Events.CALENDAR_ID, whichCalendar);
-      values.put(CalendarContract.Events.TITLE,
-          "Hockey- " + game.getLeague() + ": " + game.getTeamH() + " vs " + game.getTeamA());
-      values.put(CalendarContract.Events.EVENT_LOCATION, "Twin Rinks Ice Arena - " + game.getRink()
-          + " Rink");
-      values.put(CalendarContract.Events.DTSTART, game.getCalendarObject().getTimeInMillis());
-      values.put(CalendarContract.Events.DTEND,
-          game.getCalendarObject().getTimeInMillis() + 5400000);
-      values.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
+      values.put(CalendarContract.Events.TITLE, "Hockey- " + game.getLeague()
+          + ": " + game.getTeamH() + " vs " + game.getTeamA());
+      values.put(CalendarContract.Events.EVENT_LOCATION,
+          "Twin Rinks Ice Arena - " + game.getRink() + " Rink");
+      values.put(CalendarContract.Events.DTSTART, game.getCalendarObject()
+          .getTimeInMillis());
+      values.put(CalendarContract.Events.DTEND, game.getCalendarObject()
+          .getTimeInMillis() + 5400000);
+      values.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault()
+          .getID());
       cr.insert(CalendarContract.Events.CONTENT_URI, values);
     }
     catch(Exception e) {
-      toast(e.getMessage());
-      e.printStackTrace();
+      util.err(e.getMessage());
     }
-  }
-
-  public void toast(Object obj) {
-    Toast toast = Toast.makeText(context, obj.toString(), Toast.LENGTH_LONG);
-    toast.show();
   }
 }
