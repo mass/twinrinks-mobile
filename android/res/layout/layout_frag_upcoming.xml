@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical">
+
+  <Button
+    android:id="@+id/btn_upcoming_goToAddTeams"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
-    
-    <Button
-        android:id="@+id/btn_upcoming_goToAddTeams"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/addNewTeams" />
+    android:text="@string/addNewTeams" />
 
-    <ListView
-        android:id="@+id/listView_upcoming_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null"
-        android:dividerHeight="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp" >
-    </ListView>
+  <ListView
+    android:id="@+id/listView_upcoming_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="@null"
+    android:dividerHeight="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp" />
 
 </LinearLayout>

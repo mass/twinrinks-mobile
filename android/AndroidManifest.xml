@@ -1,31 +1,33 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gigaStorm.twinRinks"
-    android:versionCode="3"
-    android:versionName="1.3" >
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.gigaStorm.twinRinks"
+  android:versionCode="3"
+  android:versionName="1.3">
 
-    <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="17" />
+  <uses-sdk
+    android:minSdkVersion="8"
+    android:targetSdkVersion="19" />
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_CALENDAR" />
-    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.READ_CALENDAR" />
+  <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
-    <application
-        android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" 
-        android:theme="@style/Theme.Sherlock">
-        <activity android:name="com.gigaStorm.twinRinks.Activity_Main" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+  <application
+    android:allowBackup="true"
+    android:icon="@drawable/ic_launcher"
+    android:label="@string/app_name"
+    android:theme="@style/Theme.Sherlock">
+    <activity android:name="com.gigaStorm.twinRinks.Activity_Main">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name="com.gigaStorm.twinRinks.Activity_About" />
-        <activity android:name="com.gigaStorm.twinRinks.Activity_Settings" />
-    </application>
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity android:name="com.gigaStorm.twinRinks.Activity_About" />
+    <activity android:name="com.gigaStorm.twinRinks.Activity_Settings" />
+  </application>
 
 </manifest>
