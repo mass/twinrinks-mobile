@@ -1,7 +1,6 @@
 
 package com.gigaStorm.twinRinks;
 
-import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -9,25 +8,22 @@ import java.util.Date;
 import java.util.Locale;
 
 // Wrapper class for an object representing a game
-public class Model_Game implements Serializable {
-    private static final long serialVersionUID = 8443055282851237298L;
+public class Model_Game {
 
+	private Integer Id; 	// Used by database
     private String date;
-
+    private String weekDay;
     private String beginTime;
-
     private String endTime;
-
     private String rink;
-
     private String teamH;
-
     private String teamA;
-
     private String league;
-
     private Calendar cal;
 
+    public Model_Game() {
+    	
+    }
     public Model_Game(String d, String r, String bt, String et, String th, String ta, String l) {
         date = d.replaceAll("\\s", "");
         beginTime = bt.replaceAll("\\s", "") + "M";
@@ -67,16 +63,16 @@ public class Model_Game implements Serializable {
         return false;
     }
 
-    private Calendar generateCalendarObject() {
+    public Calendar generateCalendarObject() {
         Calendar cal = Calendar.getInstance();
 
         // 05/31/13;08:55PM
-        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy;hh:mma", Locale.US);
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy;hh:mmaa", Locale.US);
         Date date = new Date();
         try {
-            date = format.parse(this.date + ";" + this.beginTime);
+            date = format.parse(this.date + ";" + this.beginTime + "M");
         } catch (ParseException e) {
-            e.printStackTrace();
+            Logger.i("Model_Game", "generateCalendarObject(): " + e.getMessage());
         }
         cal.setTime(date);
         return cal;
@@ -110,4 +106,61 @@ public class Model_Game implements Serializable {
     public String getLeague() {
         return league;
     }
+
+	public String getBeginTime() {
+		return beginTime;
+	}
+
+	public void setBeginTime(String beginTime) {
+		this.beginTime = beginTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+	public Calendar getCal() {
+		return cal;
+	}
+
+	public void setCal(Calendar cal) {
+		this.cal = cal;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public void setRink(String rink) {
+		this.rink = rink;
+	}
+
+	public void setTeamH(String teamH) {
+		this.teamH = teamH;
+	}
+
+	public void setTeamA(String teamA) {
+		this.teamA = teamA;
+	}
+
+	public void setLeague(String league) {
+		this.league = league;
+	}
+	public Integer getId() {
+		return Id;
+	}
+	public void setId(Integer id) {
+		Id = id;
+	}
+	public String getWeekDay() {
+		return weekDay;
+	}
+	public void setWeekDay(String weekDay) {
+		this.weekDay = weekDay;
+	}
+	
 }

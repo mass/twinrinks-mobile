@@ -1,16 +1,16 @@
 
 package com.gigaStorm.twinRinks;
 
-import java.io.Serializable;
-
 //Wrapper class for an object representing a team
-public class Model_Team implements Serializable {
-    private static final long serialVersionUID = 8308588163969826346L;
+public class Model_Team {
 
+	private Integer Id; 	// Used by database
     private String league;
-
     private String teamName;
 
+    public Model_Team() {
+    }
+    
     public Model_Team(String l, String n) {
         league = l;
         teamName = n;
@@ -34,7 +34,24 @@ public class Model_Team implements Serializable {
         return teamName;
     }
 
-    public String toString() {
+    public Integer getId() {
+		return Id;
+	}
+
+	public void setId(Integer id) {
+		Id = id;
+	}
+
+	public String toString() {
         return league + "-" + teamName;
     }
+
+	public void setLeague(String league) {
+		this.league = league;
+	}
+
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
+    
 }

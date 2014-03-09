@@ -65,8 +65,8 @@ public class Fragment_Upcoming extends SherlockFragment {
         ArrayList<Model_Game> gamesToAdd = new ArrayList<Model_Game>();
         for (Model_Game e1 : games)
             for (Model_Team e : yourTeams)
-                if ((e1.getTeamA().equalsIgnoreCase(e.getTeamName()) || e1.getTeamH()
-                        .equalsIgnoreCase(e.getTeamName()))
+                if ((e1.getTeamA().equalsIgnoreCase(e.getTeamName()) || 
+                	e1.getTeamH().equalsIgnoreCase(e.getTeamName()))
                         && e1.getLeague().equalsIgnoreCase(e.getLeague()))
                     if (!e1.hasPassed())
                         gamesToAdd.add(e1);

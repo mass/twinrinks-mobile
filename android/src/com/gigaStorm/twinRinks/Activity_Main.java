@@ -4,11 +4,13 @@ package com.gigaStorm.twinRinks;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -20,18 +22,34 @@ import com.viewpagerindicator.TitlePageIndicator;
 // Main activity that loads the three fragments into a frame layout
 public class Activity_Main extends SherlockFragmentActivity {
 
+    private static final String	TAG="Activity_Main";
     private ActionBar actionBar;
-
     private Data_MemoryManager memoryManager;
-
     private ViewPager viewPager;
-
     private PagerAdapter pagerAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	String	SubTag="OnCreate(): ";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
+		String androidId = Settings.Secure.getString(this.getContentResolver(),
+				android.provider.Settings.Secure.ANDROID_ID);
+		if (androidId == null || androidId.equals("9774d56d682e549c")) {
+			// We are running on the emulator. Debugging should be ON.
+			Logger.e(TAG, SubTag
+					+ "Enabeling VERBOSE debugging. androidID = " + androidId);
+			Logger.enableLogging(Log.VERBOSE);
+		} else {
+			// We are running on a phone. Debugging should be OFF.
+			Logger.e(TAG, SubTag
+					+ "Enabeling ERRORS only debugging. androidID = "
+					+ androidId);
+			Logger.enableLogging(Log.ERROR);
+		}
+		// If there is a need to debug the app, uncomment the following line
+		// Logger.enableLogging(Log.VERBOSE);
+		
         getWindow().setBackgroundDrawableResource(android.R.color.black);
 
         actionBar = getSupportActionBar();
