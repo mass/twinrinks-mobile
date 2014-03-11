@@ -1,3 +1,4 @@
+
 package com.gigaStorm.twinRinks;
 
 import android.content.Context;
@@ -13,13 +14,13 @@ import android.content.Context;
  */
 public class Data_CalendarManagerCompat {
 
-  private Util util;
+    private Util util;
 
-  public Data_CalendarManagerCompat(Context context) {
-    this.util = new Util(context);
-  }
+    public Data_CalendarManagerCompat(Context context) {
+        this.util = new Util(context);
+    }
 
-  public void saveGamesToCalendar() {
-    util.toast("This feature is not currently supported in this version of android");
-  }
+    public void saveGamesToCalendar() {
+        util.toast("This feature is not currently supported in this version of android");
+    }
 }
