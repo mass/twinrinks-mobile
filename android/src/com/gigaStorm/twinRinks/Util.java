@@ -6,26 +6,16 @@ import android.net.NetworkInfo;
 import android.widget.Toast;
 
 /**
-<<<<<<< HEAD
  * <code>Util</code> provides several utility functions which will appear frequently throughout the
  * code.
-=======
- * <code>Util</code> provides several utility functions which will appear
- * frequently throughout the code.
->>>>>>> 188a691... Fix data fetch bug.
  * 
  * @author Andrew Mass
  */
 public class Util {
 
   /**
-<<<<<<< HEAD
    * The context of the parent activity, used to interact with the application from a non-android
    * class.
-=======
-   * The context of the parent activity, used to interact with the application
-   * from a non-android class.
->>>>>>> 188a691... Fix data fetch bug.
    */
   private Context parentContext;
 
@@ -57,12 +47,7 @@ public class Util {
   /**
    * Checks to make sure we have a functioning Internet connection.
    * 
-<<<<<<< HEAD
    * @return a boolean relating whether this device has a valid Internet connection.
-=======
-   * @return a boolean relating whether this device has a valid Internet
-   *         connection.
->>>>>>> 188a691... Fix data fetch bug.
    */
   public boolean checkInternet() {
     ConnectivityManager connec = (ConnectivityManager) parentContext
@@ -70,11 +55,6 @@ public class Util {
     NetworkInfo wifi = connec.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
     NetworkInfo mobile = connec.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 
-<<<<<<< HEAD
     return (wifi != null && wifi.isConnected() || mobile != null & mobile.isConnected());
-=======
-    return (wifi != null && wifi.isConnected() || mobile != null
-        & mobile.isConnected());
->>>>>>> 188a691... Fix data fetch bug.
   }
 }

@@ -68,8 +68,6 @@ public class Activity_Settings extends SherlockPreferenceActivity {
 
     util = new Util(this);
 
-    util = new Util(this);
-
     memoryManager = new Data_MemoryManager(this);
     yourTeams = memoryManager.getYourTeams();
     updatePreferencesFromTeams();

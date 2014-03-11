@@ -54,13 +54,10 @@ public class Model_Team implements Serializable {
     return teamName;
   }
 
-<<<<<<< HEAD
   public void setTeamName(String teamName) {
     this.teamName = teamName;
   }
 
-=======
->>>>>>> 188a691... Fix data fetch bug.
   @Override
   public String toString() {
     return league + "-" + teamName;

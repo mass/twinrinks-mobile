@@ -11,12 +11,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
 
 /**
-<<<<<<< HEAD
  * <code>Activity_About</code> shows extra information about the appliation to the user.
-=======
- * <code>Activity_About</code> shows extra information about the appliation to
- * the user.
->>>>>>> 188a691... Fix data fetch bug.
  * 
  * @author Andrew Mass
  */
@@ -57,9 +52,8 @@ public class Activity_About extends SherlockActivity {
       public void onClick(View v) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        shareIntent
-            .putExtra(Intent.EXTRA_TEXT,
-                "Check out this Twin Rinks Adult Hockey Android app. http://goo.gl/ZeGxN");
+        shareIntent.putExtra(Intent.EXTRA_TEXT,
+            "Check out this Twin Rinks Adult Hockey Android app. http://goo.gl/ZeGxN");
         startActivity(Intent.createChooser(shareIntent, "Choose Application:"));
       }
     });
