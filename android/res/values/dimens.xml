@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <dimen name="gameview_top">35sp</dimen>
-  <dimen name="gameview_mid">20sp</dimen>
-  <dimen name="gameview_bot">20sp</dimen>
+    <dimen name="gameview_top">35sp</dimen>
+    <dimen name="gameview_mid">20sp</dimen>
+    <dimen name="gameview_bot">20sp</dimen>
 
 </resources>

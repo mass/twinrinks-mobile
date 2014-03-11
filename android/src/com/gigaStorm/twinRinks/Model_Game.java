@@ -1,4 +1,3 @@
-
 package com.gigaStorm.twinRinks;
 
 import java.io.Serializable;
@@ -16,161 +15,162 @@ import java.util.Locale;
  */
 public class Model_Game {
 
-    private Integer Id; // Used by database
-    private String date;
-    private String weekDay;
-    private String beginTime;
-    private String endTime;
-    private String rink;
-    private String teamH;
-    private String teamA;
-    private String league;
-    private Calendar cal;
+  private Integer Id; // Used by database
+  private String date;
+  private String weekDay;
+  private String beginTime;
+  private String endTime;
+  private String rink;
+  private String teamH;
+  private String teamA;
+  private String league;
+  private Calendar cal;
 
-    public Model_Game() {
+  public Model_Game() {
 
+  }
+
+  public Model_Game(String d, String r, String bt, String et, String th, String ta, String l) {
+    date = d.replaceAll("\\s", "");
+    beginTime = bt.replaceAll("\\s", "") + "M";
+    endTime = et.replaceAll("\\s", "");
+    rink = r.replaceAll("\\s", "");
+    league = l.replaceAll("\\s", "");
+    teamH = th.replaceAll("\\s", "");
+    teamA = ta.replaceAll("\\s", "");
+    cal = generateCalendarObject();
+  }
+
+  public String getFullDateString() {
+    switch(this.cal.get(Calendar.DAY_OF_WEEK)) {
+      case 1:
+        return "Sunday, " + date + ", at " + beginTime;
+      case 2:
+        return "Monday, " + date + ", at " + beginTime;
+      case 3:
+        return "Tuesday, " + date + ", at " + beginTime;
+      case 4:
+        return "Wednesday, " + date + ", at " + beginTime;
+      case 5:
+        return "Thursday, " + date + ", at " + beginTime;
+      case 6:
+        return "Friday, " + date + ", at " + beginTime;
+      case 7:
+        return "Saturday, " + date + ", at " + beginTime;
     }
+    return "Failed";
+  }
 
-    public Model_Game(String d, String r, String bt, String et, String th, String ta, String l) {
-        date = d.replaceAll("\\s", "");
-        beginTime = bt.replaceAll("\\s", "") + "M";
-        endTime = et.replaceAll("\\s", "");
-        rink = r.replaceAll("\\s", "");
-        league = l.replaceAll("\\s", "");
-        teamH = th.replaceAll("\\s", "");
-        teamA = ta.replaceAll("\\s", "");
-        cal = generateCalendarObject();
+  public boolean hasPassed() {
+    Calendar now = Calendar.getInstance();
+
+    if(this.cal.getTimeInMillis() + 7200000 <= now.getTimeInMillis())
+      return true;
+    return false;
+  }
+
+  public Calendar generateCalendarObject() {
+    Calendar cal = Calendar.getInstance();
+
+    // 05/31/13;08:55PM
+    SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy;hh:mmaa", Locale.US);
+    Date date = new Date();
+    try {
+      date = format.parse(this.date + ";" + this.beginTime + "M");
     }
-
-    public String getFullDateString() {
-        switch (this.cal.get(Calendar.DAY_OF_WEEK)) {
-            case 1:
-                return "Sunday, " + date + ", at " + beginTime;
-            case 2:
-                return "Monday, " + date + ", at " + beginTime;
-            case 3:
-                return "Tuesday, " + date + ", at " + beginTime;
-            case 4:
-                return "Wednesday, " + date + ", at " + beginTime;
-            case 5:
-                return "Thursday, " + date + ", at " + beginTime;
-            case 6:
-                return "Friday, " + date + ", at " + beginTime;
-            case 7:
-                return "Saturday, " + date + ", at " + beginTime;
-        }
-        return "Failed";
+    catch(ParseException e) {
+      Logger.i("Model_Game", "generateCalendarObject(): " + e.getMessage());
     }
+    cal.setTime(date);
+    return cal;
+  }
 
-    public boolean hasPassed() {
-        Calendar now = Calendar.getInstance();
+  public Calendar getCalendarObject() {
+    return this.cal;
+  }
 
-        if (this.cal.getTimeInMillis() + 7200000 <= now.getTimeInMillis())
-            return true;
-        return false;
-    }
+  public String toString() {
+    return "League: " + league + "\nDate: " + date + "\nRink: " + rink + "\nBegin: " + beginTime
+        + "\nEnd: " + endTime + "\nHome: " + teamH + "\nAway: " + teamA;
+  }
 
-    public Calendar generateCalendarObject() {
-        Calendar cal = Calendar.getInstance();
+  public String getDate() {
+    return date;
+  }
 
-        // 05/31/13;08:55PM
-        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy;hh:mmaa", Locale.US);
-        Date date = new Date();
-        try {
-            date = format.parse(this.date + ";" + this.beginTime + "M");
-        } catch (ParseException e) {
-            Logger.i("Model_Game", "generateCalendarObject(): " + e.getMessage());
-        }
-        cal.setTime(date);
-        return cal;
-    }
+  public String getRink() {
+    return rink;
+  }
 
-    public Calendar getCalendarObject() {
-        return this.cal;
-    }
+  public String getTeamH() {
+    return teamH;
+  }
 
-    public String toString() {
-        return "League: " + league + "\nDate: " + date + "\nRink: " + rink + "\nBegin: "
-                + beginTime + "\nEnd: " + endTime + "\nHome: " + teamH + "\nAway: " + teamA;
-    }
+  public String getTeamA() {
+    return teamA;
+  }
 
-    public String getDate() {
-        return date;
-    }
+  public String getLeague() {
+    return league;
+  }
 
-    public String getRink() {
-        return rink;
-    }
+  public String getBeginTime() {
+    return beginTime;
+  }
 
-    public String getTeamH() {
-        return teamH;
-    }
+  public void setBeginTime(String beginTime) {
+    this.beginTime = beginTime;
+  }
 
-    public String getTeamA() {
-        return teamA;
-    }
+  public String getEndTime() {
+    return endTime;
+  }
 
-    public String getLeague() {
-        return league;
-    }
+  public void setEndTime(String endTime) {
+    this.endTime = endTime;
+  }
 
-    public String getBeginTime() {
-        return beginTime;
-    }
+  public Calendar getCal() {
+    return cal;
+  }
 
-    public void setBeginTime(String beginTime) {
-        this.beginTime = beginTime;
-    }
+  public void setCal(Calendar cal) {
+    this.cal = cal;
+  }
 
-    public String getEndTime() {
-        return endTime;
-    }
+  public void setDate(String date) {
+    this.date = date;
+  }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
+  public void setRink(String rink) {
+    this.rink = rink;
+  }
 
-    public Calendar getCal() {
-        return cal;
-    }
+  public void setTeamH(String teamH) {
+    this.teamH = teamH;
+  }
 
-    public void setCal(Calendar cal) {
-        this.cal = cal;
-    }
+  public void setTeamA(String teamA) {
+    this.teamA = teamA;
+  }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
+  public void setLeague(String league) {
+    this.league = league;
+  }
 
-    public void setRink(String rink) {
-        this.rink = rink;
-    }
+  public Integer getId() {
+    return Id;
+  }
 
-    public void setTeamH(String teamH) {
-        this.teamH = teamH;
-    }
+  public void setId(Integer id) {
+    Id = id;
+  }
 
-    public void setTeamA(String teamA) {
-        this.teamA = teamA;
-    }
+  public String getWeekDay() {
+    return weekDay;
+  }
 
-    public void setLeague(String league) {
-        this.league = league;
-    }
-
-    public Integer getId() {
-        return Id;
-    }
-
-    public void setId(Integer id) {
-        Id = id;
-    }
-
-    public String getWeekDay() {
-        return weekDay;
-    }
-
-    public void setWeekDay(String weekDay) {
-        this.weekDay = weekDay;
-    }
+  public void setWeekDay(String weekDay) {
+    this.weekDay = weekDay;
+  }
 }
