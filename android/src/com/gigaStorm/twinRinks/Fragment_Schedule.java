@@ -23,13 +23,15 @@ import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockFragment;
 
 /**
- * <code>Fragment_Schedule</code> allows the user to view game data in multiple different ways.
+ * <code>Fragment_Schedule</code> allows the user to view game data in multiple
+ * different ways.
  * 
  * @author Andrew Mass
  * @see Fragment
  * @see OnItemSelectedListener
  */
-public class Fragment_Schedule extends SherlockFragment implements OnItemSelectedListener {
+public class Fragment_Schedule extends SherlockFragment implements
+    OnItemSelectedListener {
 
   private Button btn_schedule_dataSelector;
 
@@ -40,15 +42,18 @@ public class Fragment_Schedule extends SherlockFragment implements OnItemSelecte
   private ListView listView_schedule_main;
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+      Bundle savedInstanceState) {
     view = inflater.inflate(R.layout.layout_frag_schedule, container, false);
 
     memoryManager = new Data_MemoryManager(getActivity());
 
-    listView_schedule_main = (ListView) view.findViewById(R.id.listView_schedule_main);
+    listView_schedule_main = (ListView) view
+        .findViewById(R.id.listView_schedule_main);
     listView_schedule_main.setSelector(new ColorDrawable(Color.TRANSPARENT));
 
-    btn_schedule_dataSelector = (Button) view.findViewById(R.id.btn_schedule_dataSelector);
+    btn_schedule_dataSelector = (Button) view
+        .findViewById(R.id.btn_schedule_dataSelector);
     btn_schedule_dataSelector.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -84,7 +89,8 @@ public class Fragment_Schedule extends SherlockFragment implements OnItemSelecte
               case 5:
                 Time current = new Time();
                 current.setToNow();
-                showScheduleDataDate(current.year, current.month, current.monthDay);
+                showScheduleDataDate(current.year, current.month,
+                    current.monthDay);
                 return;
             }
           }
@@ -107,7 +113,8 @@ public class Fragment_Schedule extends SherlockFragment implements OnItemSelecte
     builder.setItems(teamStrings, new DialogInterface.OnClickListener() {
       @Override
       public void onClick(DialogInterface dialog, final int item) {
-        showScheduleData(teams.get(item).getLeague(), teams.get(item).getTeamName());
+        showScheduleData(teams.get(item).getLeague(), teams.get(item)
+            .getTeamName());
       }
     });
     AlertDialog alert = builder.create();
@@ -126,7 +133,8 @@ public class Fragment_Schedule extends SherlockFragment implements OnItemSelecte
     builder.setItems(items, new DialogInterface.OnClickListener() {
       @Override
       public void onClick(DialogInterface dialog, final int item) {
-        showScheduleData(yourTeams.get(item).getLeague(), yourTeams.get(item).getTeamName());
+        showScheduleData(yourTeams.get(item).getLeague(), yourTeams.get(item)
+            .getTeamName());
       }
     });
     AlertDialog alert = builder.create();
@@ -136,12 +144,14 @@ public class Fragment_Schedule extends SherlockFragment implements OnItemSelecte
   public void showSelectDatePopup() {
     Time current = new Time();
     current.setToNow();
-    DatePickerDialog dialog = new DatePickerDialog(getActivity(), new OnDateSetListener() {
-      @Override
-      public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-        showScheduleDataDate(year, monthOfYear, dayOfMonth);
-      }
-    }, current.year, current.month, current.monthDay);
+    DatePickerDialog dialog = new DatePickerDialog(getActivity(),
+        new OnDateSetListener() {
+          @Override
+          public void onDateSet(DatePicker view, int year, int monthOfYear,
+              int dayOfMonth) {
+            showScheduleDataDate(year, monthOfYear, dayOfMonth);
+          }
+        }, current.year, current.month, current.monthDay);
     dialog.show();
   }
 
@@ -149,7 +159,8 @@ public class Fragment_Schedule extends SherlockFragment implements OnItemSelecte
     ArrayList<Model_Game> games = memoryManager.getGames();
     ArrayList<Model_Game> gamesToAdd = new ArrayList<Model_Game>();
     for(Model_Game e: games) {
-      if((e.getTeamA().equalsIgnoreCase(team) || e.getTeamH().equalsIgnoreCase(team))
+      if((e.getTeamA().equalsIgnoreCase(team) || e.getTeamH().equalsIgnoreCase(
+          team))
           && e.getLeague().equalsIgnoreCase(league)) {
         if(!e.hasPassed()) {
           gamesToAdd.add(e);
@@ -162,7 +173,8 @@ public class Fragment_Schedule extends SherlockFragment implements OnItemSelecte
       values[i] = gamesToAdd.get(i).toString();
     }
 
-    Data_ArrayAdapter adapter = new Data_ArrayAdapter(getActivity(), gamesToAdd, values);
+    Data_ArrayAdapter adapter = new Data_ArrayAdapter(getActivity(),
+        gamesToAdd, values);
     listView_schedule_main.setAdapter(adapter);
   }
 
@@ -180,7 +192,8 @@ public class Fragment_Schedule extends SherlockFragment implements OnItemSelecte
       values[i] = gamesToAdd.get(i).toString();
     }
 
-    Data_ArrayAdapter adapter = new Data_ArrayAdapter(getActivity(), gamesToAdd, values);
+    Data_ArrayAdapter adapter = new Data_ArrayAdapter(getActivity(),
+        gamesToAdd, values);
     listView_schedule_main.setAdapter(adapter);
   }
 
@@ -188,7 +201,8 @@ public class Fragment_Schedule extends SherlockFragment implements OnItemSelecte
     ArrayList<Model_Game> games = memoryManager.getGames();
     ArrayList<Model_Game> gamesToAdd = new ArrayList<Model_Game>();
     for(Model_Game e: games) {
-      if((e.getTeamA().equalsIgnoreCase("PLAYOFFS") || e.getTeamH().equalsIgnoreCase("PLAYOFFS"))) {
+      if((e.getTeamA().equalsIgnoreCase("PLAYOFFS") || e.getTeamH()
+          .equalsIgnoreCase("PLAYOFFS"))) {
         if(!e.hasPassed()) {
           gamesToAdd.add(e);
         }
@@ -200,7 +214,8 @@ public class Fragment_Schedule extends SherlockFragment implements OnItemSelecte
       values[i] = gamesToAdd.get(i).toString();
     }
 
-    Data_ArrayAdapter adapter = new Data_ArrayAdapter(getActivity(), gamesToAdd, values);
+    Data_ArrayAdapter adapter = new Data_ArrayAdapter(getActivity(),
+        gamesToAdd, values);
     listView_schedule_main.setAdapter(adapter);
   }
 
@@ -222,12 +237,14 @@ public class Fragment_Schedule extends SherlockFragment implements OnItemSelecte
       values[i] = gamesToAdd.get(i).toString();
     }
 
-    Data_ArrayAdapter adapter = new Data_ArrayAdapter(getActivity(), gamesToAdd, values);
+    Data_ArrayAdapter adapter = new Data_ArrayAdapter(getActivity(),
+        gamesToAdd, values);
     listView_schedule_main.setAdapter(adapter);
   }
 
   @Override
-  public void onItemSelected(AdapterView<?> arg0, View arg1, int pos, long arg3) {
+  public void
+      onItemSelected(AdapterView<?> arg0, View arg1, int pos, long arg3) {
     switch(pos) {
       case 0:
         showSelectFromAllTeamsPopup();

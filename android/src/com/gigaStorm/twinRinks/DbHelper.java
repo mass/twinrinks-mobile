@@ -49,7 +49,8 @@ public class DbHelper extends SQLiteOpenHelper {
    * @param factory
    * @param version
    */
-  public DbHelper(Context context, String name, CursorFactory factory, int version) {
+  public DbHelper(Context context, String name, CursorFactory factory,
+      int version) {
     super(context, name, factory, version);
   }
 
@@ -60,50 +61,59 @@ public class DbHelper extends SQLiteOpenHelper {
    * @param version
    * @param errorHandler
    */
-  public DbHelper(Context context, String name, CursorFactory factory, int version,
-      DatabaseErrorHandler errorHandler) {
+  public DbHelper(Context context, String name, CursorFactory factory,
+      int version, DatabaseErrorHandler errorHandler) {
     super(context, name, factory, version, errorHandler);
   }
 
   /*
    * (non-Javadoc)
-   * @see android.database.sqlite.SQLiteOpenHelper#onCreate(android.database.sqlite .SQLiteDatabase)
+   * @see
+   * android.database.sqlite.SQLiteOpenHelper#onCreate(android.database.sqlite
+   * .SQLiteDatabase)
    */
   @Override
   public void onCreate(SQLiteDatabase db) {
 
     SubTag = "onCreate(): ";
     Logger.i(TAG, SubTag + "Creating twinrinks table");
-    Cursor c = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='"
-        + GAME_TABLE_NAME + "'", null);
+    Cursor c = db.rawQuery(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='"
+            + GAME_TABLE_NAME + "'", null);
 
     if(c.getCount() == 0) {
       db.execSQL("CREATE TABLE " + GAME_TABLE_NAME + " (" + ID_KEY
-          + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DATE_KEY + " TEXT, " + WEEKDAY_KEY + " TEXT, "
-          + BEGINTIME_KEY + " TEXT, " + ENDTIME_KEY + " DATE, " + RINK_KEY + " TEXT," + TEAMH_KEY
-          + " TEXT," + TEAMA_KEY + " TEXT, " + LEAGUE_KEY + " TEXT );");
+          + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DATE_KEY + " TEXT, "
+          + WEEKDAY_KEY + " TEXT, " + BEGINTIME_KEY + " TEXT, " + ENDTIME_KEY
+          + " DATE, " + RINK_KEY + " TEXT," + TEAMH_KEY + " TEXT," + TEAMA_KEY
+          + " TEXT, " + LEAGUE_KEY + " TEXT );");
     }
 
-    c = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='"
-        + TEAM_TABLE_NAME + "'", null);
+    c = db.rawQuery(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='"
+            + TEAM_TABLE_NAME + "'", null);
 
     if(c.getCount() == 0) {
       db.execSQL("CREATE TABLE " + TEAM_TABLE_NAME + " (" + ID_KEY
-          + " INTEGER PRIMARY KEY AUTOINCREMENT, " + LEAGUE_KEY + " TEXT, " + TEAM_KEY + " TEXT );");
+          + " INTEGER PRIMARY KEY AUTOINCREMENT, " + LEAGUE_KEY + " TEXT, "
+          + TEAM_KEY + " TEXT );");
     }
 
-    c = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='"
-        + MY_TEAMS_TABLE_NAME + "'", null);
+    c = db.rawQuery(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='"
+            + MY_TEAMS_TABLE_NAME + "'", null);
 
     if(c.getCount() == 0) {
       db.execSQL("CREATE TABLE " + MY_TEAMS_TABLE_NAME + " (" + ID_KEY
-          + " INTEGER PRIMARY KEY AUTOINCREMENT, " + LEAGUE_KEY + " TEXT, " + TEAM_KEY + " TEXT );");
+          + " INTEGER PRIMARY KEY AUTOINCREMENT, " + LEAGUE_KEY + " TEXT, "
+          + TEAM_KEY + " TEXT );");
     }
   }
 
   /*
    * (non-Javadoc)
-   * @see android.database.sqlite.SQLiteOpenHelper#onUpgrade(android.database.sqlite
+   * @see
+   * android.database.sqlite.SQLiteOpenHelper#onUpgrade(android.database.sqlite
    * .SQLiteDatabase, int, int)
    */
   @Override
@@ -286,9 +296,12 @@ public class DbHelper extends SQLiteOpenHelper {
       if(cursor.moveToFirst()) {
         do {
           Model_Team basicData = new Model_Team();
-          basicData.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(ID_KEY))));
-          basicData.setLeague(cursor.getString(cursor.getColumnIndex(LEAGUE_KEY)));
-          basicData.setTeamName(cursor.getString(cursor.getColumnIndex(TEAM_KEY)));
+          basicData.setId(Integer.parseInt(cursor.getString(cursor
+              .getColumnIndex(ID_KEY))));
+          basicData.setLeague(cursor.getString(cursor
+              .getColumnIndex(LEAGUE_KEY)));
+          basicData.setTeamName(cursor.getString(cursor
+              .getColumnIndex(TEAM_KEY)));
 
           // Adding basic data to list
           dataList.add(basicData);
@@ -315,9 +328,12 @@ public class DbHelper extends SQLiteOpenHelper {
       if(cursor.moveToFirst()) {
         do {
           Model_Team basicData = new Model_Team();
-          basicData.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(ID_KEY))));
-          basicData.setLeague(cursor.getString(cursor.getColumnIndex(LEAGUE_KEY)));
-          basicData.setTeamName(cursor.getString(cursor.getColumnIndex(TEAM_KEY)));
+          basicData.setId(Integer.parseInt(cursor.getString(cursor
+              .getColumnIndex(ID_KEY))));
+          basicData.setLeague(cursor.getString(cursor
+              .getColumnIndex(LEAGUE_KEY)));
+          basicData.setTeamName(cursor.getString(cursor
+              .getColumnIndex(TEAM_KEY)));
 
           // Adding basic data to list
           dataList.add(basicData);
@@ -344,15 +360,22 @@ public class DbHelper extends SQLiteOpenHelper {
       if(cursor.moveToFirst()) {
         do {
           Model_Game basicData = new Model_Game();
-          basicData.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(ID_KEY))));
+          basicData.setId(Integer.parseInt(cursor.getString(cursor
+              .getColumnIndex(ID_KEY))));
           basicData.setDate(cursor.getString(cursor.getColumnIndex(DATE_KEY)));
-          basicData.setWeekDay(cursor.getString(cursor.getColumnIndex(WEEKDAY_KEY)));
-          basicData.setBeginTime(cursor.getString(cursor.getColumnIndex(BEGINTIME_KEY)));
-          basicData.setEndTime(cursor.getString(cursor.getColumnIndex(ENDTIME_KEY)));
+          basicData.setWeekDay(cursor.getString(cursor
+              .getColumnIndex(WEEKDAY_KEY)));
+          basicData.setBeginTime(cursor.getString(cursor
+              .getColumnIndex(BEGINTIME_KEY)));
+          basicData.setEndTime(cursor.getString(cursor
+              .getColumnIndex(ENDTIME_KEY)));
           basicData.setRink(cursor.getString(cursor.getColumnIndex(RINK_KEY)));
-          basicData.setTeamA(cursor.getString(cursor.getColumnIndex(TEAMA_KEY)));
-          basicData.setTeamH(cursor.getString(cursor.getColumnIndex(TEAMH_KEY)));
-          basicData.setLeague(cursor.getString(cursor.getColumnIndex(LEAGUE_KEY)));
+          basicData
+              .setTeamA(cursor.getString(cursor.getColumnIndex(TEAMA_KEY)));
+          basicData
+              .setTeamH(cursor.getString(cursor.getColumnIndex(TEAMH_KEY)));
+          basicData.setLeague(cursor.getString(cursor
+              .getColumnIndex(LEAGUE_KEY)));
 
           basicData.setCal(basicData.generateCalendarObject());
           // Adding basic data to list
@@ -380,15 +403,22 @@ public class DbHelper extends SQLiteOpenHelper {
       if(cursor.moveToFirst()) {
         do {
           Model_Game basicData = new Model_Game();
-          basicData.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(ID_KEY))));
+          basicData.setId(Integer.parseInt(cursor.getString(cursor
+              .getColumnIndex(ID_KEY))));
           basicData.setDate(cursor.getString(cursor.getColumnIndex(DATE_KEY)));
-          basicData.setWeekDay(cursor.getString(cursor.getColumnIndex(WEEKDAY_KEY)));
-          basicData.setBeginTime(cursor.getString(cursor.getColumnIndex(BEGINTIME_KEY)));
-          basicData.setEndTime(cursor.getString(cursor.getColumnIndex(ENDTIME_KEY)));
+          basicData.setWeekDay(cursor.getString(cursor
+              .getColumnIndex(WEEKDAY_KEY)));
+          basicData.setBeginTime(cursor.getString(cursor
+              .getColumnIndex(BEGINTIME_KEY)));
+          basicData.setEndTime(cursor.getString(cursor
+              .getColumnIndex(ENDTIME_KEY)));
           basicData.setRink(cursor.getString(cursor.getColumnIndex(RINK_KEY)));
-          basicData.setTeamH(cursor.getString(cursor.getColumnIndex(TEAMH_KEY)));
-          basicData.setTeamA(cursor.getString(cursor.getColumnIndex(TEAMA_KEY)));
-          basicData.setLeague(cursor.getString(cursor.getColumnIndex(LEAGUE_KEY)));
+          basicData
+              .setTeamH(cursor.getString(cursor.getColumnIndex(TEAMH_KEY)));
+          basicData
+              .setTeamA(cursor.getString(cursor.getColumnIndex(TEAMA_KEY)));
+          basicData.setLeague(cursor.getString(cursor
+              .getColumnIndex(LEAGUE_KEY)));
           basicData.setCal(basicData.generateCalendarObject());
 
           // Adding basic data to list
@@ -409,8 +439,8 @@ public class DbHelper extends SQLiteOpenHelper {
     List<Model_Team> dataList = new ArrayList<Model_Team>();
     SubTag = "getAllData(" + sql + "): ";
     try {
-      String selectQuery = "SELECT Distinct " + TEAMH_KEY + " FROM " + GAME_TABLE_NAME + " " + sql
-          + ";";
+      String selectQuery = "SELECT Distinct " + TEAMH_KEY + " FROM "
+          + GAME_TABLE_NAME + " " + sql + ";";
       SQLiteDatabase db = this.getWritableDatabase();
       Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -418,7 +448,8 @@ public class DbHelper extends SQLiteOpenHelper {
       if(cursor.moveToFirst()) {
         do {
           Model_Team basicData = new Model_Team();
-          basicData.setTeamName(cursor.getString(cursor.getColumnIndex(TEAMH_KEY)));
+          basicData.setTeamName(cursor.getString(cursor
+              .getColumnIndex(TEAMH_KEY)));
           dataList.add(basicData);
         }
         while(cursor.moveToNext());
@@ -522,7 +553,8 @@ public class DbHelper extends SQLiteOpenHelper {
     SubTag = "deleteRecord(Game): ";
     try {
       SQLiteDatabase db = this.getWritableDatabase();
-      db.delete(GAME_TABLE_NAME, ID_KEY + " = ?", new String[] {String.valueOf(bd.getId())});
+      db.delete(GAME_TABLE_NAME, ID_KEY + " = ?",
+          new String[] {String.valueOf(bd.getId())});
       db.close();
     }
     catch(Exception e) {
@@ -534,7 +566,8 @@ public class DbHelper extends SQLiteOpenHelper {
     SubTag = "deleteGameRecord(Team): ";
     try {
       SQLiteDatabase db = this.getWritableDatabase();
-      db.delete(TEAM_TABLE_NAME, ID_KEY + " = ?", new String[] {String.valueOf(bd.getId())});
+      db.delete(TEAM_TABLE_NAME, ID_KEY + " = ?",
+          new String[] {String.valueOf(bd.getId())});
       db.close();
     }
     catch(Exception e) {
@@ -546,7 +579,8 @@ public class DbHelper extends SQLiteOpenHelper {
     SubTag = "deleteGameRecord(Team): ";
     try {
       SQLiteDatabase db = this.getWritableDatabase();
-      db.delete(MY_TEAMS_TABLE_NAME, ID_KEY + " = ?", new String[] {String.valueOf(bd.getId())});
+      db.delete(MY_TEAMS_TABLE_NAME, ID_KEY + " = ?",
+          new String[] {String.valueOf(bd.getId())});
       db.close();
     }
     catch(Exception e) {
@@ -561,7 +595,8 @@ public class DbHelper extends SQLiteOpenHelper {
     }
     try {
       SQLiteDatabase db = this.getWritableDatabase();
-      db.delete(GAME_TABLE_NAME, ID_KEY + " = ?", new String[] {String.valueOf(recId)});
+      db.delete(GAME_TABLE_NAME, ID_KEY + " = ?",
+          new String[] {String.valueOf(recId)});
       db.close();
     }
     catch(Exception e) {
@@ -576,7 +611,8 @@ public class DbHelper extends SQLiteOpenHelper {
     }
     try {
       SQLiteDatabase db = this.getWritableDatabase();
-      db.delete(TEAM_TABLE_NAME, ID_KEY + " = ?", new String[] {String.valueOf(recId)});
+      db.delete(TEAM_TABLE_NAME, ID_KEY + " = ?",
+          new String[] {String.valueOf(recId)});
       db.close();
     }
     catch(Exception e) {
@@ -591,7 +627,8 @@ public class DbHelper extends SQLiteOpenHelper {
     }
     try {
       SQLiteDatabase db = this.getWritableDatabase();
-      db.delete(MY_TEAMS_TABLE_NAME, ID_KEY + " = ?", new String[] {String.valueOf(recId)});
+      db.delete(MY_TEAMS_TABLE_NAME, ID_KEY + " = ?",
+          new String[] {String.valueOf(recId)});
       db.close();
     }
     catch(Exception e) {

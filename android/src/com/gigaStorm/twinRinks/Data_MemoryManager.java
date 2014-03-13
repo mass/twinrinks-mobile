@@ -170,9 +170,11 @@ public class Data_MemoryManager {
     });
   }
 
-  public boolean hasTeam(ArrayList<Model_Team> teams, String league, String team) {
+  public boolean
+      hasTeam(ArrayList<Model_Team> teams, String league, String team) {
     for(Model_Team e: teams) {
-      if(e.getLeague().equalsIgnoreCase(league) && e.getTeamName().equalsIgnoreCase(team)) {
+      if(e.getLeague().equalsIgnoreCase(league)
+          && e.getTeamName().equalsIgnoreCase(team)) {
         return true;
       }
     }

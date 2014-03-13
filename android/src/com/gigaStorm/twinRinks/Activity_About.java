@@ -8,10 +8,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.MenuItem;
 
 /**
- * <code>Activity_About</code> shows extra information about the appliation to the user.
+ * <code>Activity_About</code> shows extra information about the application to
+ * the user.
  * 
  * @author Andrew Mass
  */
@@ -34,6 +34,7 @@ public class Activity_About extends SherlockActivity {
 
     actionBar = getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(true);
+    actionBar.setHomeButtonEnabled(true);
     actionBar.setTitle("About");
 
     btn_about_rate = (Button) findViewById(R.id.btn_about_rate);
@@ -52,8 +53,9 @@ public class Activity_About extends SherlockActivity {
       public void onClick(View v) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT,
-            "Check out this Twin Rinks Adult Hockey Android app. http://goo.gl/ZeGxN");
+        shareIntent
+            .putExtra(Intent.EXTRA_TEXT,
+                "Check out this Twin Rinks Adult Hockey Android app. http://goo.gl/ZeGxN");
         startActivity(Intent.createChooser(shareIntent, "Choose Application:"));
       }
     });
@@ -63,21 +65,9 @@ public class Activity_About extends SherlockActivity {
       @Override
       public void onClick(View v) {
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri
-            .parse("mailto:support.m@gigastormdevelopers.com"));
+            .parse("mailto:amass1212@gmail.com"));
         startActivity(Intent.createChooser(intent, "Choose Application:"));
       }
     });
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch(item.getItemId()) {
-      case android.R.id.home:
-        startActivity(new Intent(this, Activity_Main.class));
-        return true;
-
-      default:
-        return super.onOptionsItemSelected(item);
-    }
   }
 }

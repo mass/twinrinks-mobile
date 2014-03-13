@@ -10,12 +10,12 @@ import java.util.Locale;
 /**
  * <code>Model_Game</code> represents a game.
  * 
- * @author mass
+ * @author Andrew Mass
  * @see Serializable
  */
 public class Model_Game {
 
-  private Integer Id; // Used by database
+  private Integer id; // Used by database
   private String date;
   private String weekDay;
   private String beginTime;
@@ -26,11 +26,10 @@ public class Model_Game {
   private String league;
   private Calendar cal;
 
-  public Model_Game() {
+  public Model_Game() {}
 
-  }
-
-  public Model_Game(String d, String r, String bt, String et, String th, String ta, String l) {
+  public Model_Game(String d, String r, String bt, String et, String th,
+      String ta, String l) {
     date = d.replaceAll("\\s", "");
     beginTime = bt.replaceAll("\\s", "") + "M";
     endTime = et.replaceAll("\\s", "");
@@ -62,14 +61,16 @@ public class Model_Game {
         return "Friday, " + date + ", at " + beginTime;
       case 7:
         return "Saturday, " + date + ", at " + beginTime;
+      default:
+        return "Failed";
     }
-    return "Failed";
   }
 
   /**
    * Checks to see if the game is in the past.
    * <p>
-   * Adds a two-hour grace-period so we can see games that have happened in the past two hours.
+   * Adds a two-hour grace-period so we can see games that have happened in the
+   * past two hours.
    * </p>
    * 
    * @return boolean representing whether this game is in the past.
@@ -84,8 +85,8 @@ public class Model_Game {
   SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy;hh:mmaa", Locale.US);
 
   /**
-   * Outputs a <code>Calendar</code> object based on the game's date string which gives the game's
-   * start time.
+   * Outputs a <code>Calendar</code> object based on the game's date string
+   * which gives the game's start time.
    * 
    * @return a <code>Calendar</code> object representing this game's start time.
    */
@@ -113,8 +114,9 @@ public class Model_Game {
 
   @Override
   public String toString() {
-    return "League: " + league + "\nDate: " + date + "\nRink: " + rink + "\nBegin: " + beginTime
-        + "\nEnd: " + endTime + "\nHome: " + teamH + "\nAway: " + teamA;
+    return "League: " + league + "\nDate: " + date + "\nRink: " + rink
+        + "\nBegin: " + beginTime + "\nEnd: " + endTime + "\nHome: " + teamH
+        + "\nAway: " + teamA;
   }
 
   public String getDate() {
@@ -182,11 +184,11 @@ public class Model_Game {
   }
 
   public Integer getId() {
-    return Id;
+    return id;
   }
 
-  public void setId(Integer id) {
-    Id = id;
+  public void setId(Integer idP) {
+    id = idP;
   }
 
   public String getWeekDay() {

@@ -8,12 +8,11 @@ import java.io.Serializable;
  * @author Andrew Mass
  * @see Serializable
  */
-public class Model_Team implements Serializable {
-  private static final long serialVersionUID = 8308588163969826346L;
+public class Model_Team {
 
   private String league;
 
-  private Integer Id;
+  private Integer id;
 
   private String teamName;
 
@@ -31,11 +30,11 @@ public class Model_Team implements Serializable {
   }
 
   public Integer getId() {
-    return Id;
+    return id;
   }
 
-  public void setId(Integer id) {
-    Id = id;
+  public void setId(Integer idP) {
+    id = idP;
   }
 
   public String getTeamKey() {

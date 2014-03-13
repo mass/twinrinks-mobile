@@ -19,7 +19,8 @@ import com.actionbarsherlock.view.MenuItem;
 import com.viewpagerindicator.TitlePageIndicator;
 
 /**
- * <code>Activity_Main</code> loads the three main fragments into a frame layout.
+ * <code>Activity_Main</code> loads the three main fragments into a frame
+ * layout.
  * 
  * @author Andrew Mass
  * @see FragmentActivity
@@ -38,19 +39,22 @@ public class Activity_Main extends SherlockFragmentActivity {
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
-    String SubTag = "OnCreate(): ";
     super.onCreate(savedInstanceState);
     setContentView(R.layout.layout_main);
+
+    String SubTag = "OnCreate(): ";
     String androidId = Settings.Secure.getString(this.getContentResolver(),
         android.provider.Settings.Secure.ANDROID_ID);
     if(androidId == null || androidId.equals("9774d56d682e549c")) {
       // We are running on the emulator. Debugging should be ON.
-      Logger.e(TAG, SubTag + "Enabeling VERBOSE debugging. androidID = " + androidId);
+      Logger.e(TAG, SubTag + "Enabling VERBOSE debugging. androidID = "
+          + androidId);
       Logger.enableLogging(Log.VERBOSE);
     }
     else {
       // We are running on a phone. Debugging should be OFF.
-      Logger.e(TAG, SubTag + "Enabeling ERRORS only debugging. androidID = " + androidId);
+      Logger.e(TAG, SubTag + "Enabling ERRORS only debugging. androidID = "
+          + androidId);
       Logger.enableLogging(Log.ERROR);
     }
     // If there is a need to debug the app, uncomment the following line
@@ -71,8 +75,10 @@ public class Activity_Main extends SherlockFragmentActivity {
 
     TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.viewPagerIndicator);
     titleIndicator.setViewPager(viewPager);
-    titleIndicator.setBackgroundColor(getResources().getColor(R.color.vpi__background_holo_dark));
-    titleIndicator.setFooterIndicatorStyle(TitlePageIndicator.IndicatorStyle.None);
+    titleIndicator.setBackgroundColor(getResources().getColor(
+        R.color.vpi__background_holo_dark));
+    titleIndicator
+        .setFooterIndicatorStyle(TitlePageIndicator.IndicatorStyle.None);
     titleIndicator.setCurrentItem(viewPager.getCurrentItem());
 
     super.onResume();
@@ -116,10 +122,6 @@ public class Activity_Main extends SherlockFragmentActivity {
           Data_CalendarManager man = new Data_CalendarManager(this);
           man.saveGamesToCalendar();
         }
-        else {
-          Data_CalendarManagerCompat man = new Data_CalendarManagerCompat(this);
-          man.saveGamesToCalendar();
-        }
         return true;
 
       case R.id.menu_settings:
@@ -138,30 +140,30 @@ public class Activity_Main extends SherlockFragmentActivity {
 
     @Override
     public Fragment getItem(int position) {
-      if(position == 0) {
-        return new Fragment_Upcoming();
+      switch(position) {
+        case 0:
+          return new Fragment_Upcoming();
+        case 1:
+          return new Fragment_Schedule();
+        case 2:
+          return new Fragment_SignIn();
+        default:
+          return new Fragment_Upcoming();
       }
-      if(position == 1) {
-        return new Fragment_Schedule();
-      }
-      if(position == 2) {
-        return new Fragment_SignIn();
-      }
-      return new Fragment_Upcoming();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-      if(position == 0) {
-        return "Upcoming";
+      switch(position) {
+        case 0:
+          return "Upcoming";
+        case 1:
+          return "Schedule";
+        case 2:
+          return "Sub Sign-In";
+        default:
+          return "Error";
       }
-      if(position == 1) {
-        return "Schedule";
-      }
-      if(position == 2) {
-        return "Sub Sign-In";
-      }
-      return "Error";
     }
 
     @Override
