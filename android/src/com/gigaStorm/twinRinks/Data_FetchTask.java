@@ -16,33 +16,30 @@ import android.os.AsyncTask;
  * server.
  * 
  * @author Andrew Mass
+ * @author Boris Dubinsky
  * @see AsyncTask
  */
 public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
 
-  Data_MemoryManager parent;
-  private DbHelper db;
-  private ProgressDialog progress;
+  private Data_DbHelper dbHelper;
+
+  private ProgressDialog progressDialog;
 
   private Context parentContext;
 
-  private String[] fetchData;
-
-  public Data_FetchTask(Data_MemoryManager p, Context context) {
+  public Data_FetchTask(Data_MemoryManager parent, Context context) {
     super();
-    parent = p;
-    db = new DbHelper(p.getContext());
     parentContext = context;
-    fetchData = new String[1];
+    dbHelper = new Data_DbHelper(parentContext);
   }
 
   @Override
   protected void onPreExecute() {
     super.onPreExecute();
-    progress = new ProgressDialog(parentContext);
-    progress.setTitle("Fetching Game Data...");
-    progress.setMessage("Please Wait...");
-    progress.setIndeterminate(true);
+    progressDialog = new ProgressDialog(parentContext);
+    progressDialog.setTitle("Fetching Game Data...");
+    progressDialog.setMessage("Please Wait...");
+    progressDialog.setIndeterminate(true);
 
     OnClickListener listener = new OnClickListener() {
       @Override
@@ -51,11 +48,13 @@ public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
       }
     };
 
-    progress.setButton(ProgressDialog.BUTTON_NEUTRAL, "Cancel", listener);
-    progress.show();
+    progressDialog.setButton(ProgressDialog.BUTTON_NEUTRAL, "Cancel", listener);
+    progressDialog.show();
   }
 
-  private void getLeagueSchedule(String league, Model_Game mg, int leaguePos) {
+  private void
+      getLeagueSchedule(String leagueUrl, String league, int leaguePos) {
+    Model_Game mg = new Model_Game();
     mg.setBeginTime("");
     mg.setDate("");
     mg.setEndTime("");
@@ -64,7 +63,7 @@ public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
     mg.setTeamH("");
 
     Logger.i("Data_FetchTask", "Getting data from Twinrinks...");
-    String htmlString = "http://twinrinks.com/" + league;
+    String htmlString = "http://twinrinks.com/" + leagueUrl;
     Document doc = null;
     try {
       doc = Jsoup.connect(htmlString).get();
@@ -72,21 +71,27 @@ public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
       Logger.i("Data_FetchTask", "Number of elements: " + elems.size());
 
       for(Element src: elems) {
+
         String line = src.text();
         if(line.length() > 70) {
+
           String lineTmp = line.trim().replaceAll("\\s+", " ");
           Logger.i("Data_FetchTask", "Data: " + src.text());
           // clean up the line. Remove multiple spaces
           lineTmp = line.trim().replaceAll("\\s+", " ");
+
           mg.setDate(lineTmp.substring(0, lineTmp.indexOf(' ')));
           lineTmp = lineTmp.substring(lineTmp.indexOf(' ') + 1,
               lineTmp.length());
+
           mg.setWeekDay(lineTmp.substring(0, lineTmp.indexOf(' ')));
           lineTmp = lineTmp.substring(lineTmp.indexOf(' ') + 1,
               lineTmp.length());
+
           mg.setRink(lineTmp.substring(0, lineTmp.indexOf(' ')));
           lineTmp = lineTmp.substring(lineTmp.indexOf(' ') + 1,
               lineTmp.length());
+
           mg.setBeginTime(lineTmp.substring(0, lineTmp.indexOf(' ')));
           if(mg.getBeginTime().length() > 6) {
             // remove first character, which '*'
@@ -95,9 +100,11 @@ public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
           }
           lineTmp = lineTmp.substring(lineTmp.indexOf(' ') + 1,
               lineTmp.length());
+
           mg.setEndTime(lineTmp.substring(0, lineTmp.indexOf(' ')));
           lineTmp = lineTmp.substring(lineTmp.indexOf(' ') + 1,
               lineTmp.length());
+
           for(int i = 0; i < 3; i++) {
             if(i == leaguePos) {
               mg.setLeague(lineTmp.substring(0, lineTmp.indexOf(' ')));
@@ -109,25 +116,31 @@ public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
           }
           lineTmp = lineTmp.substring(lineTmp.indexOf(' ') + 1,
               lineTmp.length());
+
           mg.setTeamH(lineTmp.substring(0, lineTmp.indexOf(' ')));
           lineTmp = lineTmp.substring(lineTmp.indexOf(' ') + 1,
               lineTmp.length());
+          if(mg.getTeamH().contains("FINALS") || mg.getTeamH().contains("SEMI")) {
+            mg.setTeamH("PLAYOFFS");
+          }
+
           mg.setTeamA(lineTmp.substring(0, lineTmp.length()));
+          if(mg.getTeamA().contains("FINALS") || mg.getTeamA().contains("SEMI")) {
+            mg.setTeamA("PLAYOFFS");
+          }
 
           mg.generateCalendarObject();
 
-          // Check if the date Jan 1st. According to Gary Pivar
-          // (owner), there will
-          // never be a game on that day because it's a customer
-          // appreciation date.
-          // TODO: add that day to every team in every league as
-          // customer appreciation
-
+          /*
+           * Check if the date Jan 1st. According to Gary Pivar (owner), there
+           * will never be a game on that day because it's a customer
+           * appreciation date. TODO: Add that day to every team in every league
+           * as customer appreciation.
+           */
           String moDay = mg.getDate().substring(0, 5);
           if(moDay.compareTo("01/01") != 0) {
             mg.generateCalendarObject();
-            db.insertRecord(mg);
-            fetchData[0] = "Inserted " + db.getRecordCount(mg) + " records";
+            dbHelper.insertGame(mg);
           }
         }
       }
@@ -136,48 +149,44 @@ public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
       Logger.i("getLeagueSchedule():",
           "Problem getting schedule: " + e.getMessage());
     }
+
     // Extract all the unique team names
-    List<Model_Team> mtTmp = db.getTeamfromGame("WHERE league = '"
-        + mg.getLeague() + "' ");
+    List<Model_Team> mtTmp = dbHelper.getTeamsFromLeague(league);
     for(Model_Team t: mtTmp) {
-      t.setLeague(mg.getLeague());
-      db.insertRecord(t);
+      t.setLeague(league);
+      dbHelper.insertTeam(t);
     }
   }
 
   @Override
   protected Void doInBackground(Void... params) {
-
-    Model_Game mg = new Model_Game();
-    Model_Team mt = new Model_Team();
-    // Remove database before we re-populate it
-    // NOTE: My records are not automatically deleted
-    db.deleteAllRecords(mg);
-    db.deleteAllRecords(mt);
+    // Remove database before we re-populate it.
+    // NOTE: My records are not automatically deleted.
+    dbHelper.deleteAllGameRecords();
+    dbHelper.deleteAllTeamRecords();
 
     Logger.i("Data_FetchTask", "Getting Leasure data from Twinrinks...");
-    getLeagueSchedule("recl/leisure%20schedule.htm", mg, 1);
+    getLeagueSchedule("recl/leisure%20schedule.htm", "Leisure", 1);
 
     Logger.i("Data_FetchTask", "Getting Bronze data from Twinrinks...");
-    getLeagueSchedule("recb/bronze%20schedule.htm", mg, 2);
+    getLeagueSchedule("recb/bronze%20schedule.htm", "Bronze", 2);
 
     Logger.i("Data_FetchTask", "Getting Silver data from Twinrinks...");
-    getLeagueSchedule("recs/silver%20schedule.htm", mg, 2);
+    getLeagueSchedule("recs/silver%20schedule.htm", "Silver", 2);
 
     Logger.i("Data_FetchTask", "Getting Gold data from Twinrinks...");
-    getLeagueSchedule("recg/gold.schedule.htm", mg, 2);
+    getLeagueSchedule("recg/gold.schedule.htm", "Gold", 2);
 
     Logger.i("Data_FetchTask", "Getting Platinum data from Twinrinks...");
-    getLeagueSchedule("recp/platinum_sched.htm", mg, 2);
+    getLeagueSchedule("recp/platinum_sched.htm", "Platinum", 2);
 
-    // parent.setScheduleTable(data);
     return null;
   }
 
   @Override
   protected void onPostExecute(Void result) {
-    parent.setScheduleTable(fetchData);
-    progress.dismiss();
+    dbHelper.close();
+    progressDialog.dismiss();
     super.onPostExecute(result);
   }
 }

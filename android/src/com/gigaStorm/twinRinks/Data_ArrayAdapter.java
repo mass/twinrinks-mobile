@@ -41,7 +41,8 @@ public class Data_ArrayAdapter extends ArrayAdapter<String> {
         + tempGame.getRink() + " Rink";
     String bottomText = tempGame.getFullDateString();
 
-    if(tempGame.getTeamH().equals("PLAYOFFS")) {
+    if(tempGame.getTeamH().equals("PLAYOFFS")
+        || tempGame.getTeamA().equals("PLAYOFFS")) {
       topText = "PLAYOFF GAME";
     }
 

@@ -37,6 +37,7 @@ public class Activity_Settings extends SherlockPreferenceActivity {
 
   private Util util;
 
+  @SuppressWarnings("deprecation")
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -68,7 +69,7 @@ public class Activity_Settings extends SherlockPreferenceActivity {
     util = new Util(this);
 
     memoryManager = new Data_MemoryManager(this);
-    yourTeams = memoryManager.getYourTeams();
+    yourTeams = memoryManager.getUserTeams();
     updatePreferencesFromTeams();
 
     final EditTextPreference autoLogInUsername = (EditTextPreference) findPreference("autoLogInUsername");
@@ -111,7 +112,7 @@ public class Activity_Settings extends SherlockPreferenceActivity {
 
   @Override
   protected void onPause() {
-    memoryManager.saveYourTeams(yourTeams);
+    memoryManager.saveUserTeams(yourTeams);
     super.onPause();
   }
 

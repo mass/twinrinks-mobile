@@ -59,7 +59,7 @@ public class Fragment_Upcoming extends SherlockFragment {
 
   @Override
   public void onResume() {
-    yourTeams = memoryManager.getYourTeams();
+    yourTeams = memoryManager.getUserTeams();
     if(yourTeams.size() > 0) {
       prepareGames();
     }

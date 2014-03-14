@@ -54,6 +54,7 @@ public class Data_CalendarManager {
 
     cr = context.getContentResolver();
     result = cr.query(uri, projection, null, null, null);
+
     if(result.getCount() > 0 && result.moveToFirst()) {
       do {
         listCals.add(result.getString(result
@@ -61,6 +62,7 @@ public class Data_CalendarManager {
       }
       while(result.moveToNext());
     }
+
     CharSequence[] calendars = listCals.toArray(new CharSequence[listCals
         .size()]);
 
@@ -72,6 +74,7 @@ public class Data_CalendarManager {
         loopThroughGames(itemCal);
       };
     });
+
     AlertDialog alert = builder.create();
     alert.show();
   }
@@ -79,14 +82,12 @@ public class Data_CalendarManager {
   private void loopThroughGames(int whichCalendar) {
     ArrayList<Model_Game> games = memoryManager.getGames();
 
-    for(Model_Game e1: games) {
-      for(Model_Team e: memoryManager.getYourTeams()) {
-        if((e1.getTeamA().equalsIgnoreCase(e.getTeamName()) || e1.getTeamH()
-            .equalsIgnoreCase(e.getTeamName()))
-            && e1.getLeague().equalsIgnoreCase(e.getLeague())) {
-          if(!e1.hasPassed()) {
-            addGameToCalendar(e1, whichCalendar + 1);
-          }
+    for(Model_Game g: games) {
+      for(Model_Team t: memoryManager.getUserTeams()) {
+        if((g.getTeamA().equalsIgnoreCase(t.getTeamName()) || g.getTeamH()
+            .equalsIgnoreCase(t.getTeamName()))
+            && g.getLeague().equalsIgnoreCase(t.getLeague()) && !g.hasPassed()) {
+          addGameToCalendar(g, whichCalendar + 1);
         }
       }
     }
@@ -95,6 +96,7 @@ public class Data_CalendarManager {
   private void addGameToCalendar(Model_Game game, int whichCalendar) {
     ContentResolver cr = context.getContentResolver();
     ContentValues values = new ContentValues();
+
     try {
       values.put(CalendarContract.Events.CALENDAR_ID, whichCalendar);
       values.put(CalendarContract.Events.TITLE, "Hockey- " + game.getLeague()

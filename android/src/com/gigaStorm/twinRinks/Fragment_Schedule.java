@@ -128,7 +128,7 @@ public class Fragment_Schedule extends SherlockFragment {
   }
 
   private void showSelectFromYourTeamsPopup() {
-    final ArrayList<Model_Team> yourTeams = memoryManager.getYourTeams();
+    final ArrayList<Model_Team> yourTeams = memoryManager.getUserTeams();
 
     if(yourTeams.size() < 1) {
       Util util = new Util(getActivity());
