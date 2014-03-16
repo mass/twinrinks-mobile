@@ -219,9 +219,9 @@ public class Fragment_Schedule extends SherlockFragment {
     ArrayList<Model_Game> gamesToAdd = new ArrayList<Model_Game>();
 
     for(Model_Game e: games) {
-      if(e.getCalendarObject().get(Calendar.YEAR) == year
-          && e.getCalendarObject().get(Calendar.MONTH) == month
-          && e.getCalendarObject().get(Calendar.DAY_OF_MONTH) == monthday
+      if(e.getCal().get(Calendar.YEAR) == year
+          && e.getCal().get(Calendar.MONTH) == month
+          && e.getCal().get(Calendar.DAY_OF_MONTH) == monthday
           && !e.hasPassed()) {
         gamesToAdd.add(e);
       }

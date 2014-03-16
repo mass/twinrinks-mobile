@@ -108,10 +108,6 @@ public class Model_Game {
     return cal;
   }
 
-  public Calendar getCalendarObject() {
-    return this.cal;
-  }
-
   @Override
   public String toString() {
     return "League: " + league + "\nDate: " + date + "\nRink: " + rink

@@ -1,5 +1,8 @@
 package com.gigaStorm.twinRinks;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -179,6 +182,29 @@ public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
 
     Logger.i("Data_FetchTask", "Getting Platinum data from Twinrinks...");
     getLeagueSchedule("recp/platinum_sched.htm", "Platinum", 2);
+
+    /*
+     * Remove all game records, sort them by date, then add them back into the
+     * database. This ensures that the game at the top of any list in the app
+     * will be the next game chronologically.
+     */
+    Data_MemoryManager memoryManager = new Data_MemoryManager(parentContext);
+    ArrayList<Model_Game> games = memoryManager.getGames();
+    dbHelper.deleteAllGameRecords();
+
+    Collections.sort(games, new Comparator<Model_Game>() {
+      @Override
+      public int compare(Model_Game a, Model_Game b) {
+        if(a.getCal().equals(b.getCal())) {
+          return 0;
+        }
+        return (a.getCal().before(b.getCal())) ? -1 : 1;
+      }
+    });
+
+    for(Model_Game g: games) {
+      dbHelper.insertGame(g);
+    }
 
     return null;
   }

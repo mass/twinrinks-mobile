@@ -103,10 +103,10 @@ public class Data_CalendarManager {
           + ": " + game.getTeamH() + " vs " + game.getTeamA());
       values.put(CalendarContract.Events.EVENT_LOCATION,
           "Twin Rinks Ice Arena - " + game.getRink() + " Rink");
-      values.put(CalendarContract.Events.DTSTART, game.getCalendarObject()
+      values.put(CalendarContract.Events.DTSTART, game.getCal()
           .getTimeInMillis());
-      values.put(CalendarContract.Events.DTEND, game.getCalendarObject()
-          .getTimeInMillis() + 5400000);
+      values.put(CalendarContract.Events.DTEND,
+          game.getCal().getTimeInMillis() + 5400000);
       values.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault()
           .getID());
       cr.insert(CalendarContract.Events.CONTENT_URI, values);
