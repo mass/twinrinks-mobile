@@ -27,7 +27,7 @@ public class Activity_Settings extends SherlockPreferenceActivity {
 
   private PreferenceCategory addTeamCategory;
 
-  private ArrayList<Model_Team> yourTeams;
+  private ArrayList<Model_Team> userTeams;
 
   private Data_MemoryManager memoryManager;
 
@@ -69,7 +69,7 @@ public class Activity_Settings extends SherlockPreferenceActivity {
     util = new Util(this);
 
     memoryManager = new Data_MemoryManager(this);
-    yourTeams = memoryManager.getUserTeams();
+    userTeams = memoryManager.getUserTeams();
     updatePreferencesFromTeams();
 
     final EditTextPreference autoLogInUsername = (EditTextPreference) findPreference("autoLogInUsername");
@@ -108,18 +108,37 @@ public class Activity_Settings extends SherlockPreferenceActivity {
       autoLogInPassword.setEnabled(true);
       autoLogInUsername.setEnabled(true);
     }
+
+    final Preference clearDatabasePreference = findPreference("clearDatabasePreference");
+    final Context context = this;
+    clearDatabasePreference
+        .setOnPreferenceClickListener(new OnPreferenceClickListener() {
+          @Override
+          public boolean onPreferenceClick(Preference preference) {
+            Data_DbHelper dbHelper = new Data_DbHelper(context);
+            dbHelper.deleteAllGameRecords();
+            dbHelper.deleteAllTeamRecords();
+            dbHelper.deleteAllUserTeamRecords();
+            dbHelper.close();
+
+            userTeams = memoryManager.getUserTeams();
+            updatePreferencesFromTeams();
+            util.toast("Cleared all loaded data. Refresh the app.");
+            return true;
+          }
+        });
   }
 
   @Override
   protected void onPause() {
-    memoryManager.saveUserTeams(yourTeams);
+    memoryManager.saveUserTeams(userTeams);
     super.onPause();
   }
 
   private void updatePreferencesFromTeams() {
     addTeamCategory.removeAll();
-    for(int i = 0; i < yourTeams.size(); i++) {
-      addTeamCategory.addPreference(getNewPreference(yourTeams.get(i)));
+    for(int i = 0; i < userTeams.size(); i++) {
+      addTeamCategory.addPreference(getNewPreference(userTeams.get(i)));
     }
 
     addTeamCategory.addPreference(addNewTeamPref);
@@ -127,7 +146,7 @@ public class Activity_Settings extends SherlockPreferenceActivity {
 
   private void addNewTeam(Model_Team team) {
     if(getIndexOfTeam(team) == -1) {
-      yourTeams.add(team);
+      userTeams.add(team);
       addTeamCategory.addPreference(getNewPreference(team));
     }
     else {
@@ -136,9 +155,9 @@ public class Activity_Settings extends SherlockPreferenceActivity {
   }
 
   private int getIndexOfTeam(Model_Team team) {
-    for(int i = 0; i < yourTeams.size(); i++) {
-      if(yourTeams.get(i).getLeague().equals(team.getLeague())
-          && yourTeams.get(i).getTeamName().equals(team.getTeamName())) {
+    for(int i = 0; i < userTeams.size(); i++) {
+      if(userTeams.get(i).getLeague().equals(team.getLeague())
+          && userTeams.get(i).getTeamName().equals(team.getTeamName())) {
         return i;
       }
     }
@@ -162,7 +181,7 @@ public class Activity_Settings extends SherlockPreferenceActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
           @Override
           public void onClick(DialogInterface dialog, int id) {
-            yourTeams.remove(getIndexOfTeam(team));
+            userTeams.remove(getIndexOfTeam(team));
             addTeamCategory.removePreference(preference);
           }
         });

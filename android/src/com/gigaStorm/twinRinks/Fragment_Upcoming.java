@@ -40,7 +40,12 @@ public class Fragment_Upcoming extends SherlockFragment {
 
     memoryManager = new Data_MemoryManager(getActivity());
     games = memoryManager.getGames();
-    if(games.size() <= 0) {
+
+    /*
+     * Refresh game data if there are no loaded games, or the latest game is in
+     * the past.
+     */
+    if(games.size() <= 0 || games.get(games.size() - 1).hasPassed()) {
       memoryManager.refreshData();
       games = memoryManager.getGames();
     }

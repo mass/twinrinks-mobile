@@ -3,14 +3,12 @@
 
   <PreferenceCategory
     android:key="addTeamCategory"
-    android:summary="Select what teams you play on"
     android:title="Your Teams">
     <Preference
       android:key="addNewTeamPref"
       android:title="Add Team..." />
   </PreferenceCategory>
   <PreferenceCategory
-    android:summary="Enter Login-Credentials"
     android:title="Automatic Login">
     <CheckBoxPreference
       android:defaultValue="false"
@@ -25,6 +23,14 @@
     <EditTextPreference
       android:key="autoLogInPassword"
       android:title="Enter your password" />
+  </PreferenceCategory>
+  
+  <PreferenceCategory
+    android:title="Advanced">
+    <Preference
+      android:key="clearDatabasePreference"
+      android:title="Clear Database"
+      android:summary="Clear all loaded data. Try this if you are having issues refreshing the app. Warning: this will remove your saved teams." />
   </PreferenceCategory>
 
 </PreferenceScreen>
