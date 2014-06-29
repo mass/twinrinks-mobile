@@ -100,7 +100,6 @@ public class Data_DbHelper extends SQLiteOpenHelper {
     SubTag = "insertGame(Game): ";
 
     try {
-      Logger.i(TAG, SubTag + "Inserting a record");
 
       SQLiteDatabase db = this.getWritableDatabase();
 
@@ -115,7 +114,6 @@ public class Data_DbHelper extends SQLiteOpenHelper {
       vals.put(LEAGUE_KEY, mg.getLeague());
       db.insert(GAMES_TABLE_NAME, null, vals);
       db.close();
-      Logger.i(TAG, SubTag + "Done inserting a record");
     }
     catch(Exception e) {
       Logger.e(TAG, SubTag + e.getMessage());
@@ -126,17 +124,25 @@ public class Data_DbHelper extends SQLiteOpenHelper {
     SubTag = "insertTeam(Team): ";
 
     try {
-      Logger.i(TAG, SubTag + "Inserting a record");
 
       SQLiteDatabase db = this.getWritableDatabase();
 
       ContentValues vals = new ContentValues();
-      vals.put(TEAM_KEY, mt.getTeamName());
-      vals.put(LEAGUE_KEY, mt.getLeague());
-      db.insert(TEAMS_TABLE_NAME, null, vals);
-      db.close();
+      // Check if this team already in the table
+      String selectQuery = "SELECT * FROM " + TEAMS_TABLE_NAME + " WHERE " 
+    		  + TEAM_KEY + " = \"" + mt.getTeamName() + "\" AND "
+    		  + LEAGUE_KEY + " = \"" + mt.getLeague()
+    		  		+ "\";";
+      Cursor cursor = db.rawQuery(selectQuery, null);
 
-      Logger.i(TAG, SubTag + "Done inserting a record");
+      // Looping through all rows and adding to list.
+      if(cursor.getCount() == 0) {
+    	  vals.put(TEAM_KEY, mt.getTeamName());
+    	  vals.put(LEAGUE_KEY, mt.getLeague());
+    	  db.insert(TEAMS_TABLE_NAME, null, vals);
+      }
+      Logger.e(TAG, SubTag + "Inserting team: " + mt.getLeague() + "-" + mt.getTeamName());
+      db.close();
     }
     catch(Exception e) {
       Logger.e(TAG, SubTag + e.getMessage());
@@ -146,7 +152,6 @@ public class Data_DbHelper extends SQLiteOpenHelper {
   public void insertUserTeam(Model_Team mt) {
     SubTag = "insertUserTeam(Team): ";
     try {
-      Logger.i(TAG, SubTag + "Inserting a record");
 
       SQLiteDatabase db = this.getWritableDatabase();
 
@@ -156,7 +161,7 @@ public class Data_DbHelper extends SQLiteOpenHelper {
       db.insert(USER_TEAMS_TABLE_NAME, null, vals);
       db.close();
 
-      Logger.i(TAG, SubTag + "Done inserting a record");
+      Logger.i(TAG, SubTag + "Done inserting team: " + mt.getLeague() + "-" + mt.getTeamName());
     }
     catch(Exception e) {
       Logger.e(TAG, SubTag + e.getMessage());
@@ -293,6 +298,24 @@ public class Data_DbHelper extends SQLiteOpenHelper {
           dataList.add(basicData);
         }
         while(cursor.moveToNext());
+        
+        // In case some teams are only Away team (ex: during playoff time)
+        selectQuery = "SELECT Distinct " + TEAMA_KEY + " FROM "
+                + GAMES_TABLE_NAME + " WHERE league = '" + league + "' ";
+        cursor = db.rawQuery(selectQuery, null);
+
+        // Looping through all rows and adding to list.
+        if(cursor.moveToFirst()) {
+        	do {
+                Model_Team basicData = new Model_Team();
+                basicData.setTeamName(cursor.getString(cursor
+                    .getColumnIndex(TEAMA_KEY)));
+                basicData.setLeague(league);
+                if (!dataList.contains(basicData))
+                	dataList.add(basicData);
+              }
+              while(cursor.moveToNext());
+        }
         db.close();
       }
     }
