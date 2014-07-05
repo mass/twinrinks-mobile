@@ -71,7 +71,6 @@ public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
     try {
       doc = Jsoup.connect(htmlString).get();
       Elements elems = doc.select("span[style]");
-      Logger.i("Data_FetchTask", "Number of elements: " + elems.size());
 
       for(Element src: elems) {
 
@@ -79,7 +78,6 @@ public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
         if(line.length() > 70) {
 
           String lineTmp = line.trim().replaceAll("\\s+", " ");
-          Logger.i("Data_FetchTask", "Data: " + src.text());
           // clean up the line. Remove multiple spaces
           lineTmp = line.trim().replaceAll("\\s+", " ");
 
@@ -120,18 +118,36 @@ public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
           lineTmp = lineTmp.substring(lineTmp.indexOf(' ') + 1,
               lineTmp.length());
 
-          mg.setTeamH(lineTmp.substring(0, lineTmp.indexOf(' ')));
+          // During playoff, the team name is followed by "(n)" indicating final standing
+          String team = lineTmp.substring(0, lineTmp.indexOf(' '));
+          int	indx = team.indexOf('(');
+          if (indx > 0) {
+        	  team = team.substring(0, team.indexOf('('));
+          }
+          mg.setTeamH(team.toUpperCase());
+          
           lineTmp = lineTmp.substring(lineTmp.indexOf(' ') + 1,
               lineTmp.length());
           if(mg.getTeamH().contains("FINALS") || mg.getTeamH().contains("SEMI")) {
             mg.setTeamH("PLAYOFFS");
           }
-
-          mg.setTeamA(lineTmp.substring(0, lineTmp.length()));
-          if(mg.getTeamA().contains("FINALS") || mg.getTeamA().contains("SEMI")) {
-            mg.setTeamA("PLAYOFFS");
+          
+       // During playoff, the team name is followed by "(n)" indicating final standing
+          int sp_loc = lineTmp.indexOf(' ');
+          if (sp_loc > 0) {
+        	  // The is a second team, but it has some text after the team name
+        	  team = lineTmp.substring(0, lineTmp.indexOf(' '));
+          } else {
+        	  // This is a second team. Make sure it's not play off time
+        	  team = lineTmp;
           }
-
+    	  if (team.indexOf('(') > 0)
+    		  team = team.substring(0, team.indexOf('('));
+    	  mg.setTeamA(team.toUpperCase());
+    	  if ( mg.getTeamA().contains ("WIN") || mg.getTeamH().contains ("WIN") ||
+    			  mg.getTeamA().contains("FINALS") || mg.getTeamA().contains("SEMI"))
+    		  continue;
+    	  mg.setTeamA(team.toUpperCase());
           mg.generateCalendarObject();
 
           /*

@@ -58,7 +58,7 @@ public class Activity_Main extends SherlockFragmentActivity {
       Logger.enableLogging(Log.ERROR);
     }
     // If there is a need to debug the app, uncomment the following line
-    // Logger.enableLogging(Log.VERBOSE);
+    Logger.enableLogging(Log.VERBOSE);
 
     getWindow().setBackgroundDrawableResource(android.R.color.black);
 
