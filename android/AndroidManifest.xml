@@ -2,11 +2,11 @@
 <manifest
   xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.gigaStorm.twinRinks"
-  android:versionCode="6"
-  android:versionName="1.4.1">
+  android:versionCode="7"
+  android:versionName="1.4.2">
 
   <uses-sdk
-    android:minSdkVersion="8"
+    android:minSdkVersion="11"
     android:targetSdkVersion="19" />
 
   <uses-permission android:name="android.permission.INTERNET" />
