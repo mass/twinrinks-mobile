@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -56,114 +58,110 @@ public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
   }
 
   private void
-      getLeagueSchedule(String leagueUrl, String league, int leaguePos) {
-    Model_Game mg = new Model_Game();
-    mg.setBeginTime("");
-    mg.setDate("");
-    mg.setEndTime("");
-    mg.setRink("");
-    mg.setTeamA("");
-    mg.setTeamH("");
+  	getLeagueSchedule(String leagueUrl, String league, int leaguePos) {
+	  
+	Model_Game mg = new Model_Game();
+	mg.setBeginTime("");
+	mg.setDate("00/00/0000");
+	mg.setEndTime("");
+	mg.setRink("");
+	mg.setTeamA("");
+	mg.setTeamH("");
+	
+	Logger.i("Data_FetchTask", "Getting data from Twinrinks...");
+	String htmlString =  leagueUrl;
+	Document doc = null;
+	try {
+		Connection.Response res = Jsoup.connect(htmlString).timeout(5000)
+				.ignoreHttpErrors(true).followRedirects(true).execute();
+			
+		doc = res.parse();
+		Element table = doc.select("table").get(0);
+		Elements rows = table.select("tr");
+/*
+ * Here is the example of the line that needs parsing:
+ * <tr id="tab_0,Leisure_Red,Leisure_Kelly"><td>10/11/2014</td><td>SA</td><td>Blue</td><td>09:10P</td><td>Leisure</td><td>Red</td><td>Kelly</td>
+ */
+		for (int i = 1; i < rows.size(); i++) { //first row is the col names so skip it.
+		    String	tmpStr;
+		    
+			Element row = rows.get(i);
+		    Elements cols = row.select("td");
+			
+			// get Date
+		    tmpStr = cols.get(0).text();
+		    if (!tmpStr.isEmpty())
+		    	mg.setDate(tmpStr);
+			
+			// Get Weekday
+		    tmpStr = cols.get(1).text();
+		    if (!tmpStr.isEmpty())
+		    	mg.setWeekDay(tmpStr);
+			
+			// Get Rink
+		    tmpStr = cols.get(2).text();
+		    if (!tmpStr.isEmpty())
+		    	mg.setRink(tmpStr);
 
-    Logger.i("Data_FetchTask", "Getting data from Twinrinks...");
-    String htmlString = "http://twinrinks.com/" + leagueUrl;
-    Document doc = null;
-    try {
-      doc = Jsoup.connect(htmlString).get();
-      Elements elems = doc.select("span[style]");
+			// Get begin time
+		    tmpStr = cols.get(3).text();
+		    if (!tmpStr.isEmpty())
+		    	mg.setBeginTime(tmpStr);
 
-      for(Element src: elems) {
+		    tmpStr = cols.get(4).text();
+		    if (!tmpStr.isEmpty())
+		    	mg.setLeague(tmpStr);
 
-        String line = src.text();
-        if(line.length() > 70) {
-
-          String lineTmp = line.trim().replaceAll("\\s+", " ");
-          // clean up the line. Remove multiple spaces
-          lineTmp = line.trim().replaceAll("\\s+", " ");
-
-          mg.setDate(lineTmp.substring(0, lineTmp.indexOf(' ')));
-          lineTmp = lineTmp.substring(lineTmp.indexOf(' ') + 1,
-              lineTmp.length());
-
-          mg.setWeekDay(lineTmp.substring(0, lineTmp.indexOf(' ')));
-          lineTmp = lineTmp.substring(lineTmp.indexOf(' ') + 1,
-              lineTmp.length());
-
-          mg.setRink(lineTmp.substring(0, lineTmp.indexOf(' ')));
-          lineTmp = lineTmp.substring(lineTmp.indexOf(' ') + 1,
-              lineTmp.length());
-
-          mg.setBeginTime(lineTmp.substring(0, lineTmp.indexOf(' ')));
-          if(mg.getBeginTime().length() > 6) {
-            // remove first character, which '*'
-            mg.setBeginTime(mg.getBeginTime().substring(1,
-                mg.getBeginTime().length()));
-          }
-          lineTmp = lineTmp.substring(lineTmp.indexOf(' ') + 1,
-              lineTmp.length());
-
-          mg.setEndTime(lineTmp.substring(0, lineTmp.indexOf(' ')));
-          lineTmp = lineTmp.substring(lineTmp.indexOf(' ') + 1,
-              lineTmp.length());
-
-          for(int i = 0; i < 3; i++) {
-            if(i == leaguePos) {
-              mg.setLeague(lineTmp.substring(0, lineTmp.indexOf(' ')));
-            }
-            else {
-              lineTmp = lineTmp.substring(lineTmp.indexOf(' ') + 1,
-                  lineTmp.length());
-            }
-          }
-          lineTmp = lineTmp.substring(lineTmp.indexOf(' ') + 1,
-              lineTmp.length());
-
-          // During playoff, the team name is followed by "(n)" indicating final standing
-          String team = lineTmp.substring(0, lineTmp.indexOf(' '));
-          int	indx = team.indexOf('(');
-          if (indx > 0) {
-        	  team = team.substring(0, team.indexOf('('));
-          }
-          mg.setTeamH(team.toUpperCase());
-          
-          lineTmp = lineTmp.substring(lineTmp.indexOf(' ') + 1,
-              lineTmp.length());
-          if(mg.getTeamH().contains("FINALS") || mg.getTeamH().contains("SEMI")) {
-            mg.setTeamH("PLAYOFFS");
-          }
-          
-       // During playoff, the team name is followed by "(n)" indicating final standing
-          int sp_loc = lineTmp.indexOf(' ');
-          if (sp_loc > 0) {
-        	  // The is a second team, but it has some text after the team name
-        	  team = lineTmp.substring(0, lineTmp.indexOf(' '));
-          } else {
-        	  // This is a second team. Make sure it's not play off time
-        	  team = lineTmp;
-          }
-    	  if (team.indexOf('(') > 0)
-    		  team = team.substring(0, team.indexOf('('));
-    	  mg.setTeamA(team.toUpperCase());
-    	  if ( mg.getTeamA().contains ("WIN") || mg.getTeamH().contains ("WIN") ||
-    			  mg.getTeamA().contains("FINALS") || mg.getTeamA().contains("SEMI"))
-    		  continue;
-    	  mg.setTeamA(team.toUpperCase());
-          mg.generateCalendarObject();
-
-          /*
-           * Check if the date Jan 1st. According to Gary Pivar (owner), there
-           * will never be a game on that day because it's a customer
-           * appreciation date. TODO: Add that day to every team in every league
-           * as customer appreciation.
-           */
-          String moDay = mg.getDate().substring(0, 5);
-          if(moDay.compareTo("01/01") != 0) {
-            mg.generateCalendarObject();
-            dbHelper.insertGame(mg);
-          }
-        }
-      }
-    }
+			// There is no end time
+			// mg.setBeginTime(cols.get(4).text());
+ 
+			// During playoff, the team name is followed by "(n)" indicating 
+			// final standing
+		    
+		    String team = cols.get(5).text();
+			int	indx = team.indexOf('(');
+			if (indx > 0) {
+				team = team.substring(0, team.indexOf('('));
+			}
+	
+			if(mg.getTeamH().contains("FINALS") || 
+				mg.getTeamH().contains("SEMI")) {
+					mg.setTeamH("PLAYOFFS");
+			} else
+					mg.setTeamH(team.toUpperCase());
+	  
+			// During playoff, the team name is followed by "(n)" indicating 
+			// final standing
+			team = cols.get(6).text();
+			indx = team.indexOf('(');
+			if (indx > 0) {
+				team = team.substring(0, team.indexOf('('));
+			}
+	
+			if(mg.getTeamA().contains("FINALS") || 
+				mg.getTeamA().contains("SEMI")) {
+					mg.setTeamA("PLAYOFFS");
+			} else
+					mg.setTeamA(team.toUpperCase());
+	  
+			mg.generateCalendarObject();
+	
+		  /*
+		   * Check if the date Jan 1st. According to Gary Pivar (owner), there
+		   * will never be a game on that day because it's a customer
+		   * appreciation date. TODO: Add that day to every team in every league
+		   * as customer appreciation.
+		   */
+			if (!mg.getDate().equals("00/00/0000")) {
+				String moDay = mg.getDate().substring(0, 5);
+				if(moDay.compareTo("01/01") != 0 &&
+					moDay.compareTo("1/1") != 0) {
+					mg.generateCalendarObject();
+					dbHelper.insertGame(mg);
+				}
+			}
+		}
+	}
     catch(Exception e) {
       Logger.i("getLeagueSchedule():",
           "Problem getting schedule: " + e.getMessage());
@@ -185,19 +183,19 @@ public class Data_FetchTask extends AsyncTask<Void, Integer, Void> {
     dbHelper.deleteAllTeamRecords();
 
     Logger.i("Data_FetchTask", "Getting Leasure data from Twinrinks...");
-    getLeagueSchedule("recl/leisure%20schedule.htm", "Leisure", 1);
+    getLeagueSchedule("http://twinrinks.com/recl/leisure%20schedule.php", "Leisure", 1);
 
     Logger.i("Data_FetchTask", "Getting Bronze data from Twinrinks...");
-    getLeagueSchedule("recb/bronze%20schedule.htm", "Bronze", 2);
+    getLeagueSchedule("http://twinrinks.com/recb/bronze%20schedule.php", "Bronze", 2);
 
     Logger.i("Data_FetchTask", "Getting Silver data from Twinrinks...");
-    getLeagueSchedule("recs/silver%20schedule.htm", "Silver", 2);
+    getLeagueSchedule("http://twinrinks.com/recs/silver%20schedule.php", "Silver", 2);
 
     Logger.i("Data_FetchTask", "Getting Gold data from Twinrinks...");
-    getLeagueSchedule("recg/gold.schedule.htm", "Gold", 2);
+    getLeagueSchedule("http://twinrinks.com/recg/gold%20schedule.php", "Gold", 2);
 
     Logger.i("Data_FetchTask", "Getting Platinum data from Twinrinks...");
-    getLeagueSchedule("recp/platinum_sched.htm", "Platinum", 2);
+    getLeagueSchedule("http://twinrinks.com/recp/platinum%20schedule.php", "Platinum", 2);
 
     /*
      * Remove all game records, sort them by date, then add them back into the
